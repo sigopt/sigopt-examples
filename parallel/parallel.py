@@ -4,7 +4,7 @@ import sigopt.interface
 def evaluate_metric(assignments):
   # Implement this to start optimizing. Assignments is a dict-like object that maps
   # parameter names to values. Use those values to compute your metric value and return it.
-  raise NotImplementedError
+  raise NotImplementedError("Add your custom function to the `evaluate_metric` function.")
 
 class Runner(threading.Thread):
   def __init__(self, client_token, experiment_id, worker_id):
