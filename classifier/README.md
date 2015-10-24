@@ -2,6 +2,8 @@
 
 Machine learning classifier hyperparameter optimization example.
 
+More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models).
+
 Setup:
 
 1. Get a free SigOpt account at https://sigopt.com/signup
