@@ -9,7 +9,7 @@ from sklearn import cross_validation
 POSITIVE_TEXT = json.load(open("POSITIVE_list.json"))
 NEGATIVE_TEXT = json.load(open("NEGATIVE_list.json"))
 
-# optimization metric : see blogpost http://blog.sigopt.com/post/130771597853/
+# optimization metric : see blogpost http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text
 def sentiment_metric(POS_TEXT, NEG_TEXT, params):
     min_ngram = params['min_n_gram']
     max_ngram = min_ngram + params['n_gram_offset']
