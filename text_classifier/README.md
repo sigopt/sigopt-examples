@@ -2,7 +2,7 @@
 
 Example using SigOpt to tune logistic regression model for text sentiment classification.
 
-More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models).
+More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text).
 
 Setup:
 
