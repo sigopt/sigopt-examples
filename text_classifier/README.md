@@ -8,7 +8,8 @@ Setup:
 
 1. Get a free SigOpt account at https://sigopt.com/signup
 2. Find your SigOpt API tokens and client ID at https://sigopt.com/user/profile
-3. sudo ./setup_env.sh
+3. insert your <CLIENT_ID>, <CLIENT_TOKEN>, <USER_TOKEN> into sigopt_creds.py
+4. sudo ./setup_env.sh
 
 Run:
 
