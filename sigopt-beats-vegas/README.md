@@ -1,6 +1,8 @@
-# optimal-hack-bet
+# sigopt-beats-vegas
 
 Learn more at the associated [blog post](http://blog.sigopt.com/post/136340340198/sigopt-for-ml-using-model-tuning-to-beat-vegas).
+
+Dive right in with [the iPython Notebook](https://github.com/sigopt/sigopt-examples/blob/master/sigopt-beats-vegas/SigOpt%20NBA%20OverUnder%20Model.ipynb).
 
 #### Setup
 ```
