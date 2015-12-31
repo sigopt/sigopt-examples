@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+for i in `seq 7`; do
+  python scraper.py $((i * 200)) $(((i + 1) * 200)) $1
+done
+
+python reduce.py data

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+for season in `seq 16`; do
+  echo "Downloading data for season $season"
+  for i in `seq 7`; do
+    python scraper.py $(((i - 1) * 200)) $((i * 200)) $season
+  done
+done
+
+python reduce.py data
