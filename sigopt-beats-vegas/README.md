@@ -7,8 +7,8 @@ Dive right in with [the iPython Notebook](https://github.com/sigopt/sigopt-examp
 #### Setup
 ```
 sudo apt-get install libffi-dev python-pip python-dev libssl-dev libxml2-dev libxslt1-dev python-scipy git
-git clone https://github.com/sigopt/optimal-hack-bet.git
-cd optimal-hack-bet
+git clone https://github.com/sigopt/sigopt-examples.git
+cd sigopt-examples/sigopt-beats-vegas
 sudo pip install -r requirements.txt
 ```
 
