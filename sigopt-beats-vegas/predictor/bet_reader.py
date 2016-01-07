@@ -4,7 +4,7 @@ import numpy
 import pickle
 import requests
 
-from constant import SEASON_1415_START, SEASON_1415_END
+from constant import SEASON_1415_START, SEASON_1516_END
 
 def fix_game(game):
   fixes = {
@@ -30,7 +30,7 @@ def transform_old_format(old_bet_info):
         })
   return bet_info
 
-def read_info(filename="bet_info.pkl", start_date=SEASON_1415_START, end_date=SEASON_1415_END):
+def read_info(filename="bet_info.pkl", start_date=SEASON_1415_START, end_date=SEASON_1516_END):
   try:
     with open(filename, 'rb') as f:
       bet_info_s15 = pickle.load(f)
