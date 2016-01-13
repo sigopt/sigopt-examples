@@ -77,14 +77,13 @@ public class App
                     .valueStddev(result.stddev)
                     .build())
                 .call();
-            Thread.sleep(1000);
         }
         System.out.println("Check out your experiment results here: https://sigopt.com/experiment/" + experiment.getId());
     }
 
     // This should produce the value you want to optimize - substitute in your own problem here.
     // Use the suggested values to compute your result
-    public static Result computeResult(Suggestion suggestion)
+    public static Result computeResult(Suggestion suggestion) throws InterruptedException
     {
         Map<String, Object> assignments = suggestion.getAssignments();
         double x1 = (Double)assignments.get("x1");
@@ -93,6 +92,12 @@ public class App
           (x2 + 47) * Math.sin(Math.sqrt(Math.abs(x2 + x1 / 2 + 47))) -
           x1 * Math.sin(Math.sqrt(Math.abs(x1 - (x2 + 47))))
         );
+        // Note: SigOpt was designed to optimze time consuming and expensive processes like
+        // tuning ML models, optimizing complex simulations, or running optimal A/B tests.
+        // We simulate the evaluation taking 1000ms here to allow SigOpt time to find the best
+        // possible suggestion. In practice this is not an issue when the underlying evaluation
+        // is time consuming or expensive enough to warrant the use of SigOpt.
+        Thread.sleep(1000);
         return new Result(result, null);
     }
 }
