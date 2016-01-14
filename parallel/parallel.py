@@ -1,5 +1,6 @@
-import threading, time
+import argparse, threading, time
 import sigopt.interface
+from sigopt_creds import client_token
 
 def evaluate_metric(assignments):
   # Implement this to start optimizing. Assignments is a dict-like object that maps
@@ -7,39 +8,30 @@ def evaluate_metric(assignments):
   raise NotImplementedError("Add your custom function to the `evaluate_metric` function.")
 
 class Runner(threading.Thread):
-  def __init__(self, client_token, experiment_id, worker_id):
+  def __init__(self, client_token, experiment_id):
     threading.Thread.__init__(self)
     self.experiment_id = experiment_id
-    self.conn = sigopt.interface.Connection(client_token=client_token, worker_id=worker_id)
+    self.conn = sigopt.interface.Connection(client_token=client_token)
 
   def run(self):
     for i in xrange(5):
-      assignments = self.conn.experiments(self.experiment_id).suggest().suggestion.assignments
-      value = evaluate_metric(assignments)
-      self.conn.experiments(self.experiment_id).report(data={'assignments': assignments, 'value': value})
+      suggestion = self.conn.experiments(self.experiment_id).suggestions().create()
+      value = evaluate_metric(suggestion.assignments)
+      self.conn.experiments(self.experiment_id).observations().create(suggestion=suggestion.id, value=value)
 
 def parallel_example(client_token, experiment_id, count=2):
-  runners = [Runner(client_token, experiment_id, 'worker-%s' % (i+1)) for i in xrange(count)]
+  runners = [Runner(client_token, experiment_id) for _ in xrange(count)]
   for runner in runners:
     runner.start()
   for runner in runners:
     runner.join()
 
-def release_worker(client_token, experiment_id, worker_id):
-  conn = sigopt.interface.Connection(client_token=client_token)
-  conn.experiments(experiment_id).releaseworker(worker_id=worker_id)
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--experiment_id', type=int)
+  the_args = parser.parse_args()
 
-def release_old_workers(client_token, experiment_id, seconds_threshold=2*60*60):
-  conn = sigopt.interface.Connection(client_token=client_token)
-  existing_workers = conn.experiments(experiment_id).workers().workers
-  for worker in existing_workers:
-    # Check to see if any of the workers have been working for a long time,
-    # and assume that means they have failed
-    if int(time.time()) - worker.claimed_time > seconds_threshold:
-      conn.experiments(experiment_id).releaseworker(worker_id=worker.id)
+  if the_args.experiment_id is None:
+    raise Exception("Must provide an experiment id.")
 
-def release_all_workers(client_token, experiment_id):
-  conn = sigopt.interface.Connection(client_token=client_token)
-  existing_workers = conn.experiments(experiment_id).workers().workers
-  for worker in existing_workers:
-    conn.experiments(experiment_id).releaseworker(worker_id=worker.id)
+  parallel_example(client_token, the_args.experiment_id)
