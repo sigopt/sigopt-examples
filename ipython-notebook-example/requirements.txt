@@ -1,0 +1,4 @@
+jupyter
+numpy
+scipy
+sigopt-python>=1.0.0
