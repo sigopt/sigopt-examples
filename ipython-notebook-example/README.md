@@ -16,3 +16,4 @@ You can modify this notebook to optimize any function.
 ```
 ipython notebook
 ```
+This command will automatically open up your web browser. Navigate to SigOpt_Introduction.ipynb, and select Cell -> Run All from the menu bar.
