@@ -1,4 +1,4 @@
 numpy
 scipy
 sklearn
-sigopt-python==0.6.2
+sigopt-python>=1.0.0

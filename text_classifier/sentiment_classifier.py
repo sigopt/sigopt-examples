@@ -1,6 +1,6 @@
 import json, math, numpy, datetime
 import sigopt.interface
-from sigopt_creds import USER_TOKEN, CLIENT_TOKEN, CLIENT_ID
+from sigopt_creds import CLIENT_TOKEN
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import SGDClassifier
 from sklearn import cross_validation
@@ -25,10 +25,10 @@ def sentiment_metric(POS_TEXT, NEG_TEXT, params):
     cv_scores = cross_validation.cross_val_score(clf, X, y, cv=cv)
     return numpy.mean(cv_scores)
 
-conn = sigopt.interface.Connection(user_token=USER_TOKEN, client_token=CLIENT_TOKEN)
-experiment = conn.experiments.create(client_id=CLIENT_ID, data={
-  'name': 'Sentiment LR Classifier '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
-  'parameters': [
+conn = sigopt.interface.Connection(client_token=CLIENT_TOKEN)
+experiment = conn.experiments().create(
+  name='Sentiment LR Classifier '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
+  parameters=[
      { 'name':'l1_coef',      'type': 'double', 'bounds': { 'min': 0, 'max': 1.0 }},
      { 'name':'log_reg_coef', 'type': 'double', 'bounds': { 'min': math.log(0.000001), 'max': math.log(100.0) }},
      { 'name':'min_n_gram',   'type': 'int',    'bounds': { 'min': 1, 'max': 2 }},
@@ -36,13 +36,13 @@ experiment = conn.experiments.create(client_id=CLIENT_ID, data={
      { 'name':'log_min_df',   'type': 'double', 'bounds': { 'min': math.log(0.00000001), 'max': math.log(0.1) }},
      { 'name':'df_offset',    'type': 'double', 'bounds': { 'min': 0.01, 'max': 0.25 }}
   ],
-}).experiment
+)
 
 # run experimentation loop
 for _ in range(60):
-    suggestion = conn.experiments(experiment.id).suggest().suggestion
+    suggestion = conn.experiments(experiment.id).suggestions().create()
     opt_metric = sentiment_metric(POSITIVE_TEXT, NEGATIVE_TEXT, suggestion.assignments)
-    conn.experiments(experiment.id).report(data={
-        'assignments': suggestion.assignments,
-        'value': opt_metric,
-    }) # track progress on your experiment : https://sigopt.com/experiment/list
+    conn.experiments(experiment.id).observations().create(
+        suggestion=suggestion.id,
+        value=opt_metric,
+    ) # track progress on your experiment : https://sigopt.com/experiment/list
