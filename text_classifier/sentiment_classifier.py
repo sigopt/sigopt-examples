@@ -29,12 +29,12 @@ conn = sigopt.interface.Connection(client_token=CLIENT_TOKEN)
 experiment = conn.experiments().create(
   name='Sentiment LR Classifier '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
   parameters=[
-     { 'name':'l1_coef',      'type': 'double', 'bounds': { 'min': 0, 'max': 1.0 }},
-     { 'name':'log_reg_coef', 'type': 'double', 'bounds': { 'min': math.log(0.000001), 'max': math.log(100.0) }},
-     { 'name':'min_n_gram',   'type': 'int',    'bounds': { 'min': 1, 'max': 2 }},
-     { 'name':'n_gram_offset','type': 'int',    'bounds': { 'min': 0, 'max': 2 }},
-     { 'name':'log_min_df',   'type': 'double', 'bounds': { 'min': math.log(0.00000001), 'max': math.log(0.1) }},
-     { 'name':'df_offset',    'type': 'double', 'bounds': { 'min': 0.01, 'max': 0.25 }}
+    { 'name':'l1_coef',      'type': 'double', 'bounds': { 'min': 0, 'max': 1.0 }},
+    { 'name':'log_reg_coef', 'type': 'double', 'bounds': { 'min': math.log(0.000001), 'max': math.log(100.0) }},
+    { 'name':'min_n_gram',   'type': 'int',    'bounds': { 'min': 1, 'max': 2 }},
+    { 'name':'n_gram_offset','type': 'int',    'bounds': { 'min': 0, 'max': 2 }},
+    { 'name':'log_min_df',   'type': 'double', 'bounds': { 'min': math.log(0.00000001), 'max': math.log(0.1) }},
+    { 'name':'df_offset',    'type': 'double', 'bounds': { 'min': 0.01, 'max': 0.25 }}
   ],
 )
 
