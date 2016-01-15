@@ -10,6 +10,7 @@ import time
 from sklearn import datasets, svm, ensemble
 from sigopt.interface import Connection
 from sigopt.exception import ApiException
+from sigopt_creds import client_token
 
 from constant import CLASSIFIER_TYPE_TO_PARAMS, NUM_SIGOPT_SUGGESTIONS, GRID_SEARCH_WIDTH, NUM_RANDOM_SEARCHES, Dataset
 
@@ -50,9 +51,7 @@ class ExampleRunner(object):
         if self.classifier_type not in CLASSIFIER_TYPE_TO_PARAMS.keys():
           raise Exception("classifier_type must be one of %s" % CLASSIFIER_TYPE_TO_PARAMS.keys())
 
-        self.client_token = kwargs.get('client_token')
-        self.user_token = kwargs.get('user_token')
-        self.client_id = kwargs.get('client_id')
+        self.client_token = client_token
         self.dataset_name = kwargs.get('dataset_name')
         self.test_set_size = kwargs.get('test_set_size')
 
@@ -102,36 +101,23 @@ class ExampleRunner(object):
         else:
             raise(NotImplementedError)
 
-    def delete_experiments(self):
-        conn = Connection(client_token=self.client_token, user_token=self.user_token)
-        for e in conn.client_experiments(self.client_id).experiments:
-            if e.name.startswith('Example Classifier'):
-                conn.experiment_delete(e.id)
-            else:
-                raise Exception(
-                    "Refusing to delete experiment that was not created by this script."
-                    " Please visit https://sigopt.com/experiment/{0}/properties to delete manually."
-                    .format(e.id)
-                )
-
     def create_experiment(self):
         """Create a SigOpt experiment for optimizing the classifier hyperparameters."""
-        conn = Connection(client_token=self.client_token, user_token=self.user_token)
+        conn = Connection(client_token=self.client_token)
         params = CLASSIFIER_TYPE_TO_PARAMS[self.classifier_type]
         try:
-            response = conn.experiment_create(self.client_id, {
-                "name": "Example Classifier {num}".format(num=int(time.time())),
-                "parameters": params,
-            })
-            return response.experiment
+            return conn.experiments().create(
+                name="Example Classifier {num}".format(num=int(time.time())),
+                parameters=params,
+            )
         except ApiException as e:
             if e.status_code == 403 and 'support@sigopt.com' in str(e):
-                existing_experiments = conn.client_experiments(self.client_id).experiments
+                existing_experiments = conn.experiments().fetch().data
                 if existing_experiments:
                     raise Exception(
                         "You have existing experiments on sigopt.com: {0}."
-                        " You can only have one experiment under the free plan."
-                        " Run again with --delete-existing to remove your existing experiments."
+                        " You have exceeded the number of experiments that can be created under your plan."
+                        " Please visit https://sigopt.com/pricing to learn about plans."
                         .format(['https://sigopt.com/experiment/{0}'.format(e.id) for e in existing_experiments])
                     )
             raise
@@ -139,9 +125,9 @@ class ExampleRunner(object):
     def sigopt_generator(self, experiment):
         """Generate optimal parameter configurations using SigOpt."""
         for _ in xrange(NUM_SIGOPT_SUGGESTIONS):
-            conn = Connection(client_token=self.client_token, user_token=self.user_token)
-            response = conn.experiment_suggest(experiment.id)
-            yield response.suggestion.assignments.to_json()
+            conn = Connection(client_token=self.client_token)
+            suggestion = conn.experiments(experiment.id).suggestions().create()
+            yield suggestion.assignments.to_json()
 
     def random_generator(self, experiment):
         """Return a random parameter configuration within the bounds of the parameters"""
@@ -204,11 +190,12 @@ class ExampleRunner(object):
         fout.write(output)
 
         if sigopt_post is True:
-            conn = Connection(client_token=self.client_token, user_token=self.user_token)
-            conn.experiment_report(experiment.id, {
-                'assignments': assignments,
-                'value': score,
-            })
+            conn = Connection(client_token=self.client_token)
+            conn.experiments(experiment.id).observations().create(
+                assignments=assignments,
+                value=score,
+            )
+            conn.experiments(experiment.id).suggestions().delete()
 
     def calculate_objective(self, assignments):
         """Return the fit of the classifier with the given hyperparameters and the test data."""
@@ -225,22 +212,16 @@ class ExampleRunner(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Classifier Tuner')
-    parser.add_argument('--user-token', type=str, required=True, help='Your SigOpt API user token')
-    parser.add_argument('--client-token', type=str, required=True, help='Your SigOpt API client token')
-    parser.add_argument('--client-id', type=str, required=True, help='Your SigOpt API client id')
     parser.add_argument('--classifier-type', type=str, choices=CLASSIFIER_TYPE_TO_PARAMS.keys(), help='The type of classifier to use. Defaults to GBC')
     parser.add_argument('--dataset-name', type=str, help='The sklearn dataset to use. Defaults to datasets.load_digits().')
     parser.add_argument('--test-set-size', type=int, help='The number of points in the test set. The remainder of the dataset will be the test set.')
     parser.add_argument('--num-sigopt-suggestions', type=int, help='The number of suggestions to request from SigOpt.')
     parser.add_argument('--grid-search-width', type=int, help='How many grid points in each dimension to use for grid search')
     parser.add_argument('--num-random-searches', type=int, help='How many random search parameter configurations to test')
-    parser.add_argument('--delete-existing', action='store_true', help='Delete all your SigOpt experiments and start again. WARNING: This cannot be undone.')
     args = vars(parser.parse_args())
 
     try:
       runner = ExampleRunner(**args)
-      if args.get('delete_existing'):
-        runner.delete_experiments()
       experiment = runner.create_experiment()
 
       print('Running SigOpt...')
