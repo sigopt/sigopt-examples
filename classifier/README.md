@@ -51,8 +51,6 @@ optional arguments:
   --num-random-searches NUM_RANDOM_SEARCHES
                         How many random search parameter configurations to
                         test
-  --delete-existing     Delete all your SigOpt experiments and start again.
-                        WARNING: This cannot be undone.
 ```
 
 If you have any questions, comments, or concerns please email us at contact@sigopt.com
