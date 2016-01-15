@@ -1,6 +1,6 @@
 import sigopt.interface
 
-import datetime
+import datetime, os
 
 import bet_reader
 import evaluator
@@ -118,7 +118,9 @@ def run_sigopt(box_scores, client_token, historical_games, historical_games_trai
   return experiment.id
 
 def run_example(client_token, sigopt_width=1, sigopt_depth=100):
-  box_scores = read_data.read_box_scores('../boxscores/all_boxscores.json')
+  boxscores_path = os.path.join(os.path.dirname(__file__), '../boxscores/all_boxscores.json')
+  box_scores = read_data.read_box_scores(boxscores_path)
+
   historical_games = get_historical_games(box_scores)
   historical_games_training_set = get_historical_games(box_scores, max_date=SEASON_1314_END)
 
