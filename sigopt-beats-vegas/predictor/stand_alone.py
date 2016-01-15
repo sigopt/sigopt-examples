@@ -9,7 +9,7 @@ from constant import SEASON_1314_END
 from game_stats import EXP_TRANSFORM
 from run_model import runner
 
-def create_sigopt_experiment(conn, client_id):
+def create_sigopt_experiment(conn):
   """Creates and returns a SigOpt experiment object."""
   experiment = conn.experiments().create(
     name='NBA Over/Under',
@@ -58,19 +58,19 @@ def get_historical_games(box_scores, max_date=None):
 
   return historical_games
 
-def run_sigopt(box_scores, user_token, client_token, client_id, historical_games, historical_games_training_set, bet_info, sigopt_width=1, sigopt_depth=100):
+def run_sigopt(box_scores, client_token, historical_games, historical_games_training_set, bet_info, sigopt_width=1, sigopt_depth=100):
   historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
   conn = sigopt.interface.Connection(client_token=client_token)
-  experiment = create_sigopt_experiment(conn, client_id)
+  experiment = create_sigopt_experiment(conn)
 
   for _ in range(sigopt_depth):
       tunable_param_lists = []
-      assignments = []
+      suggestion_ids = []
       for worker_id in range(sigopt_width):
           conn = sigopt.interface.Connection(client_token=client_token)
           suggestion = conn.experiments(experiment.id).suggestions().create()
-          assignments.append(suggestion.assignments)
+          assignments.append(suggestion.id)
 
           moving_averages = (
               suggestion.assignments['slow_ma'],
@@ -100,10 +100,10 @@ def run_sigopt(box_scores, user_token, client_token, client_id, historical_games
           tunable_param_lists,
           )
 
-      for i, assignment in enumerate(assignments):
+      for i, suggestion_id in enumerate(suggestion_ids):
 
           conn.experiments(experiment.id).observations().create(
-            assignments=assignment,
+            suggestion=suggestion_id,
             value=winnings_list[i][0],
             value_stddev=winnings_list[i][1],
           )
@@ -117,7 +117,7 @@ def run_sigopt(box_scores, user_token, client_token, client_id, historical_games
 
   return experiment.id
 
-def run_example(user_token, client_token, client_id, sigopt_width=1, sigopt_depth=100):
+def run_example(client_token, sigopt_width=1, sigopt_depth=100):
   box_scores = read_data.read_box_scores('../boxscores/all_boxscores.json')
   historical_games = get_historical_games(box_scores)
   historical_games_training_set = get_historical_games(box_scores, max_date=SEASON_1314_END)
@@ -126,11 +126,11 @@ def run_example(user_token, client_token, client_id, sigopt_width=1, sigopt_dept
   bet_info = bet_reader.transform_old_format(bet_info_s15)
   historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
-  return run_sigopt(box_scores, user_token, client_token, client_id, historical_games, historical_games_training_set, bet_info, sigopt_width=sigopt_width, sigopt_depth=sigopt_depth)
+  return run_sigopt(box_scores, client_token, historical_games, historical_games_training_set, bet_info, sigopt_width=sigopt_width, sigopt_depth=sigopt_depth)
 
 if __name__ == '__main__':
-  from sigopt_creds import user_token, client_token, client_id
-  if user_token == 'USER_TOKEN':
-    raise Exception('Add your tokens to sigopt_creds.py')
+  from sigopt_creds import client_token
+  if not client_token:
+    raise Exception('Find your client_token at https://sigopt.com/user/profile and add to sigopt_creds.py')
 
-  run_example(user_token, client_token, client_id)
+  run_example(client_token)
