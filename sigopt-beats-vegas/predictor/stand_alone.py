@@ -70,7 +70,7 @@ def run_sigopt(box_scores, client_token, historical_games, historical_games_trai
       for worker_id in range(sigopt_width):
           conn = sigopt.interface.Connection(client_token=client_token)
           suggestion = conn.experiments(experiment.id).suggestions().create()
-          assignments.append(suggestion.id)
+          suggestion_ids.append(suggestion.id)
 
           moving_averages = (
               suggestion.assignments['slow_ma'],

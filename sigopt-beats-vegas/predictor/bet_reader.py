@@ -65,20 +65,23 @@ def read_info(filename="bet_info.pkl", start_date=SEASON_1415_START, end_date=SE
       if len(rows) > 0:
         bet_info[day] = []
       for row in rows:
-        if len(row) < 11:
+        try:
+          if len(row) < 11:
+            continue
+          overunder = float(row.findAll("td")[10].find("a").contents[0]) # Bet365
+          line = float(row.findAll("td")[5].find("a").contents[0]) # Bet365
+          trows = row.find(align='left').findAll(target="_blank") # Team names
+          assert len(trows) == 2
+          home = trows[0].contents[0].strip()
+          away = trows[1].contents[0].strip()
+          bet_info[day].append({
+              "home": home,
+              "away": away,
+              "overunder": overunder,
+              "line": line
+            })
+        except IndexError:
           continue
-        overunder = float(row.findAll("td")[10].find("a").contents[0]) # Bet365
-        line = float(row.findAll("td")[5].find("a").contents[0]) # Bet365
-        trows = row.find(align='left').findAll(target="_blank") # Team names
-        assert len(trows) == 2
-        home = trows[0].contents[0].strip()
-        away = trows[1].contents[0].strip()
-        bet_info[day].append({
-            "home": home,
-            "away": away,
-            "overunder": overunder,
-            "line": line
-          })
       day = day - datetime.timedelta(days=1)
 
     bet_info_s15 = {}
