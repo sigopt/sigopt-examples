@@ -9,6 +9,7 @@ enum34==1.0.4
 idna==2.0
 ipaddress==1.0.15
 joblib==0.9.3
+jupyter==1.0.0
 lxml==3.5.0
 numpy==1.9.1
 pyOpenSSL==0.15.1
@@ -20,7 +21,7 @@ requests==2.8.1
 scipy==0.16.1
 scikit-learn==0.17
 service-identity==14.0.0
-sigopt-python==0.6.2
+sigopt-python>=1.0.0
 simplejson==3.8.1
 six==1.10.0
 sklearn==0.0

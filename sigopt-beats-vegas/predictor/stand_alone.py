@@ -11,9 +11,9 @@ from run_model import runner
 
 def create_sigopt_experiment(conn, client_id):
   """Creates and returns a SigOpt experiment object."""
-  experiment = conn.experiments.create(client_id=client_id, data={
-    'name': 'NBA Over/Under',
-    'parameters': [
+  experiment = conn.experiments().create(
+    name='NBA Over/Under',
+    parameters=[
               {'name': 'fast_ma',
                'type': 'int',
                'bounds': { 'min': 1, 'max': 5 },
@@ -43,7 +43,7 @@ def create_sigopt_experiment(conn, client_id):
                'bounds': { 'min': 0, 'max': 5 },
               },
           ],
-  }).experiment
+  )
 
   print "You can track your experiment at https://sigopt.com/experiment/{0}".format(experiment.id)
 
@@ -61,22 +61,15 @@ def get_historical_games(box_scores, max_date=None):
 def run_sigopt(box_scores, user_token, client_token, client_id, historical_games, historical_games_training_set, bet_info, sigopt_width=1, sigopt_depth=100):
   historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
-  conn = sigopt.interface.Connection(
-      user_token=user_token,
-      client_token=client_token,
-  )
+  conn = sigopt.interface.Connection(client_token=client_token)
   experiment = create_sigopt_experiment(conn, client_id)
 
   for _ in range(sigopt_depth):
       tunable_param_lists = []
       assignments = []
       for worker_id in range(sigopt_width):
-          conn = sigopt.interface.Connection(
-              user_token=user_token,
-              client_token=client_token,
-              worker_id=worker_id,
-          )
-          suggestion = conn.experiments(experiment.id).suggest().suggestion
+          conn = sigopt.interface.Connection(client_token=client_token)
+          suggestion = conn.experiments(experiment.id).suggestions().create()
           assignments.append(suggestion.assignments)
 
           moving_averages = (
@@ -109,15 +102,16 @@ def run_sigopt(box_scores, user_token, client_token, client_id, historical_games
 
       for i, assignment in enumerate(assignments):
 
-          conn.experiments(experiment.id).report(data={
-            'assignments': assignment,
-            'value': winnings_list[i][0],
-            'value_stddev': winnings_list[i][1],
-          })
+          conn.experiments(experiment.id).observations().create(
+            assignments=assignment,
+            value=winnings_list[i][0],
+            value_stddev=winnings_list[i][1],
+          )
 
   print "Optimization done. View results at https://sigopt.com/experiment/{0}".format(experiment.id)
 
-  best_observation = conn.experiments(experiment.id).bestobservation().observation
+  experiment_detail = conn.experiments(experiment.id).fetch()
+  best_observation = experiment_detail.progress.best_observation
   if best_observation:
     print "Best value found: {0} at {1}".format(best_observation.value, best_observation.assignments)
 
@@ -135,8 +129,8 @@ def run_example(user_token, client_token, client_id, sigopt_width=1, sigopt_dept
   return run_sigopt(box_scores, user_token, client_token, client_id, historical_games, historical_games_training_set, bet_info, sigopt_width=sigopt_width, sigopt_depth=sigopt_depth)
 
 if __name__ == '__main__':
-  from sigopt_tokens import user_token, client_token, client_id
+  from sigopt_creds import user_token, client_token, client_id
   if user_token == 'USER_TOKEN':
-    raise Exception('Add your tokens to sigopt_tokens.py')
+    raise Exception('Add your tokens to sigopt_creds.py')
 
   run_example(user_token, client_token, client_id)
