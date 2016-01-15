@@ -29,12 +29,6 @@ python classifier_tuner.py --help
 
 optional arguments:
   -h, --help            show this help message and exit
-  --user-token USER_TOKEN
-                        Your SigOpt API user token
-  --client-token CLIENT_TOKEN
-                        Your SigOpt API client token
-  --client-id CLIENT_ID
-                        Your SigOpt API client id
   --classifier-type {GBC,SVC}
                         The type of classifier to use. Defaults to GBC
   --dataset-name DATASET_NAME
