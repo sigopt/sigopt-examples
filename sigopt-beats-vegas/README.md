@@ -4,24 +4,22 @@ Learn more at the associated [blog post](http://blog.sigopt.com/post/13634034019
 
 Dive right in with [the iPython Notebook](https://github.com/sigopt/sigopt-examples/blob/master/sigopt-beats-vegas/SigOpt%20NBA%20OverUnder%20Model.ipynb).
 
-#### Setup
-```
-sudo apt-get install libffi-dev python-pip python-dev libssl-dev libxml2-dev libxslt1-dev python-scipy git
-git clone https://github.com/sigopt/sigopt-examples.git
-cd sigopt-examples/sigopt-beats-vegas
-sudo pip install -r requirements.txt
-```
+## Setup
 
-Next, open `predictor/sigopt_tokens.py` and add in your SigOpt auth tokens
-(which can be found at https://sigopt.com/user/profile).
+1. Get a free SigOpt account at https://sigopt.com/signup
+2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile).
+3. Insert your `client_token` into sigopt_creds.py
+4. Run `sudo ./setup_env.sh`
 
-#### Fetching the data
-```
-cd boxscores/scraper
-./scrape_all
-```
+## Run
 
-#### Running
+To open up the [ipython notebook](http://ipython.org/notebook.html):
+```
+ipython notebook
+```
+This command will automatically open up your web browser. Navigate to SigOpt_Introduction.ipynb, and select Cell -> Run All from the menu bar.
+
+To run the predictor as a standalone:
 ```
 cd predictor
 python stand_alone.py
