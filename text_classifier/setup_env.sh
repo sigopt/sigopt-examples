@@ -1,6 +1,6 @@
 #!/bin/bash
 OS_NAME="$(uname -s)"
-if [ '$OS_NAME' == 'Darwin' ]; then
+if [ "$OS_NAME" == 'Darwin' ]; then
   brew install gfortran
   sudo easy_install pip
 else
