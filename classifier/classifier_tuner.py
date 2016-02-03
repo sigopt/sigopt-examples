@@ -5,7 +5,6 @@ import itertools
 import json
 import numpy
 import sys
-import time
 
 from sklearn import datasets, svm, ensemble
 from sigopt.interface import Connection
@@ -107,7 +106,7 @@ class ExampleRunner(object):
         params = CLASSIFIER_TYPE_TO_PARAMS[self.classifier_type]
         try:
             return conn.experiments().create(
-                name="Example Classifier {num}".format(num=int(time.time())),
+                name="Example Classifier",
                 parameters=params,
             )
         except ApiException as e:

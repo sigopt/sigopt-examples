@@ -1,4 +1,4 @@
-import json, math, numpy, datetime
+import json, math, numpy
 import sigopt.interface
 from sigopt_creds import client_token
 from sklearn.feature_extraction.text import CountVectorizer
@@ -27,7 +27,7 @@ def sentiment_metric(POS_TEXT, NEG_TEXT, params):
 
 conn = sigopt.interface.Connection(client_token=client_token)
 experiment = conn.experiments().create(
-  name='Sentiment LR Classifier '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
+  name='Sentiment LR Classifier',
   parameters=[
     { 'name':'l1_coef',      'type': 'double', 'bounds': { 'min': 0, 'max': 1.0 }},
     { 'name':'log_reg_coef', 'type': 'double', 'bounds': { 'min': math.log(0.000001), 'max': math.log(100.0) }},
