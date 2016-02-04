@@ -8,7 +8,7 @@ Dive right in with [the iPython Notebook](https://github.com/sigopt/sigopt-examp
 
 1. Get a free SigOpt account at https://sigopt.com/signup
 2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile).
-3. Insert your `client_token` into sigopt_creds.py
+3. Insert your `client_token` into `predictor/sigopt_creds.py`
 4. Run `sudo ./setup_env.sh`
 
 ## Run
