@@ -27,7 +27,6 @@ SVC_PARAMS = [
                     },
                 "name": "C",
                 "type": "double",
-                "transformation": "log",
                 },
             {
                 "bounds": {
@@ -36,7 +35,6 @@ SVC_PARAMS = [
                     },
                 "name": "gamma",
                 "type": "double",
-                "transformation": "log",
                 },
             {
                 "type": "categorical",
@@ -57,7 +55,6 @@ GBC_PARAMS = [
                     },
                 "name": "learning_rate",
                 "type": "double",
-                "transformation": "log",
                 },
             {
                 "bounds": {
@@ -66,7 +63,6 @@ GBC_PARAMS = [
                     },
                 "name": "n_estimators",
                 "type": "int",
-                "transformation": "log",
                 },
             {
                 "bounds": {
