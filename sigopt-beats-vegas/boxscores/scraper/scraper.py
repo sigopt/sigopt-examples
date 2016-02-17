@@ -19,10 +19,11 @@ def scrape(start, stop, season):
   if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
-  def passer(request, e, **kwargs):
-      pass
+  def print_error(request, e, **kwargs):
+    print e
 
   def save_json(response, **kwargs):
+    response.raise_for_status()
     boxscore_json = response.json()
     try:
         if boxscore_json.get('Message') == 'An error has occurred.':
@@ -44,7 +45,7 @@ def scrape(start, stop, season):
       url = 'http://stats.nba.com/stats/boxscore/?GameId={}&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0&RangeType=0'.format(game_id)
       action_item = grequests.get(url, hooks={'response': save_json})
       async_list.append(action_item)
-  grequests.map(async_list, size=len(async_list), stream=False, exception_handler=passer)
+  grequests.map(async_list, size=len(async_list), stream=False, exception_handler=print_error)
 
 if __name__ == "__main__":
   import argparse
