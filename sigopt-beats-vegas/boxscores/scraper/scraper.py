@@ -43,7 +43,8 @@ def scrape(start, stop, season):
   for game_num in GAMES_RANGE[start:stop]:
       game_id = "002{:02}0{:04}".format(season, game_num)
       url = 'http://stats.nba.com/stats/boxscore/?GameId={}&StartPeriod=0&EndPeriod=0&StartRange=0&EndRange=0&RangeType=0'.format(game_id)
-      action_item = grequests.get(url, hooks={'response': save_json})
+      headers = {'User-Agent': 'curl'}
+      action_item = grequests.get(url, headers=headers, hooks={'response': save_json})
       async_list.append(action_item)
   grequests.map(async_list, size=len(async_list), stream=False, exception_handler=print_error)
 
