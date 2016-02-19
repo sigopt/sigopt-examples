@@ -1,19 +1,19 @@
 # SigOpt with Other Languages
-If your metric evaluation is in an executable file written in another language you can use the example `other_languages` as a starting point to perform metric evaluation in a sub process.
+Our `other_languages` example is one way to use SigOpt when your metric evaluation function is in a language other than python. All you need to do is create an executable file that accepts parameters as command line arguments, and then create an experiment with the same parameter names as the executable. The executable file should accept the suggested parameters at the command line, evaluate the metric, and print out a float.
 
-This script will pass the suggested assignments as command line arguments, and will expect the script's output to be a float representing a fuction evaluated on these assignments.
-
-To start, you'll need to create an experiment with parameter names matching the command line arguments of your program.
+## Setup
+1. Get a free SigOpt account at https://sigopt.com/signup
+2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile).
+3. `export CLIENT_TOKEN=<your client_token>`
+4. Install the SigOpt python client `pip install sigopt-python`
 
 ## Example Usage
-
-For example, your filename is `test` and it expects an argument `x` on the command line that is a double. Say this script normally spews setup info, but if you run `./test --quiet`, the only information sent to stdout is the value of your function evalauted at `x`. Set up an experiment with one parameter named `x` that has type `double`, and run the following command:
 ```
-python other_languages.py --command='./test --quiet' --experiment_id=EXPERIMENT_ID --client_token=$CLIENT_TOKEN
+python other_languages.py --command='<command to run your script>' --experiment_id=EXPERIMENT_ID --client_token=$CLIENT_TOKEN
 ```
 The above command will run the following sub process to evaluate your metric, automatially requesting the suggsetion beforehand and reporting the observation afterwards:
 ```
-./test --quiet --x=SUGGESTION_FOR_X
+<comamnd to run your script> --x=SUGGESTION_FOR_X
 ```
 
 Feel free to use, or modify for your own needs!
