@@ -2,6 +2,10 @@
 
 Welcome to SigOpt Examples. These examples show you how to use [SigOpt](https://sigopt.com) for model tuning tasks in various machine learning environments. 
 
+## Requirements
+
+These examples will run on any Linux or Mac OS X machine from the command line.
+
 ## First Time?
 
 If this is your first time using SigOpt, we recommend you work through the [Python Text Classifier](text_classifier) example. In this example you will create a logistic regression model to classify Amazon product reviews and use SigOpt maximize the k-fold cross-validation accuracy by tuning the regression coefficients and feature parameters.
