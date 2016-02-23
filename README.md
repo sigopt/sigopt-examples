@@ -1,6 +1,12 @@
-# SigOpt Examples
+# Getting Started with SigOpt
 
-Example code for using SigOpt.
+Welcome to SigOpt Examples. These examples show you how to use [SigOpt](https://sigopt.com) for model tuning tasks in various machine learning environments. 
+
+## First Time?
+
+If this is your first time using SigOpt, we recommend you work through the [Python Text Classifier](text_classifier) example. In this example you will create a logistic regression model to classify Amazon product reviews and use SigOpt maximize the k-fold cross-validation accuracy by tuning the regression coefficients and feature parameters.
+
+## More Examples
 
 - [ipython-notebook-example](https://github.com/sigopt/sigopt-examples/tree/master/ipython-notebook-example): Simple example of using SigOpt to optimize a 2D function with plots and comparisons in an iPython Notebook.
 - [java](https://github.com/sigopt/sigopt-examples/tree/master/java): An example of using the Java API client.
@@ -10,4 +16,4 @@ Example code for using SigOpt.
 - [parallel](https://github.com/sigopt/sigopt-examples/tree/master/parallel): Examples of running SigOpt from multiple parallel processes in Python ([blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models)).
 - [other_languages](https://github.com/sigopt/sigopt-examples/tree/master/other_languages): Example of using the python client to run an evaluation function in a different language.
 
-If you have any questions, comments, or concerns please email us at contact@sigopt.com
+If you have any questions, comments, or concerns please email us at [contact@sigopt.com](mailto:contact@sigopt.com)
