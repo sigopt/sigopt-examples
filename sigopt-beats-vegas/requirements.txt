@@ -21,7 +21,7 @@ requests==2.8.1
 scipy==0.16.1
 scikit-learn==0.17
 service-identity==14.0.0
-sigopt-python>=1.0.0
+sigopt>=1.0.0
 simplejson==3.8.1
 six==1.10.0
 sklearn==0.0

@@ -1,4 +1,4 @@
 jupyter
 numpy
 scipy
-sigopt-python>=1.0.0
+sigopt>=1.0.0
