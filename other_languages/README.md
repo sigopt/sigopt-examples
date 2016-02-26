@@ -5,7 +5,7 @@ Our `other_languages` example is one way to use SigOpt when your metric evaluati
 1. Get a free SigOpt account at https://sigopt.com/signup
 2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile).
 3. `export CLIENT_TOKEN=<your client_token>`
-4. Install the SigOpt python client `pip install sigopt-python`
+4. Install the SigOpt python client `pip install sigopt`
 
 ## Example Usage
 ```
