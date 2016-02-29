@@ -20,3 +20,7 @@ nohup python sentiment_classifier.py &
 ```
 
 You can track the progress on your [experiment dashboard](https://sigopt.com/experiment/list).
+
+## Walkthrough
+
+If you'd like to go more in depth with the code, step through our Jupyter notebook [walkthrough](https://github.com/sigopt/sigopt-examples/blob/master/text-classifier/SigOpt%20Text%20Classifier%20Walkthrough.ipynb).
