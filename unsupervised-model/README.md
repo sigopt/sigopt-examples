@@ -15,4 +15,4 @@ More details about this example can be found in [the associated blog post](LINK)
 
 ## Optimize
 
-Once the text classifier model tuning loop is running, you can track the progress on your [experiment dashboard](https://sigopt.com/experiment/list).
+Once the unsupervised model is being optimized, you can track the progress on your [experiment dashboard](https://sigopt.com/experiment/list).
