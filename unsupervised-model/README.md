@@ -2,7 +2,7 @@
 
 Example using SigOpt to tune a combined unsupervied supervised model for OCR recognition
 
-More details about this example can be found in [the associated blog post](LINK).
+More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/140871698423/sigopt-for-ml-unsupervised-learning-with-even).
 
 ## Setup
 
