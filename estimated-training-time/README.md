@@ -23,7 +23,7 @@ We recommend using [Jupyter](http://jupyter.readthedocs.org/en/latest/install.ht
 jupyter notebook
 ```
 
-Then open [`Estimated Training Time vs Parameter Values.ipynb`](https://github.com/sigopt/sigopt-examples/blob/master/estimated-training-time/Estimated%20Training%20Time%20vs%20Parameter%20Values.ipynb) in the browser window that pops up.
+Then open [`Estimated Training Time vs Parameter Values.ipynb`](https://github.com/sigopt/sigopt-examples/blob/master/estimated-training-time/How%20are%20My%20Hyperparameters%20Affecting%20My%20Training%20Time%3F.ipynb) in the browser window that pops up.
 
 ## Share
 Discover something cool or interesting? Email <contact@sigopt.com> or tweet to [@SigOpt](twitter.com/sigopt) to let us know what you find! Happy Optimizing!
