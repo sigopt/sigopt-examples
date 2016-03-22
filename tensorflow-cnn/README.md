@@ -1,4 +1,4 @@
-# Unsupervised Model Tuning
+# TensorFlow Convolutional Neural Network Tuning
 
 Example using SigOpt to tune a convolutional neural network for OCR recognition
 
