@@ -2,7 +2,7 @@
 
 Example using SigOpt to tune a convolutional neural network for OCR recognition
 
-More details about this example can be found in [the associated blog post](LINK).
+More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/141501625253/sigopt-for-ml-tensorflow-convnets-on-a-budget).
 
 ## Setup
 
