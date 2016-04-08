@@ -1,4 +1,4 @@
-import json, math, numpy
+import json, math, numpy, urllib
 import sigopt.interface
 from sigopt_creds import client_token
 from sklearn.feature_extraction.text import CountVectorizer
@@ -6,8 +6,16 @@ from sklearn.linear_model import SGDClassifier
 from sklearn import cross_validation
 
 #load text training data
-POSITIVE_TEXT = json.load(open("POSITIVE_list.json"))
-NEGATIVE_TEXT = json.load(open("NEGATIVE_list.json"))
+(negative_file, _ ) = urllib.urlretrieve(
+    "http://sigopt-public.s3-website-us-west-2.amazonaws.com/NEGATIVE_list.json",
+    "NEGATIVE_LIST.json"
+)
+(positive_file, _) = urllib.urlretrieve(
+    "http://sigopt-public.s3-website-us-west-2.amazonaws.com/POSITIVE_list.json",
+    "POSITIVE_LIST.json"
+)
+POSITIVE_TEXT = json.load(open(positive_file))
+NEGATIVE_TEXT = json.load(open(negative_file))
 
 # optimization metric : see blogpost http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text
 def sentiment_metric(POS_TEXT, NEG_TEXT, params):
