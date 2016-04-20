@@ -2,6 +2,8 @@
 
 Example using SigOpt to explore approximated how long it takes to train your models. 
 
+![alt tag](time-vs-metric.png)
+
 ## Setup
 
 1. Get a free SigOpt account at [https://sigopt.com/signup](https://sigopt.com/signup)
