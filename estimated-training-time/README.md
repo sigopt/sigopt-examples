@@ -2,7 +2,7 @@
 
 Example using SigOpt to explore approximated how long it takes to train your models. 
 
-![alt tag](time-vs-metric.png)
+![alt tag](metric-vs-time.png)
 
 ## Setup
 
