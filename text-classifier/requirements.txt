@@ -1,4 +1,4 @@
 numpy
 scipy
 sklearn
-sigopt>=1.6.0
+sigopt>=1.6.1
