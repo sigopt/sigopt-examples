@@ -3,7 +3,7 @@ import datetime
 import numpy
 import time
 import scipy
-import sigopt.interface
+import sigopt
 import scipy.io
 import tensorflow as tf
 import math
@@ -58,7 +58,7 @@ _, extra_XZ, _, extra_yZ = train_test_split(extra_XZ, extra_yZ, test_size=0.75, 
 
 
 # create SigOpt experiment
-conn = sigopt.interface.Connection(client_token=client_token)
+conn = sigopt.Connection(client_token=client_token)
 experiment = conn.experiments().create(
   name='SVHN ConvNet '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
   parameters=[
@@ -75,7 +75,7 @@ experiment = conn.experiments().create(
 )
 
 # SigOpt optimization loop
-conn = sigopt.interface.Connection(client_token=client_token)
+conn = sigopt.Connection(client_token=client_token)
 for jk in xrange(100):
   # SigOpt params
   suggestion = conn.experiments(experiment.id).suggestions().create()

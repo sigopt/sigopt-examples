@@ -3,7 +3,7 @@ import os
 from subprocess import PIPE, Popen
 import sys
 
-from sigopt.interface import Connection
+from sigopt import Connection
 
 class SubProcessEvaluator(object):
   def __init__(self, command):

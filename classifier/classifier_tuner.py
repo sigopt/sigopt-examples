@@ -7,7 +7,7 @@ import numpy
 import sys
 
 from sklearn import datasets, svm, ensemble
-from sigopt.interface import Connection
+from sigopt import Connection
 from sigopt.exception import ApiException
 from sigopt_creds import client_token
 
