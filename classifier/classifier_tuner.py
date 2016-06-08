@@ -111,7 +111,7 @@ class ExampleRunner(object):
             )
         except ApiException as e:
             if e.status_code == 403 and 'support@sigopt.com' in str(e):
-                existing_experiments = conn.experiments().fetch().data
+                existing_experiments = list(conn.experiments().fetch().iterate_pages())
                 if existing_experiments:
                     raise Exception(
                         "You have existing experiments on sigopt.com: {0}."
