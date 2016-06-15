@@ -1,4 +1,4 @@
-import sigopt.interface
+import sigopt
 
 import datetime, os
 
@@ -61,14 +61,14 @@ def get_historical_games(box_scores, max_date=None):
 def run_sigopt(box_scores, client_token, historical_games, historical_games_training_set, bet_info, sigopt_width=1, sigopt_depth=100):
   historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
-  conn = sigopt.interface.Connection(client_token=client_token)
+  conn = sigopt.Connection(client_token=client_token)
   experiment = create_sigopt_experiment(conn)
 
   for _ in range(sigopt_depth):
       tunable_param_lists = []
       suggestion_ids = []
       for worker_id in range(sigopt_width):
-          conn = sigopt.interface.Connection(client_token=client_token)
+          conn = sigopt.Connection(client_token=client_token)
           suggestion = conn.experiments(experiment.id).suggestions().create()
           suggestion_ids.append(suggestion.id)
 

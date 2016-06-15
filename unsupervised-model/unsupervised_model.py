@@ -2,7 +2,7 @@ import math, numpy, datetime
 import sklearn
 import random
 import scipy
-import sigopt.interface
+import sigopt
 import scipy.io
 import sklearn.cluster
 import xgboost as xgb
@@ -34,7 +34,7 @@ test_X  = convert_rgb2gray(test_X)
 train_X = convert_rgb2gray(train_X)
 
 # setup SigOpt experiment
-conn = sigopt.interface.Connection(client_token=client_token)
+conn = sigopt.Connection(client_token=client_token)
 experiment = conn.experiments().create(
   name='SVHN Classifier '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
   parameters=[

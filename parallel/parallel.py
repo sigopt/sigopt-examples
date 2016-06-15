@@ -1,5 +1,5 @@
 import argparse, threading, time
-import sigopt.interface
+import sigopt
 from sigopt_creds import client_token
 
 def evaluate_metric(assignments):
@@ -11,7 +11,7 @@ class Runner(threading.Thread):
   def __init__(self, client_token, experiment_id):
     threading.Thread.__init__(self)
     self.experiment_id = experiment_id
-    self.conn = sigopt.interface.Connection(client_token=client_token)
+    self.conn = sigopt.Connection(client_token=client_token)
 
   def run(self):
     for i in xrange(5):
