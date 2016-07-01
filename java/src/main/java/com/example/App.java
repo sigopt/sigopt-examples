@@ -56,7 +56,7 @@ public class App
         for (int i = 0; i < 20; i++) {
             Suggestion suggestion = experiment.suggestions().create().call();
             System.out.println("Computing result for suggestion: " + suggestion.toString());
-            Result result = App.computeResult(suggestion);
+            Result result = App.evaluateMetric(suggestion);
             Observation observation = experiment.observations().create()
                 .data(new Observation.Builder()
                     .suggestion(suggestion.getId())
@@ -70,7 +70,7 @@ public class App
 
     // This should produce the value you want to optimize - substitute in your own problem here.
     // Use the suggested values to compute your result
-    public static Result computeResult(Suggestion suggestion) throws InterruptedException
+    public static Result evaluateMetric(Suggestion suggestion) throws InterruptedException
     {
         Map<String, Object> assignments = suggestion.getAssignments();
         double x = (Double)assignments.get("x");
