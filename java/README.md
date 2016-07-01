@@ -12,5 +12,5 @@ mvn compile
 Get your tokens from https://api.sigopt.com/user/profile, and then
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.args="--user_token USER_TOKEN --client_token CLIENT_TOKEN --client_id CLIENT_ID"
+mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.args="--client_token CLIENT_TOKEN"
 ```

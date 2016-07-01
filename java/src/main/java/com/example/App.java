@@ -1,7 +1,6 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.Map;
 
 import com.sigopt.Sigopt;
@@ -10,7 +9,6 @@ import com.sigopt.model.Bounds;
 import com.sigopt.model.Experiment;
 import com.sigopt.model.Observation;
 import com.sigopt.model.Parameter;
-import com.sigopt.model.SuggestData;
 import com.sigopt.model.Suggestion;
 
 class Result
@@ -34,51 +32,40 @@ public class App
             if (args[i].equals("--client_token") && i < args.length - 1) {
                 Sigopt.clientToken = args[i+1];
             }
-            if (args[i].equals("--user_token") && i < args.length - 1) {
-                Sigopt.userToken = args[i+1];
-            }
-            if (args[i].equals("--client_id") && i < args.length - 1) {
-                clientId = args[i+1];
-            }
         }
-
-        if (clientId == null) {
-            throw new RuntimeException("No client_id provided.");
-        }
-
 
         Experiment experiment = Experiment.create(
-                new Experiment.Builder()
-                    .name("EggHolder Function")
-                    .parameters(new ArrayList<Parameter>(Arrays.asList(new Parameter[]{
-                        new Parameter.Builder()
-                            .name("x1")
-                            .type("double")
-                            .bounds(new Bounds(-100.0, 100.0))
-                            .build(),
-                        new Parameter.Builder()
-                            .name("x2")
-                            .type("double")
-                            .bounds(new Bounds(-100.0, 100.0))
-                            .build()
-                    })))
-                    .build(),
-                clientId)
+            new Experiment.Builder()
+                .name("EggHolder Function")
+                .parameters(Arrays.asList(
+                    new Parameter.Builder()
+                        .name("x1")
+                        .type("double")
+                        .bounds(new Bounds(-100.0, 100.0))
+                        .build(),
+                    new Parameter.Builder()
+                        .name("x2")
+                        .type("double")
+                        .bounds(new Bounds(-100.0, 100.0))
+                        .build()
+                ))
+                .build())
             .call();
 
+        System.out.println("Follow your experiment results here: https://sigopt.com/experiment/" + experiment.getId());
         for (int i = 0; i < 20; i++) {
-            Suggestion suggestion = experiment.suggest().call();
+            Suggestion suggestion = experiment.suggestions().create().call();
             System.out.println("Computing result for suggestion: " + suggestion.toString());
             Result result = App.computeResult(suggestion);
-            experiment.report()
-                .addParam("data", new Observation.Builder()
-                    .assignments(suggestion.getAssignments())
+            Observation observation = experiment.observations().create()
+                .data(new Observation.Builder()
+                    .suggestion(suggestion.getId())
                     .value(result.value)
                     .valueStddev(result.stddev)
                     .build())
                 .call();
+            System.out.println("Reported observation: " + observation.toString());
         }
-        System.out.println("Check out your experiment results here: https://sigopt.com/experiment/" + experiment.getId());
     }
 
     // This should produce the value you want to optimize - substitute in your own problem here.
