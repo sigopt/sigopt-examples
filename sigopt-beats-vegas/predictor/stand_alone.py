@@ -9,7 +9,7 @@ from constant import SEASON_1314_END
 from game_stats import EXP_TRANSFORM
 from run_model import runner
 
-def create_sigopt_experiment(conn):
+def create_sigopt_experiment(conn, sigopt_depth):
   """Creates and returns a SigOpt experiment object."""
   experiment = conn.experiments().create(
     name='NBA Over/Under',
@@ -43,6 +43,7 @@ def create_sigopt_experiment(conn):
                'bounds': { 'min': 0, 'max': 5 },
               },
           ],
+    observation_budget=sigopt_depth,
   )
 
   print "You can track your experiment at https://sigopt.com/experiment/{0}".format(experiment.id)
@@ -62,9 +63,9 @@ def run_sigopt(box_scores, client_token, historical_games, historical_games_trai
   historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
   conn = sigopt.Connection(client_token=client_token)
-  experiment = create_sigopt_experiment(conn)
+  experiment = create_sigopt_experiment(conn, sigopt_depth)
 
-  for _ in range(sigopt_depth):
+  for _ in range(experiment.observation_budget):
       tunable_param_lists = []
       suggestion_ids = []
       for worker_id in range(sigopt_width):

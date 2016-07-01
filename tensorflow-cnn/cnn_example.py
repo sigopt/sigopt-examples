@@ -30,7 +30,7 @@ def convert_rgb2gray(X):
 
 # convert all image data to grayscale
 extra_X = convert_rgb2gray(extra_X)
-test_X  = convert_rgb2gray(test_X)
+test_X = convert_rgb2gray(test_X)
 train_X = convert_rgb2gray(train_X)
 
 image_w = 32
@@ -60,7 +60,7 @@ _, extra_XZ, _, extra_yZ = train_test_split(extra_XZ, extra_yZ, test_size=0.75, 
 # create SigOpt experiment
 conn = sigopt.Connection(client_token=client_token)
 experiment = conn.experiments().create(
-  name='SVHN ConvNet '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
+  name='SVHN ConvNet',
   parameters=[
     {'name': 'filter1_w',      'type': 'int',    'bounds': {'min': 3,  'max': 10}},
     {'name': 'filter1_depth',  'type': 'int',    'bounds': {'min': 10, 'max': 64}},
@@ -72,17 +72,18 @@ experiment = conn.experiments().create(
     {'name': 'rms_mom',        'type': 'double', 'bounds': {'min': 0.5, 'max': 1.0}},
     {'name': 'rms_decay',      'type': 'double', 'bounds': {'min': 0.5, 'max': 1.0}},
   ],
+  observation_budget=100,
 )
 
 # SigOpt optimization loop
 conn = sigopt.Connection(client_token=client_token)
-for jk in xrange(100):
+for jk in xrange(experiment.observation_budget):
   # SigOpt params
   suggestion = conn.experiments(experiment.id).suggestions().create()
   params = suggestion.assignments
 
   sess = tf.InteractiveSession()
-  x = tf.placeholder(tf.float32, shape=[None, image_w*image_w])
+  x = tf.placeholder(tf.float32, shape=[None, image_w * image_w])
   y_ = tf.placeholder(tf.float32, shape=[None, 10])
   filter1_w = int(params['filter1_w'])
   filter1_depth = int(params['filter1_depth'])
@@ -174,7 +175,3 @@ for jk in xrange(100):
     value=float(opt_metric),
     value_stddev=0.05
   )
-# hold out accuracy
-# print("test accuracy %g"%accuracy.eval(feed_dict={x: test_XZ, y_: test_yZ, keep_prob: 1.0}))
-
-
