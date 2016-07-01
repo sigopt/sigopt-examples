@@ -36,17 +36,17 @@ public class App
 
         Experiment experiment = Experiment.create(
             new Experiment.Builder()
-                .name("EggHolder Function")
+                .name("Franke Function")
                 .parameters(Arrays.asList(
                     new Parameter.Builder()
-                        .name("x1")
+                        .name("x")
                         .type("double")
-                        .bounds(new Bounds(-100.0, 100.0))
+                        .bounds(new Bounds(0.0, 1.0))
                         .build(),
                     new Parameter.Builder()
-                        .name("x2")
+                        .name("y")
                         .type("double")
-                        .bounds(new Bounds(-100.0, 100.0))
+                        .bounds(new Bounds(0.0, 1.0))
                         .build()
                 ))
                 .build())
@@ -73,11 +73,15 @@ public class App
     public static Result computeResult(Suggestion suggestion) throws InterruptedException
     {
         Map<String, Object> assignments = suggestion.getAssignments();
-        double x1 = (Double)assignments.get("x1");
-        double x2 = (Double)assignments.get("x2");
+        double x = (Double)assignments.get("x");
+        double y = (Double)assignments.get("y");
+
+        // Franke function - http://www.sfu.ca/~ssurjano/franke2d.html
         double result = (
-          (x2 + 47) * Math.sin(Math.sqrt(Math.abs(x2 + x1 / 2 + 47))) -
-          x1 * Math.sin(Math.sqrt(Math.abs(x1 - (x2 + 47))))
+          0.75 * Math.exp(Math.pow(-(9 * x - 2), 2.0) / 4.0 - Math.pow((9 * y - 2), 2.0) / 4.0) +
+          0.75 * Math.exp(Math.pow(-(9 * x + 1), 2.0) / 49.0 - (9 * y + 1) / 10.0) +
+          0.5 * Math.exp(Math.pow(-(9 * x - 7), 2.0) / 4.0 - Math.pow((9 * y - 3), 2.0) / 4.0) -
+          0.2 * Math.exp(Math.pow(-(9 * x - 4), 2.0) - Math.pow((9 * y - 7), 2.0))
         );
         // Note: SigOpt was designed to optimze time consuming and expensive processes like
         // tuning ML models, optimizing complex simulations, or running optimal A/B tests.
