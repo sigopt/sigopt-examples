@@ -40,7 +40,8 @@ experiment = conn.experiments().create(
     { "name": "momentum_step_schedule_steps", "type": "int", "bounds": {"max": 20,"min": 1,}},
     { "name": "epochs","type": "int", "bounds": {"max": 500,"min": 50,}},
   ],
-  observation_budget=180,
+  # Sign up for an enterprise account to get more observations
+  observation_budget=150,
 )
 
 DATA_DIR = "/home/ubuntu/data"
