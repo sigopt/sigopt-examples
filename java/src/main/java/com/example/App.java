@@ -49,11 +49,12 @@ public class App
                         .bounds(new Bounds(0.0, 1.0))
                         .build()
                 ))
+                .observationBudget(20)
                 .build())
             .call();
 
         System.out.println("Follow your experiment results here: https://sigopt.com/experiment/" + experiment.getId());
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < experiment.getObservationBudget(); i++) {
             Suggestion suggestion = experiment.suggestions().create().call();
             System.out.println("Computing result for suggestion: " + suggestion.toString());
             Result result = App.evaluateMetric(suggestion);

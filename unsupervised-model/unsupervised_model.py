@@ -30,13 +30,13 @@ def convert_rgb2gray(X):
 
 # convert all image data to grayscale
 unlab_X = convert_rgb2gray(unlab_X)
-test_X  = convert_rgb2gray(test_X)
+test_X = convert_rgb2gray(test_X)
 train_X = convert_rgb2gray(train_X)
 
 # setup SigOpt experiment
 conn = sigopt.Connection(client_token=client_token)
 experiment = conn.experiments().create(
-  name='SVHN Classifier '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
+  name='SVHN Classifier',
   parameters=[
     {'name': 'filter_w',       'type': 'int', 'bounds': {'min': 7, 'max': 10}},
     {'name': 'slide_w',        'type': 'int', 'bounds': {'min': 2, 'max': 8}},
@@ -48,10 +48,11 @@ experiment = conn.experiments().create(
     {'name': 'xgb_num_est',    'type': 'int', 'bounds': {'min': 10, 'max': 100}},
     {'name': 'xgb_lr',         'type': 'double', 'bounds': {'min': math.log(0.0001), 'max': math.log(100.0)}},
   ],
+  observation_budget=90,
 )
 
 # run optimization loop
-for j in range(90):
+for j in range(experiment.observation_budget):
   suggestion = conn.experiments(experiment.id).suggestions().create()
   params = suggestion.assignments
   print params

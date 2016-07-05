@@ -108,9 +108,10 @@ class ExampleRunner(object):
             return conn.experiments().create(
                 name="Example Classifier",
                 parameters=params,
+                observation_budget=NUM_SIGOPT_SUGGESTIONS,
             )
-        except ApiException as e:
-            if e.status_code == 403 and 'support@sigopt.com' in str(e):
+        except ApiException as err:
+            if err.status_code == 403 and 'support@sigopt.com' in str(err):
                 existing_experiments = list(conn.experiments().fetch().iterate_pages())
                 if existing_experiments:
                     raise Exception(
@@ -123,14 +124,14 @@ class ExampleRunner(object):
 
     def sigopt_generator(self, experiment):
         """Generate optimal parameter configurations using SigOpt."""
-        for _ in xrange(NUM_SIGOPT_SUGGESTIONS):
+        for _ in xrange(experiment.observation_budget):
             conn = Connection(client_token=self.client_token)
             suggestion = conn.experiments(experiment.id).suggestions().create()
             yield suggestion.assignments.to_json()
 
     def random_generator(self, experiment):
         """Return a random parameter configuration within the bounds of the parameters"""
-        for _ in xrange(NUM_RANDOM_SEARCHES):
+        for _ in xrange(experiment.observation_budget):
             suggestion = {}
             for param in experiment.parameters:
                 if param.type == 'int':

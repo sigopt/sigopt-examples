@@ -36,10 +36,11 @@ experiment = conn.experiments().create(
     { 'name':'log_min_df',   'type': 'double', 'bounds': { 'min': math.log(0.00000001), 'max': math.log(0.1) }},
     { 'name':'df_offset',    'type': 'double', 'bounds': { 'min': 0.01, 'max': 0.25 }}
   ],
+  observation_budget=60,
 )
 
 # run experimentation loop
-for _ in range(60):
+for _ in range(experiment.observation_budget):
     suggestion = conn.experiments(experiment.id).suggestions().create()
     opt_metric = sentiment_metric(POSITIVE_TEXT, NEGATIVE_TEXT, suggestion.assignments)
     conn.experiments(experiment.id).observations().create(
