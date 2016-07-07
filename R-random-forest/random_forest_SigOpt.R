@@ -6,8 +6,8 @@ library(SigOptR)
 install.packages('randomForest', repos = "http://cran.us.r-project.org")
 library(randomForest)
 
-# set SigOpt client token
-# get your client API token here : https://sigopt.com/user/profile
+# Learn more about authenticating the SigOpt API: 
+# https://sigopt.com/docs/overview/authentication
 Sys.setenv(SIGOPT_API_TOKEN="INSERT_YOUR_TOKEN_HERE")
 
 # load dataset
