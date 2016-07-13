@@ -24,7 +24,7 @@ y <- iris$Species
 
 # Create a SigOpt experiment for the Random Forest parameters
 experiment <- create_experiment(list(
-  name="R RandomForest",
+  name="Random Forest (R)",
   parameters=list(
     list(name="mtry", type="int", bounds=list(min=1, max=ncol(iris)-1)),
     list(name="ntree", type="int", bounds=list(min=1, max=100)),
