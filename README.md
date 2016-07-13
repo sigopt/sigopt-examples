@@ -4,9 +4,15 @@ Welcome to SigOpt Examples. These examples show you how to use [SigOpt](https://
 
 ## Requirements
 
-These examples will run on any Linux or Mac OS X machine from the command line.
+These examples will run on any Linux or Mac OS X machine from the command line. Each example contains a README.md with specific setup instructions.
 
 ## First Time?
+
+If this is your first time using SigOpt, we recommend you work through the [Random Forest](random-forest) example. In this example, you will use a random forest to classify data from the [iris dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) and use SigOpt maximize the k-fold cross-validation accuracy by tuning the model's hyperparameters. This example is available in a wide variety of languages and integrations:
+ * Python
+ * R
+ * scikit-learn integration
+ * iPython notebook
 
 If this is your first time using SigOpt, we recommend you work through the [Python Text Classifier](text-classifier) example. In this example you will create a logistic regression model to classify Amazon product reviews and use SigOpt maximize the k-fold cross-validation accuracy by tuning the regression coefficients and feature parameters.
 
@@ -21,6 +27,6 @@ If this is your first time using SigOpt, we recommend you work through the [Pyth
 - [classifier](https://github.com/sigopt/sigopt-examples/tree/master/classifier): Using SigOpt to tune a machine learning classifier in Python ([blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models)).
 - [parallel](https://github.com/sigopt/sigopt-examples/tree/master/parallel): Examples of running SigOpt from multiple parallel processes in Python ([blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models)).
 - [other-languages](https://github.com/sigopt/sigopt-examples/tree/master/other-languages): Example of using the python client to run an evaluation function in a different language.
-- [random-forest](https://github.com/sigopt/sigopt-examples/tree/master/random-forest): Example of tuning the hyperparameters of a random forest on the open IRIS dataset in R.
+- [random-forest](https://github.com/sigopt/sigopt-examples/tree/master/random-forest): Example of tuning the hyperparameters of a random forest on the open IRIS dataset in a variety of languages and integrations including R and Python.
 
 If you have any questions, comments, or concerns please email us at [contact@sigopt.com](mailto:contact@sigopt.com)
