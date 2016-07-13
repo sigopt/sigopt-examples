@@ -2,7 +2,7 @@ Use SigOpt's [Java API Client](https://sigopt.com/docs/overview/java) to tune th
 
 # Installation
 You will need [maven](https://maven.apache.org/) to compile and run this example.
-On OS X, you can install maven with Homebrew by running 
+On OS X, you can install maven with Homebrew by running
 
 ```bash
 brew install maven
@@ -18,5 +18,5 @@ mvn compile
 Insert your SigOpt API Token into the example below
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.args="--client_token SIGOPT_API_TOKEN"
+mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.cleanupDaemonThreads="false" -Dexec.args="--client_token SIGOPT_API_TOKEN"
 ```
