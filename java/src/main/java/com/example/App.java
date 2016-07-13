@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import com.sigopt.Sigopt;
+import com.sigopt.example.Franke;
 import com.sigopt.exception.APIException;
 import com.sigopt.model.Bounds;
 import com.sigopt.model.Experiment;
@@ -36,7 +37,7 @@ public class App
 
         Experiment experiment = Experiment.create(
             new Experiment.Builder()
-                .name("Franke Function")
+                .name("Franke Optimization (Java)")
                 .parameters(Arrays.asList(
                     new Parameter.Builder()
                         .name("x")
@@ -52,12 +53,12 @@ public class App
                 .observationBudget(20)
                 .build())
             .call();
+        System.out.println("Created experiment: https://sigopt.com/experiment/" + experiment.getId());
 
-        System.out.println("Follow your experiment results here: https://sigopt.com/experiment/" + experiment.getId());
+        // Run the Optimization Loop between 10x - 20x the number of parameters
         for (int i = 0; i < experiment.getObservationBudget(); i++) {
             Suggestion suggestion = experiment.suggestions().create().call();
-            System.out.println("Computing result for suggestion: " + suggestion.toString());
-            Result result = App.evaluateMetric(suggestion);
+            Result result = App.evaluateModel(suggestion);
             Observation observation = experiment.observations().create()
                 .data(new Observation.Builder()
                     .suggestion(suggestion.getId())
@@ -65,31 +66,17 @@ public class App
                     .valueStddev(result.stddev)
                     .build())
                 .call();
-            System.out.println("Reported observation: " + observation.toString());
         }
     }
 
-    // This should produce the value you want to optimize - substitute in your own problem here.
-    // Use the suggested values to compute your result
-    public static Result evaluateMetric(Suggestion suggestion) throws InterruptedException
+    // Evaluate your model with the suggested parameter assignments
+    // Franke function - http://www.sfu.ca/~ssurjano/franke2d.html
+    public static Result evaluateModel(Suggestion suggestion) throws InterruptedException
     {
         Map<String, Object> assignments = suggestion.getAssignments();
         double x = (Double)assignments.get("x");
         double y = (Double)assignments.get("y");
-
-        // Franke function - http://www.sfu.ca/~ssurjano/franke2d.html
-        double result = (
-          0.75 * Math.exp(Math.pow(-(9 * x - 2), 2.0) / 4.0 - Math.pow((9 * y - 2), 2.0) / 4.0) +
-          0.75 * Math.exp(Math.pow(-(9 * x + 1), 2.0) / 49.0 - (9 * y + 1) / 10.0) +
-          0.5 * Math.exp(Math.pow(-(9 * x - 7), 2.0) / 4.0 - Math.pow((9 * y - 3), 2.0) / 4.0) -
-          0.2 * Math.exp(Math.pow(-(9 * x - 4), 2.0) - Math.pow((9 * y - 7), 2.0))
-        );
-        // Note: SigOpt was designed to optimze time consuming and expensive processes like
-        // tuning ML models, optimizing complex simulations, or running optimal A/B tests.
-        // We simulate the evaluation taking 1000ms here to allow SigOpt time to find the best
-        // possible suggestion. In practice this is not an issue when the underlying evaluation
-        // is time consuming or expensive enough to warrant the use of SigOpt.
-        Thread.sleep(1000);
+        double result = Franke.evaluate(x, y);
         return new Result(result, null);
     }
 }
