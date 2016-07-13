@@ -14,8 +14,6 @@ If this is your first time using SigOpt, we recommend you work through the [Rand
  * scikit-learn integration
  * iPython notebook
 
-If this is your first time using SigOpt, we recommend you work through the [Python Text Classifier](text-classifier) example. In this example you will create a logistic regression model to classify Amazon product reviews and use SigOpt maximize the k-fold cross-validation accuracy by tuning the regression coefficients and feature parameters.
-
 ## More Examples
 
 - [ipython-notebook-example](https://github.com/sigopt/sigopt-examples/tree/master/ipython-notebook-example): Simple example of using SigOpt to optimize a 2D function with plots and comparisons in an iPython Notebook.
