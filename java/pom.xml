@@ -35,11 +35,11 @@
          <goals>
           <goal>java</goal>
          </goals>
-         <configuration>
-          <mainClass>com.example.App</mainClass>
-         </configuration>
         </execution>
        </executions>
+       <configuration>
+        <mainClass>com.example.App</mainClass>
+       </configuration>
       </plugin>
      </plugins>
     </build>
