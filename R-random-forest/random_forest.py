@@ -4,7 +4,7 @@
 
 # Run `pip install sigopt` to download the python API client
 # Run `pip install sklearn` to install scikit-learn, a machine learning
-# in Python (http://scikit-learn.org)
+# library in Python (http://scikit-learn.org)
 from sigopt import Connection
 from sklearn import cross_validation, datasets
 from sklearn.ensemble import RandomForestClassifier
