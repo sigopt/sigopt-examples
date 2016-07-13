@@ -8,8 +8,6 @@ On OS X, you can install maven with Homebrew by running
 brew install maven
 ```
 
-Then, install SigOpt's [Java API Client](https://sigopt.com/docs/overview/java). Follow the instructions on this page for accessing your SigOpt API Token. You do not need to follow the step for the `pom.xml` file, since it is already in this repository.
-
 # Compile
 
 ```bash
