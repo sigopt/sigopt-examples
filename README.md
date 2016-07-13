@@ -21,6 +21,6 @@ If this is your first time using SigOpt, we recommend you work through the [Pyth
 - [classifier](https://github.com/sigopt/sigopt-examples/tree/master/classifier): Using SigOpt to tune a machine learning classifier in Python ([blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models)).
 - [parallel](https://github.com/sigopt/sigopt-examples/tree/master/parallel): Examples of running SigOpt from multiple parallel processes in Python ([blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models)).
 - [other-languages](https://github.com/sigopt/sigopt-examples/tree/master/other-languages): Example of using the python client to run an evaluation function in a different language.
-- [R-random-forest](https://github.com/sigopt/sigopt-examples/tree/master/R-random-forest): Example of tuning the hyperparameters of a random forest on the open IRIS dataset in R.
+- [random-forest](https://github.com/sigopt/sigopt-examples/tree/master/random-forest): Example of tuning the hyperparameters of a random forest on the open IRIS dataset in R.
 
 If you have any questions, comments, or concerns please email us at [contact@sigopt.com](mailto:contact@sigopt.com)
