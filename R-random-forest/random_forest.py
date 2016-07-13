@@ -49,7 +49,7 @@ def evaluate_model(assignments, X, y):
   return numpy.mean(cv_accuracies)
 
 # Run the Optimization Loop between 10x - 20x the number of parameters
-for _ in range(2):
+for _ in range(60):
     # Receive a Suggestion from SigOpt
     suggestion = conn.experiments(experiment.id).suggestions().create()
 
