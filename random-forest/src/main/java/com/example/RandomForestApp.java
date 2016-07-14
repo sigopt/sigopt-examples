@@ -88,6 +88,17 @@ public class RandomForestApp
                     .build())
                 .call();
         }
+
+        // Re-fetch the experiment to get the best observed value and assignments
+        experiment = Experiment.fetch(experiment.getId()).call();
+        Assignments bestAssignments = experiment.getProgress().getBestObservation().getAssignments();
+        RandomForest bestRandomForest = new RandomForest();
+
+        // To wrap up the Experiment, fit the RandomForest on the best assigments and train on all available data
+        bestRandomForest.setMaxDepth(((Double)bestAssignments.get("maxDepth")).intValue());
+        bestRandomForest.setBagSizePercent(((Double)bestAssignments.get("bagSizePercent")).intValue());
+        bestRandomForest.setNumIterations(((Double)bestAssignments.get("numIterations")).intValue());
+        bestRandomForest.buildClassifier(irisData);
     }
 
     // Our object metric is cross validated accuracy
