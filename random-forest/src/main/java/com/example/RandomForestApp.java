@@ -46,7 +46,6 @@ public class RandomForestApp
         }
 
         // Create a SigOpt experiment for the Random Forest parameters
-        // Budget for Observations between 10x - 20x the number of parameters
         Experiment experiment = Experiment.create(
             new Experiment.Builder()
                 .name("Random Forest (Java)")
@@ -67,12 +66,12 @@ public class RandomForestApp
                         .bounds(new Bounds(1.0, 100.0))
                         .build()
                 ))
-                .observationBudget(60)
                 .build())
             .call();
         System.out.println("Created experiment: https://sigopt.com/experiment/" + experiment.getId());
 
-        for (int i = 0; i < experiment.getObservationBudget(); i++) {
+        // Run the Optimization Loop between 10x - 20x the number of parameters
+        for (int i = 0; i < 60; i++) {
             // Receive a Suggestion from SigOpt
             Suggestion suggestion = experiment.suggestions().create().call();
 
