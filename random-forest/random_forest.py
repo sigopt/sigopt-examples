@@ -46,7 +46,7 @@ def evaluate_model(assignments, X, y):
     min_samples_leaf=assignments['min_samples_leaf']
   )
   cv_accuracies = cross_validation.cross_val_score(classifier, X, y, cv=cv)
-  return numpy.mean(cv_accuracies)
+  return (numpy.mean(cv_accuracies), numpy.std(cv_accuracies))
 
 # Run the Optimization Loop between 10x - 20x the number of parameters
 for _ in range(60):
@@ -54,12 +54,13 @@ for _ in range(60):
     suggestion = conn.experiments(experiment.id).suggestions().create()
 
     # Evaluate the model locally
-    value = evaluate_model(suggestion.assignments, X, y)
+    (value, std) = evaluate_model(suggestion.assignments, X, y)
 
     # Report an Observation (with standard deviation) back to SigOpt
     conn.experiments(experiment.id).observations().create(
         suggestion=suggestion.id,
         value=value,
+        value_stddev=std,
     )
 
 # Re-fetch the experiment to get the best observed value and assignments
