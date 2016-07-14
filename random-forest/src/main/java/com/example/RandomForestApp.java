@@ -46,6 +46,7 @@ public class RandomForestApp
         }
 
         // Create a SigOpt experiment for the Random Forest parameters
+        // Budget for Observations between 10x - 20x the number of parameters
         Experiment experiment = Experiment.create(
             new Experiment.Builder()
                 .name("Random Forest (Java)")
@@ -71,7 +72,6 @@ public class RandomForestApp
             .call();
         System.out.println("Created experiment: https://sigopt.com/experiment/" + experiment.getId());
 
-        // Run the Optimization Loop between 10x - 20x the number of parameters
         for (int i = 0; i < experiment.getObservationBudget(); i++) {
             // Receive a Suggestion from SigOpt
             Suggestion suggestion = experiment.suggestions().create().call();
@@ -92,12 +92,9 @@ public class RandomForestApp
         // Re-fetch the experiment to get the best observed value and assignments
         experiment = Experiment.fetch(experiment.getId()).call();
         Assignments bestAssignments = experiment.getProgress().getBestObservation().getAssignments();
-        RandomForest bestRandomForest = new RandomForest();
 
         // To wrap up the Experiment, fit the RandomForest on the best assigments and train on all available data
-        bestRandomForest.setMaxDepth(((Double)bestAssignments.get("maxDepth")).intValue());
-        bestRandomForest.setBagSizePercent(((Double)bestAssignments.get("bagSizePercent")).intValue());
-        bestRandomForest.setNumIterations(((Double)bestAssignments.get("numIterations")).intValue());
+        RandomForest bestRandomForest = RandomForestApp.randomForestFromAssignments(bestAssignments);
         bestRandomForest.buildClassifier(irisData);
     }
 
@@ -105,15 +102,21 @@ public class RandomForestApp
     // We use cross validation to prevent overfitting
     public static Result evaluateModel(Assignments assignments, Instances data) throws java.lang.Exception
     {
-        RandomForest rf = new RandomForest();
-        rf.setMaxDepth(((Double)assignments.get("maxDepth")).intValue());
-        rf.setBagSizePercent(((Double)assignments.get("bagSizePercent")).intValue());
-        rf.setNumIterations(((Double)assignments.get("numIterations")).intValue());
+        RandomForest rf = RandomForestApp.randomForestFromAssignments(assignments);
 
         Evaluation eval = new Evaluation(data);
         eval.crossValidateModel(rf, data, 5, new Random(1));
 
         double accuracy = eval.pctCorrect() / 100.0;
         return new Result(accuracy, null);
+    }
+
+    // Create a new RandomForest and set the hyperparameters from the assignments
+    public static RandomForest randomForestFromAssignments(Assignments assignments) {
+        RandomForest rf = new RandomForest();
+        rf.setMaxDepth(((Double)assignments.get("maxDepth")).intValue());
+        rf.setBagSizePercent(((Double)assignments.get("bagSizePercent")).intValue());
+        rf.setNumIterations(((Double)assignments.get("numIterations")).intValue());
+        return rf;
     }
 }
