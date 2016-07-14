@@ -3,6 +3,8 @@ package com.example;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.example.Result;
+
 import com.sigopt.Sigopt;
 import com.sigopt.example.Franke;
 import com.sigopt.exception.APIException;
@@ -12,17 +14,6 @@ import com.sigopt.model.Observation;
 import com.sigopt.model.Parameter;
 import com.sigopt.model.Suggestion;
 
-class Result
-{
-    Double value;
-    Double stddev;
-
-    public Result(Double value, Double stddev)
-    {
-        this.value = value;
-        this.stddev = stddev;
-    }
-}
 
 public class App
 {
