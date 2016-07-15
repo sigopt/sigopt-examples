@@ -1,6 +1,6 @@
 # SigOpt Random Forest Example
 
-This example tunes a random forest using SigOpt on the open IRIS dataset.
+This example tunes a random forest using SigOpt on the open IRIS dataset. Scroll down to find your language!
 
 ## Python
 Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in line 16 of `random_forest.py`, then run the following code in a terminal to install dependencies and execute the script:
