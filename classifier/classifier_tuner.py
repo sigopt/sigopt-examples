@@ -9,7 +9,6 @@ import sys
 from sklearn import datasets, svm, ensemble
 from sigopt import Connection
 from sigopt.exception import ApiException
-from sigopt_creds import client_token
 
 from constant import CLASSIFIER_TYPE_TO_PARAMS, NUM_SIGOPT_SUGGESTIONS, GRID_SEARCH_WIDTH, NUM_RANDOM_SEARCHES, Dataset
 
@@ -50,7 +49,7 @@ class ExampleRunner(object):
         if self.classifier_type not in CLASSIFIER_TYPE_TO_PARAMS.keys():
           raise Exception("classifier_type must be one of %s" % CLASSIFIER_TYPE_TO_PARAMS.keys())
 
-        self.client_token = client_token
+        self.client_token = kwargs.get('client_token')
         self.dataset_name = kwargs.get('dataset_name')
         self.test_set_size = kwargs.get('test_set_size')
 
@@ -108,7 +107,7 @@ class ExampleRunner(object):
             return conn.experiments().create(
                 name="Example Classifier",
                 parameters=params,
-                observation_budget=NUM_SIGOPT_SUGGESTIONS,
+                observation_budget=self.num_sigopt_suggestions,
             )
         except ApiException as err:
             if err.status_code == 403 and 'support@sigopt.com' in str(err):
@@ -131,7 +130,7 @@ class ExampleRunner(object):
 
     def random_generator(self, experiment):
         """Return a random parameter configuration within the bounds of the parameters"""
-        for _ in xrange(experiment.observation_budget):
+        for _ in xrange(self.num_random_searches):
             suggestion = {}
             for param in experiment.parameters:
                 if param.type == 'int':
@@ -158,14 +157,14 @@ class ExampleRunner(object):
                 param_value_lists.append(list(numpy.unique(numpy.linspace(
                     param.bounds.min,
                     param.bounds.max,
-                    GRID_SEARCH_WIDTH,
+                    self.grid_search_width,
                     dtype=numpy.int64,
                     ))))
             elif param.type == 'double':
                 param_value_lists.append(list(numpy.linspace(
                     param.bounds.min,
                     param.bounds.max,
-                    GRID_SEARCH_WIDTH,
+                    self.grid_search_width,
                     )))
             elif param.type == 'categorical':
                 categories = [cat.name for cat in param.categorical_values]
@@ -212,12 +211,47 @@ class ExampleRunner(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Classifier Tuner')
-    parser.add_argument('--classifier-type', type=str, choices=CLASSIFIER_TYPE_TO_PARAMS.keys(), help='The type of classifier to use. Defaults to GBC')
-    parser.add_argument('--dataset-name', type=str, help='The sklearn dataset to use. Defaults to datasets.load_digits().')
-    parser.add_argument('--test-set-size', type=int, help='The number of points in the test set. The remainder of the dataset will be the test set.')
-    parser.add_argument('--num-sigopt-suggestions', type=int, help='The number of suggestions to request from SigOpt.')
-    parser.add_argument('--grid-search-width', type=int, help='How many grid points in each dimension to use for grid search')
-    parser.add_argument('--num-random-searches', type=int, help='How many random search parameter configurations to test')
+    parser.add_argument(
+      '--client-token',
+      type=str,
+      help='Your sigopt API token. Get this from https://sigopt.com/user/profile',
+      required=True,
+    )
+    parser.add_argument(
+      '--classifier-type',
+      type=str,
+      choices=CLASSIFIER_TYPE_TO_PARAMS.keys(),
+      help='The type of classifier to use. Defaults to GBC.',
+      default='GBC',
+    )
+    parser.add_argument(
+      '--dataset-name',
+      type=str,
+      help='The sklearn dataset to use. Defaults to datasets.load_digits().',
+    )
+    parser.add_argument(
+      '--test-set-size',
+      type=int,
+      help='The number of points in the test set. The remainder of the dataset will be the test set.',
+    )
+    parser.add_argument(
+      '--num-sigopt-suggestions',
+      type=int,
+      help='The number of suggestions to request from SigOpt.',
+      default=NUM_SIGOPT_SUGGESTIONS,
+    )
+    parser.add_argument(
+      '--grid-search-width',
+      type=int,
+      help='How many grid points in each dimension to use for grid search',
+      default=GRID_SEARCH_WIDTH,
+    )
+    parser.add_argument(
+      '--num-random-searches',
+      type=int,
+      help='How many random search parameter configurations to test',
+      default=NUM_RANDOM_SEARCHES,
+    )
     args = vars(parser.parse_args())
 
     try:
