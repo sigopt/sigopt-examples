@@ -1,4 +1,4 @@
-jupyter
-numpy
-scipy
+jupyter>=1.0.0
+numpy==1.9.1
+scipy==0.16.1
 sigopt>=1.6.4

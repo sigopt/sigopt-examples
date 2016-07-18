@@ -9,6 +9,9 @@ python:
   # - osx
 cache:
   pip: true
+
+# Use the SIGOPT_API_TOKEN environment variable to set the API token.
+# Be careful to not expose it in the travis logs
 script:
   - ./test/run_python classifier classifier_tuner.py \
       --client-token $SIGOPT_API_TOKEN \
