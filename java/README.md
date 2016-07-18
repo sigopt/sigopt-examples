@@ -1,5 +1,12 @@
-You will need maven to compile and run this example.
-On OS X, you can install maven with Homebrew by running `brew install maven`.
+Use SigOpt's [Java API Client](https://sigopt.com/docs/overview/java) to tune the [Franke function](http://www.sfu.ca/~ssurjano/franke2d.html)
+
+# Installation
+You will need [maven](https://maven.apache.org/) to compile and run this example.
+On OS X, you can install maven with Homebrew by running
+
+```bash
+brew install maven
+```
 
 # Compile
 
@@ -7,10 +14,9 @@ On OS X, you can install maven with Homebrew by running `brew install maven`.
 mvn compile
 ```
 
-# Run:
-
-Get your tokens from https://api.sigopt.com/user/profile, and then
+# Run
+Insert your SigOpt API Token into the example below
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.args="--client_token CLIENT_TOKEN"
+mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.cleanupDaemonThreads="false" -Dexec.args="--client_token SIGOPT_API_TOKEN"
 ```

@@ -2,11 +2,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.example</groupId>
-  <artifactId>my-app</artifactId>
+  <artifactId>random-forest-app</artifactId>
   <packaging>jar</packaging>
   <url>https://jcenter.bintray.com</url>
   <version>1.0-SNAPSHOT</version>
-  <name>my-app</name>
+  <name>random-forest-app</name>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -18,6 +18,11 @@
       <groupId>com.sigopt</groupId>
       <artifactId>sigopt-java</artifactId>
       <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>weka-stable</artifactId>
+      <version>3.8.0</version>
     </dependency>
   </dependencies>
   <profiles>
@@ -38,7 +43,7 @@
         </execution>
        </executions>
        <configuration>
-        <mainClass>com.example.App</mainClass>
+        <mainClass>com.example.RandomForestApp</mainClass>
        </configuration>
       </plugin>
      </plugins>
