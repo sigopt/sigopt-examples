@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import math, numpy, datetime
 import sklearn
 import random
@@ -54,7 +56,7 @@ experiment = conn.experiments().create(
 for j in range(experiment.observation_budget):
   suggestion = conn.experiments(experiment.id).suggestions().create()
   params = suggestion.assignments
-  print params
+  print(params)
   w = int(params['filter_w'])              # SIGOPT param  (filter width in pixels)
   s = int(params['slide_w'])               # SIGOPT param  (held fixed at 2)
   q = params['sparse_p']                   # SIGOPT param  (percentile of active centroid distances)
@@ -65,7 +67,7 @@ for j in range(experiment.observation_budget):
   # stack a random subset image patches, 125K
   X_unlab_patches = []
   random.seed(42)
-  print "Gathering examples..."
+  print("Gathering examples...")
   # Use subsample of 200K for k-means and covariance estimates
   for i in random.sample(range(0, unlab_X.shape[2]), 200000):
     patches = view_as_windows(unlab_X[:, :, i], (w, w), step=s)
@@ -76,7 +78,7 @@ for j in range(experiment.observation_budget):
   X_unlab_patches = numpy.vstack(X_unlab_patches)
 
   # build whitening transform matrix
-  print "Fitting ZCA Whitening Transform..."
+  print("Fitting ZCA Whitening Transform...")
   cov = LedoitWolf()
   cov.fit(X_unlab_patches)  # fit covariance estimate
   D, U = numpy.linalg.eigh(cov.covariance_)
@@ -86,7 +88,7 @@ for j in range(experiment.observation_budget):
   X_unlab_patches = numpy.dot(X_unlab_patches-mu, Wh)
 
   # run k-means on unlabelled data
-  print "Starting k-means..."
+  print("Starting k-means...")
   clustr = sklearn.cluster.MiniBatchKMeans(n_clusters=n_clust,
                                            compute_labels=False,
                                            batch_size=300)
@@ -125,20 +127,20 @@ for j in range(experiment.observation_budget):
       res_Z.append(Z)
     return res_Z
 
-  print "Transforming Training Data..."
+  print("Transforming Training Data...")
   train_XZ = process_chunk(0, train_X.shape[2], train_X)
   train_XZ = numpy.vstack(train_XZ)
   train_XZ_2, valid_XZ, train_y_2, valid_y = train_test_split(train_XZ, train_y,
                                                               test_size=0.25, random_state=42)
 
-  print "Transforming Test Data..."
+  print("Transforming Test Data...")
   test_XZ = process_chunk(0, test_X.shape[2], test_X)
   test_XZ = numpy.vstack(test_XZ)
 
   clf = xgb.XGBClassifier(max_depth=int(params['xgb_mx_depth']), n_estimators=int(params['xgb_num_est']),
                           learning_rate=math.exp(params['xgb_lr']), subsample=params['xgb_subsmple'])
 
-  print "Training Classifier..."
+  print("Training Classifier...")
   clf.fit(train_XZ_2, train_y_2.ravel())
 
   # Cross validation metric: SigOpt optimizes this metric
@@ -150,7 +152,7 @@ for j in range(experiment.observation_budget):
   # opt_metric = accuracy_score(test_y, y_test_pred)
   # print opt_metric
 
-  print "DONE!"
+  print("DONE!")
   conn.experiments(experiment.id).observations().create(
     suggestion=suggestion.id,
     value=opt_metric,
