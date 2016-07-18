@@ -20,13 +20,12 @@ from neon.models import Model
 from neon.data import DataIterator, load_cifar10
 from neon.callbacks.callbacks import Callbacks, MetricCallback
 from neon.util.argparser import NeonArgparser
-from sigopt_creds import client_token
 
 
 parser = NeonArgparser(__doc__)
 args = parser.parse_args()
 
-conn = sigopt.interface.Connection(client_token=client_token)
+conn = sigopt.interface.Connection()
 experiment = conn.experiments().create(
   name='Nervana All CNN GPU '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
   parameters=[

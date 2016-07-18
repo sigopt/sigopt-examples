@@ -6,7 +6,6 @@ import sigopt
 import scipy.io
 import sklearn.cluster
 import xgboost as xgb
-from sigopt_creds import client_token
 from skimage.util import view_as_windows
 from skimage.color import rgb2gray
 from sklearn import preprocessing
@@ -34,7 +33,7 @@ test_X = convert_rgb2gray(test_X)
 train_X = convert_rgb2gray(train_X)
 
 # setup SigOpt experiment
-conn = sigopt.Connection(client_token=client_token)
+conn = sigopt.Connection()
 experiment = conn.experiments().create(
   name='SVHN Classifier',
   parameters=[

@@ -1,4 +1,4 @@
-
+import argparse
 import datetime
 import numpy
 import time
@@ -10,8 +10,6 @@ import math
 from skimage.color import rgb2gray
 from sklearn import preprocessing
 from sklearn.cross_validation import train_test_split
-from sigopt_creds import client_token
-
 
 # load SVHN dataset
 extra_X = scipy.io.loadmat("extra_32x32.mat")['X'].astype('float64')
@@ -56,9 +54,8 @@ extra_yZ = numpy.concatenate((extra_yZ, train_yZ), axis=0)
 # only consider 75% of this dataset for now
 _, extra_XZ, _, extra_yZ = train_test_split(extra_XZ, extra_yZ, test_size=0.75, random_state=42)
 
-
 # create SigOpt experiment
-conn = sigopt.Connection(client_token=client_token)
+conn = sigopt.Connection()
 experiment = conn.experiments().create(
   name='SVHN ConvNet',
   parameters=[
@@ -166,8 +163,8 @@ for jk in xrange(experiment.observation_budget):
     chunk_range = min(i + valid_XZ.shape[0]/opt_chunk, valid_XZ.shape[0]) - i
     chunk_perc = chunk_range / float(valid_XZ.shape[0])
     opt_metric += chunk_acc * chunk_perc
-  print opt_metric
-  print "Total Time :", (time.time() - t0)
+  print(opt_metric)
+  print("Total Time :", (time.time() - t0))
 
   # report to SigOpt
   conn.experiments(experiment.id).observations().create(

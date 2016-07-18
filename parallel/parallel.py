@@ -1,6 +1,8 @@
-import argparse, threading, time
+import argparse
+import threading
+import time
+
 import sigopt
-from sigopt_creds import client_token
 
 def evaluate_metric(assignments):
   # Implement this to start optimizing. Assignments is a dict-like object that maps
@@ -28,10 +30,8 @@ def parallel_example(client_token, experiment_id, count=2):
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
-  parser.add_argument('--experiment_id', type=int)
+  parser.add_argument('--experiment_id', type=int, required=True)
+  parser.add_argument('--client_token', type=str, required=True)
   the_args = parser.parse_args()
 
-  if the_args.experiment_id is None:
-    raise Exception("Must provide an experiment id.")
-
-  parallel_example(client_token, the_args.experiment_id)
+  parallel_example(the_args.client_token, the_args.experiment_id)

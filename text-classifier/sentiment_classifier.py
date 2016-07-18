@@ -1,6 +1,5 @@
 import json, math, numpy
 import sigopt
-from sigopt_creds import client_token
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import SGDClassifier
 from sklearn import cross_validation
@@ -25,7 +24,7 @@ def sentiment_metric(POS_TEXT, NEG_TEXT, params):
     cv_scores = cross_validation.cross_val_score(clf, X, y, cv=cv)
     return numpy.mean(cv_scores)
 
-conn = sigopt.Connection(client_token=client_token)
+conn = sigopt.Connection()
 experiment = conn.experiments().create(
   name='Sentiment LR Classifier',
   parameters=[

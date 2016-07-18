@@ -59,17 +59,17 @@ def get_historical_games(box_scores, max_date=None):
 
   return historical_games
 
-def run_sigopt(box_scores, client_token, historical_games, historical_games_training_set, bet_info, sigopt_width=1, sigopt_depth=100):
+def run_sigopt(box_scores, historical_games, historical_games_training_set, bet_info, sigopt_width=1, sigopt_depth=100):
   historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
-  conn = sigopt.Connection(client_token=client_token)
+  conn = sigopt.Connection()
   experiment = create_sigopt_experiment(conn, sigopt_depth)
 
   for _ in range(experiment.observation_budget):
       tunable_param_lists = []
       suggestion_ids = []
       for worker_id in range(sigopt_width):
-          conn = sigopt.Connection(client_token=client_token)
+          conn = sigopt.Connection()
           suggestion = conn.experiments(experiment.id).suggestions().create()
           suggestion_ids.append(suggestion.id)
 
@@ -118,7 +118,7 @@ def run_sigopt(box_scores, client_token, historical_games, historical_games_trai
 
   return experiment.id
 
-def run_example(client_token, sigopt_width=1, sigopt_depth=100):
+def run_example(sigopt_width=1, sigopt_depth=100):
   boxscores_path = os.path.join(os.path.dirname(__file__), '../boxscores/all_boxscores.json')
   box_scores = read_data.read_box_scores(boxscores_path)
 
@@ -129,11 +129,7 @@ def run_example(client_token, sigopt_width=1, sigopt_depth=100):
   bet_info = bet_reader.transform_old_format(bet_info_s15)
   historical_games_by_tuple = evaluator.get_historical_games_by_tuple(historical_games)
 
-  return run_sigopt(box_scores, client_token, historical_games, historical_games_training_set, bet_info, sigopt_width=sigopt_width, sigopt_depth=sigopt_depth)
+  return run_sigopt(box_scores, historical_games, historical_games_training_set, bet_info, sigopt_width=sigopt_width, sigopt_depth=sigopt_depth)
 
 if __name__ == '__main__':
-  from sigopt_creds import client_token
-  if not client_token:
-    raise Exception('Find your client_token at https://sigopt.com/user/profile and add to sigopt_creds.py')
-
-  run_example(client_token)
+  run_example()

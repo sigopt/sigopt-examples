@@ -10,14 +10,10 @@ from ncloud.config import Config
 from ncloud.commands.show import ShowModel
 from ncloud.commands.train import TrainModel
 from ncloud.util.api_call import api_call
-from sigopt_creds import client_token as CLIENT_TOKEN
 
 import sigopt.interface
 
 from constant import TUNABLE_PARAMS, PAPER_PARAMS
-
-client_token = CLIENT_TOKEN
-
 
 class JobRunner(object):
   def __init__(self, num_sigopt_suggestions=300, output_file='data/sigopt.txt'):
@@ -26,7 +22,7 @@ class JobRunner(object):
 
   def create_experiment(self):
     """Create a SigOpt experiment for optimizing the classifier hyperparameters."""
-    conn = sigopt.interface.Connection(client_token=client_token)
+    conn = sigopt.interface.Connection()
     experiment = conn.experiments().create(
       name="Nervana POC - {num}".format(num=int(time.time())),
       parameters=TUNABLE_PARAMS
@@ -36,7 +32,7 @@ class JobRunner(object):
   def sigopt_generator(self, experiment_id):
     """Generate optimal parameter configurations using SigOpt."""
     for _ in xrange(self.num_sigopt_suggestions):
-      conn = sigopt.interface.Connection(client_token=client_token)
+      conn = sigopt.interface.Connection()
       suggestion = conn.experiments(experiment_id).suggestions().create()
       yield suggestion
 
@@ -49,7 +45,7 @@ class JobRunner(object):
       )
     print(output)
 
-    conn = sigopt.interface.Connection(client_token=client_token)
+    conn = sigopt.interface.Connection()
     conn.experiments(experiment_id).observations().create(
         suggestion=suggestion_id,
         value=obj,
@@ -90,7 +86,7 @@ class JobRunner(object):
     for k, v in temp_assignments.iteritems():
       args += " --{k} {v}".format(k=k, v=v)
     return TrainModel.call(Config(), 'cifar10_allcnn_newargs.py', args=args)
-  
+
   def fire_ncloud(self, assignments):
     output = self.ncloud_train_from_assignments(assignments)
     time.sleep(2)
@@ -112,7 +108,7 @@ class JobRunner(object):
       active_job_ids[job_id] = suggestion.assignments.to_json()
       if i == 2:
         break
-      
+
     while True:
       time.sleep(60)
       print("Polling...")
