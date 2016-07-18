@@ -8,6 +8,7 @@ import com.example.Result;
 import com.sigopt.Sigopt;
 import com.sigopt.example.Franke;
 import com.sigopt.exception.APIException;
+import com.sigopt.model.Assignments;
 import com.sigopt.model.Bounds;
 import com.sigopt.model.Experiment;
 import com.sigopt.model.Observation;
@@ -49,7 +50,7 @@ public class App
         // Run the Optimization Loop between 10x - 20x the number of parameters
         for (int i = 0; i < experiment.getObservationBudget(); i++) {
             Suggestion suggestion = experiment.suggestions().create().call();
-            Result result = App.evaluateModel(suggestion);
+            Result result = App.evaluateModel(suggestion.getAssignments());
             Observation observation = experiment.observations().create()
                 .data(new Observation.Builder()
                     .suggestion(suggestion.getId())
@@ -62,11 +63,10 @@ public class App
 
     // Evaluate your model with the suggested parameter assignments
     // Franke function - http://www.sfu.ca/~ssurjano/franke2d.html
-    public static Result evaluateModel(Suggestion suggestion) throws InterruptedException
+    public static Result evaluateModel(Assignments assignments) throws InterruptedException
     {
-        Map<String, Object> assignments = suggestion.getAssignments();
-        double x = (Double)assignments.get("x");
-        double y = (Double)assignments.get("y");
+        double x = assignments.getDouble("x");
+        double y = assignments.getDouble("y");
         double result = Franke.evaluate(x, y);
         return new Result(result, null);
     }

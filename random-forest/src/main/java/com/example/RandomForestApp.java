@@ -113,9 +113,9 @@ public class RandomForestApp
     // Create a new RandomForest and set the hyperparameters from the assignments
     public static RandomForest randomForestFromAssignments(Assignments assignments) {
         RandomForest rf = new RandomForest();
-        rf.setMaxDepth(((Double)assignments.get("maxDepth")).intValue());
-        rf.setBagSizePercent(((Double)assignments.get("bagSizePercent")).intValue());
-        rf.setNumIterations(((Double)assignments.get("numIterations")).intValue());
+        rf.setMaxDepth(assignments.getInteger("maxDepth"));
+        rf.setBagSizePercent(assignments.getInteger("bagSizePercent"));
+        rf.setNumIterations(assignments.getInteger("numIterations"));
         return rf;
     }
 }
