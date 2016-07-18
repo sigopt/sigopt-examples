@@ -13,7 +13,10 @@ cd "$TEST_DIR"
 virtualenv venv --system-site-packages
 source venv/bin/activate
 if [ -f requirements.txt ]; then
+  cat requirements.txt | grep sigopt  # sigopt python package must be included
+  set +e
   cat requirements.txt | grep -v numpy | grep -v scipy >requirements-clean.txt
+  set -e
   pip install -r requirements-clean.txt
 fi
 exec python "$TEST_FILE" "$@"
