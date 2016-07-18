@@ -11,7 +11,8 @@ shift
 REMAINING_ARGS="$@"
 
 cd "$TEST_DIR"
-virtualenv venv
+# We allow system site packages to make installing numpy/scipy less burdensome
+virtualenv venv --system-site-packages
 source venv/bin/activate
 pip install -r requirements.txt
 exec python "$TEST_FILE" $REMAINING_ARGS

@@ -10,6 +10,14 @@ python:
 cache:
   pip: true
 
+addons:
+  apt:
+    packages:
+      # numpy and scipy cause a lot of trouble and are expensive to install, so install
+      # them once for all packages, and let the virtualenvs see this parent package
+      - 'python-numpy'
+      - 'python-scipy'
+
 # Use the SIGOPT_API_TOKEN environment variable to set the API token.
 # Be careful to not expose it in the travis logs
 script:
