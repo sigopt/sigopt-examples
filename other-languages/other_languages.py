@@ -29,8 +29,6 @@ class SubProcessEvaluator(object):
 
 
 if __name__ == '__main__':
-  print 'ffffffffff'
-  print sys.argv
   parser = argparse.ArgumentParser()
   parser.add_argument(
     '--command',
