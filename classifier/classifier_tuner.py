@@ -153,21 +153,23 @@ class ExampleRunner(object):
         """Iterate through a grid of points within the bounds of the parameters."""
         param_value_lists = []
         for param in experiment.parameters:
-            if param.type == 'int':
-                param_value_lists.append(list(numpy.unique([round(i) for i in numpy.linspace(
-                    param.bounds.min,
-                    param.bounds.max,
-                    self.grid_search_width,
-                    )])))
-            elif param.type == 'double':
-                param_value_lists.append(list(numpy.linspace(
-                    param.bounds.min,
-                    param.bounds.max,
-                    self.grid_search_width,
-                    )))
-            elif param.type == 'categorical':
+            if param.type == 'categorical':
                 categories = [cat.name for cat in param.categorical_values]
                 param_value_lists.append(categories)
+            else:
+                linspace = numpy.linspace(
+                    param.bounds.min,
+                    param.bounds.max,
+                    self.grid_search_width,
+                    )
+                if param.type == 'int':
+                    param_value_lists.append([
+                        int(i)
+                        for i
+                        in numpy.unique([round(i) for i in linspace])
+                        ])
+                else:
+                    param_value_lists.append(linspace)
 
         for param_values in itertools.product(*param_value_lists):
             suggestion = {}
