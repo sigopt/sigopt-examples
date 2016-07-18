@@ -18,6 +18,10 @@ addons:
       - 'python-numpy'
       - 'python-scipy'
 
+before_script:
+  - python -c "import numpy; print(numpy.__version__)"
+  - python -c "import scipy; print(scipy.__version__)"
+
 # Use the SIGOPT_API_TOKEN environment variable to set the API token.
 # Be careful to not expose it in the travis logs
 script:
