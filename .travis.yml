@@ -29,3 +29,6 @@ script:
   - ./test/with_new_experiment ./test/run_python parallel parallel.py --client_token $SIGOPT_API_TOKEN --experiment_id NEW_EXPERIMENT_ID
   - cd java && mvn compile && mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.cleanupDaemonThreads="false" -Dexec.args="--client_token $SIGOPT_API_TOKEN"
 
+branches:
+  only:
+    - master
