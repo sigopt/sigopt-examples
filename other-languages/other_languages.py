@@ -29,12 +29,22 @@ class SubProcessEvaluator(object):
 
 
 if __name__ == '__main__':
+  print 'ffffffffff'
+  print sys.argv
   parser = argparse.ArgumentParser()
-  parser.add_argument('--command', required=True, help="The command to run the function whose parameters you would "
-    "like to optimize. Should accept parameters as command line argument and output only the evaluated metric at the "
-    "suggested point.")
-  parser.add_argument('--experiment_id', required=True, help="The parameters of this experiment should be the "
-    "same type and name of the command line arguments to your executable file.")
+  parser.add_argument(
+    '--command',
+    required=True,
+    help="The command to run the function whose parameters you would "
+      "like to optimize. Should accept parameters as command line argument and output only the evaluated metric at the "
+      "suggested point."
+  )
+  parser.add_argument(
+    '--experiment_id',
+    required=True,
+    help="The parameters of this experiment should be the "
+      "same type and name of the command line arguments to your executable file."
+  )
   parser.add_argument('--client_token', required=True, help="Find your CLIENT_TOKEN at https://sigopt.com/user/profile")
   the_args = parser.parse_args()
 
@@ -44,7 +54,7 @@ if __name__ == '__main__':
   evaluator = SubProcessEvaluator(the_args.command)
 
   # In a loop: receive a suggestion, evaluate the metric, report an observation
-  while True:
+  for _ in range(experiment.observation_budget or 10):
     suggestion = connection.experiments(experiment.id).suggestions().create()
     print('Evaluating at suggested assignments: {0}'.format(suggestion.assignments))
     value = evaluator.evaluate_metric(suggestion.assignments)

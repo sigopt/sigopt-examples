@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import argparse
+import os
+import sigopt
+import subprocess
+import sys
+
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser()
+  parser.add_argument('rest', nargs=argparse.REMAINDER)
+  args = parser.parse_args().rest
+
+  conn = sigopt.Connection(client_token=os.environ['SIGOPT_API_TOKEN'])
+  e = conn.experiments().create(
+    name='sigopt-examples test experiment',
+    parameters=[
+      {'type': 'double', 'name': 'd', 'bounds': {'min': 10, 'max': 20}},
+      {'type': 'int', 'name': 'i', 'bounds': {'min': 1, 'max': 100}},
+      {'type': 'categorical', 'name': 'c', 'categorical_values': [{'name': 'a'}, {'name': 'b'}]},
+    ],
+  )
+  args = [(e.id if a == 'NEW_EXPERIMENT_ID' else a) for a in args]
+  p = subprocess.Popen(
+    args=args,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    env=os.environ,
+  )
+  out, err = p.communicate()
+  print(out)
+  print(err, file=sys.stderr)
+  sys.exit(p.wait())

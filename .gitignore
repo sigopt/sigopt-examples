@@ -2,6 +2,7 @@
 *.swp
 *.pdf
 */venv
+*/requirements-clean.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

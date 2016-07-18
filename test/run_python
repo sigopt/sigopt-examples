@@ -8,12 +8,12 @@ shift
 TEST_FILE="$1"
 shift
 
-REMAINING_ARGS="$@"
-
 cd "$TEST_DIR"
 # We allow system site packages to make installing numpy/scipy less burdensome
 virtualenv venv --system-site-packages
 source venv/bin/activate
-cat requirements.txt | grep -v numpy | grep -v scipy >requirements-clean.txt
-pip install -r requirements-clean.txt
-exec python "$TEST_FILE" $REMAINING_ARGS
+if [ -f requirements.txt ]; then
+  cat requirements.txt | grep -v numpy | grep -v scipy >requirements-clean.txt
+  pip install -r requirements-clean.txt
+fi
+exec python "$TEST_FILE" "$@"
