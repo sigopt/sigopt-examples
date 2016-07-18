@@ -154,11 +154,11 @@ class ExampleRunner(object):
         param_value_lists = []
         for param in experiment.parameters:
             if param.type == 'int':
-                param_value_lists.append(list(numpy.unique(numpy.linspace(
-                    int(param.bounds.min),
-                    int(param.bounds.max),
+                param_value_lists.append(list(numpy.unique([round(i) for i in numpy.linspace(
+                    param.bounds.min,
+                    param.bounds.max,
                     self.grid_search_width,
-                    ))))
+                    )])))
             elif param.type == 'double':
                 param_value_lists.append(list(numpy.linspace(
                     param.bounds.min,
