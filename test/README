@@ -1,0 +1,4 @@
+These is code for testing the SigOpt examples to make sure they work.
+
+You probably don't need to look at these files directly - check out
+the individual examples in the base directory of this package.

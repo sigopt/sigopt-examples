@@ -1,0 +1,15 @@
+sudo: false
+python:
+  - "2.7"
+  - "3.5"
+os:
+  - linux
+  - osx
+cache:
+  pip: true
+script:
+  - ./test/run_python classifier classifier_tuner.py \
+      --client-token $SIGOPT_API_TOKEN \
+      --num-sigopt-suggestions 2 \
+      --num-random-searches 1 \
+      --grid-search-width 1
