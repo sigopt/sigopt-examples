@@ -9,10 +9,11 @@ These examples will run on any Linux or Mac OS X machine from the command line. 
 ## First Time?
 
 If this is your first time using SigOpt, we recommend you work through the [Random Forest](random-forest) example. In this example, you will use a random forest to classify data from the [iris dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) and use SigOpt maximize the k-fold cross-validation accuracy by tuning the model's hyperparameters. This example is available in a wide variety of languages and integrations:
- * Python
- * R
- * scikit-learn integration
- * iPython notebook
+ * [Python](random-forest/python)
+ * [R](random-forest/r)
+ * [Java](random-forest/java)
+ * [Python inside notebook](random-forest/python#notebook-version)
+ * [scikit-learn integration](random-forest/python#scikit-learn-integration)
 
 ## More Examples
 
