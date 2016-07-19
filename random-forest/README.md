@@ -8,6 +8,7 @@ Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in 
 ```
 pip install sigopt
 pip install sklearn
+cd python
 python random_forest.py
 ```
 
@@ -49,6 +50,7 @@ Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in 
 
 ```
 pip install sigopt_sklearn
+cd python
 python random_forest.sklearn.py
 ```
 
@@ -62,6 +64,7 @@ To run the notebook:
 
 ```
 pip install jupyter
+cd python
 jupyter notebook
 ```
 
