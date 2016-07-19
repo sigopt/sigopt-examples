@@ -18,7 +18,8 @@ Learn more about our [Python API Client](https://sigopt.com/docs/overview/python
 Simply add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in line 16 of `random_forest_SigOpt.R` and then execute the R script in R Studio, or in the terminal:
 
 ```
-RScript random_forest_SigOpt.R
+cd r
+RScript random_forest.R
 ```
 
 Learn more about our [R API Client](https://sigopt.com/docs/overview/r).
