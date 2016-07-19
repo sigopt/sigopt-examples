@@ -33,6 +33,7 @@ brew install maven
 Next, compile
 
 ```bash
+cd java
 mvn compile
 ```
 Insert your SigOpt [API token](https://sigopt.com/docs/overview/authentication) into the command below to run the example
