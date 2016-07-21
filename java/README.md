@@ -1,4 +1,4 @@
-![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+[![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)](https://sigopt.com)
 
 Use SigOpt's [Java API Client](https://sigopt.com/docs/overview/java) to tune the [Franke function](http://www.sfu.ca/~ssurjano/franke2d.html)
 

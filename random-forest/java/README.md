@@ -1,4 +1,4 @@
-![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+[![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)](https://sigopt.com)
 
 # SigOpt Random Forest Java Example
 

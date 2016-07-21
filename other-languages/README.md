@@ -1,4 +1,4 @@
-![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+[![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)](https://sigopt.com)
 
 # SigOpt with Other Languages
 Our `other_languages` example is one way to use SigOpt when your metric evaluation function is in a language other than python. All you need to do is create an executable file that accepts parameters as command line arguments, and then create an experiment with the same parameter names as the executable. The executable file should accept the suggested parameters at the command line, evaluate the metric, and print out a float.
