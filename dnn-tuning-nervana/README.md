@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # Using SigOpt and Nervana Cloud to tune DNNs
 
 Learn more at the associated blog post: [Much Deeper, Much Faster: Deep Neural Network Optimization with SigOpt and Nervana Cloud](http://blog.sigopt.com/post/146208659358/much-deeper-much-faster-deep-neural-network).

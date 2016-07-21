@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # Unsupervised Model Tuning
 
 Example using SigOpt to tune a combined unsupervied supervised model for OCR recognition

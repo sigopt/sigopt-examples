@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # sigopt-beats-vegas
 
 Learn more at the associated [blog post](http://blog.sigopt.com/post/136340340198/sigopt-for-ml-using-model-tuning-to-beat-vegas).

@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # Text Classifier Tuning
 
 Example using SigOpt to tune logistic regression model for text sentiment classification.

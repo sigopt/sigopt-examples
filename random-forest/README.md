@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # SigOpt Random Forest Example
 
 We have written examples using serveral different languages + integrations to demonstrate using SigOpt to tune the hyperparameters of a Random Forest Classifier. The classifier is trained to classify elements of the [Iris Flower Dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set). Scroll down to find your language!

@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # SigOpt IPython Notebook Example
 
 Here we use SigOpt to optimze a simple 2D function within an [ipython notebook](http://ipython.org/notebook.html).

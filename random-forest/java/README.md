@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # SigOpt Random Forest Java Example
 
 This example tunes a random forest using SigOpt + Java on the open IRIS dataset.

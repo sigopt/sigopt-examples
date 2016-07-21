@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # Classifier Tuning
 
 Machine learning classifier hyperparameter optimization example.

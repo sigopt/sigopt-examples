@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # How are My Hyperparameters Affecting My Training Time?
 
 Example using SigOpt to explore approximated how long it takes to train your models. 

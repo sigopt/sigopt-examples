@@ -1,3 +1,5 @@
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
+
 # TensorFlow Convolutional Neural Network Tuning
 
 Example using SigOpt to tune a convolutional neural network for OCR recognition
