@@ -1,4 +1,4 @@
-![image](https://sigopt.com/static/img/SigOpt_logo_horiz.jpg?raw=true)
+![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)
 
 # Getting Started with SigOpt
 
