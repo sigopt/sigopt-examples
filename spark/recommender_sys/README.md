@@ -13,10 +13,10 @@ Example using SigOpt and Spark / MLLib to tune an alternating least squares algo
 4. `cd sigopt-examples/spark/recommender_sys`
 5. `sudo ./setup_env.sh`   (Note this assumes you are running on master node of spark-ec2 cluster)
 6. `sbt assembly`
-7. 
-   ```
-   /root/spark/bin/spark-submit \
+7. submit job to spark 
+```
+/root/spark/bin/spark-submit \
    --master spark://<YOUR_SPARK_MASTER_DNS>:7077 \
    --class MovieLensExperiment \
    target/scala-2.10/movie-lens-sigopt-assembly-1.0.jar   # Might be scala-2.11, depending on your version
-  ```
+```
