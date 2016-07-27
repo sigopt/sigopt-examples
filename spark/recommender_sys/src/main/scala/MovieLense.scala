@@ -13,7 +13,6 @@ import org.apache.spark.mllib.util.MLUtils
 import org.apache.spark.mllib.recommendation.{ALS, Rating, MatrixFactorizationModel}
 
 object MovieLensExperiment {
-
   def createExperiment(name: String, parameters: Seq[(String, Double, Double, String)]) : Experiment = {
     val e: Experiment = Experiment.create()
       .data(new Experiment.Builder()
@@ -112,3 +111,4 @@ object MovieLensExperiment {
 
     sc.stop()
   }
+}
