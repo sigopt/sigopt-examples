@@ -17,6 +17,5 @@ Example using SigOpt and Spark / MLLib to tune an alternating least squares algo
    ./spark/bin/spark-submit \
   --master spark://<YOUR_SPARK_MASTER_DNS>:7077 \
   --class "MovieLensExperiment" \
-  --jars sigopt-java/target/sigopt-java-3.1.1-jar-with-dependencies.jar \
-  movieLens/target/scala-2.10/move-lens-sigopt_2.10-1.0.jar 
+  target/scala-2.10/movie-lens-sigopt_2.10-1.0.jar
   ```
