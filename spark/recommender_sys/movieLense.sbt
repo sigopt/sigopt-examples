@@ -1,4 +1,4 @@
-name := "Move Lens SigOpt"
+name := "Movie Lens SigOpt"
 
 version := "1.0"
 

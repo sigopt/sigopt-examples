@@ -2,7 +2,7 @@ import sbt.Keys._
 import sbt._
 
 object MyBuild extends Build {
-
+  val sigOptSparkLibGit = ProjectRef(uri("https://github.com/sigopt/sigopt-spark.git"), "sigopt-spark")
   lazy val root = Project("root", file("."))
      .dependsOn(sigOptSparkLibGit)
      .settings(
@@ -16,9 +16,7 @@ object MyBuild extends Build {
              "com.sigopt"                  %  ("sigopt-java") % "3.1.1",
              "org.apache.spark"            %  ("spark-core" + v) % "1.6.1",
              "org.apache.spark"            %  ("spark-mllib" + v) % "1.6.1",
-             "org.json4s"                  %  ("json4s-jackson" + v) % "3.1.0"
+             "org.json4s"                  %  ("json4s-jackson" + v) % "3.2.10"
         )
     })
-
-   lazy val sigOptSparkLibGit = ProjectRef(uri("https://github.com/sigopt/sigopt-spark.git"), "sigopt-spark")
 }
