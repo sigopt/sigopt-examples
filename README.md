@@ -6,7 +6,7 @@ Welcome to SigOpt Examples. These examples show you how to use [SigOpt](https://
 
 ## Requirements
 
-These examples will run on any Linux or Mac OS X machine from the command line. Each example contains a README.md with specific setup instructions.
+Most of these examples will run on any Linux or Mac OS X machine from the command line. Each example contains a README.md with specific setup instructions.
 
 ## First Time?
 
