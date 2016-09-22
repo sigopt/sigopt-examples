@@ -59,5 +59,8 @@ docs/_build/
 # PyBuilder
 target/
 
+# Pycharm caching
+.idea
+
 # Jupyter notebooks
 .ipynb_checkpoints/

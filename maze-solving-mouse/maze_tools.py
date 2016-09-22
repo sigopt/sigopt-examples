@@ -1,8 +1,4 @@
 import numpy
-try:  # This can still be used without matplotlib, if no plotting is required
-    import matplotlib.pyplot as plt
-except ImportError:
-    plt = NotImplemented
 
 
 # Maybe it would be nice to have an import/export json function
@@ -227,6 +223,7 @@ class RightTurnSolver(object):
         return 10 * pt + 5
 
     def _plot_maze_alone_from_image(self, image, ax, figsize, markersize):
+        from matplotlib import pyplot as plt
         start_row, start_col = self._pcc(self.start)
         end_row, end_col = self._pcc(self.end)
         if ax is None:
@@ -286,6 +283,8 @@ class RightTurnSolver(object):
         """
         if self.maze is None or self.generation_history is None:
             raise AssertionError('This can only be called after creating a random maze with this object')
+        from matplotlib import pyplot as plt
+
         duration = duration or len(self.generation_history)
         partial_maze = numpy.zeros((self.shape[0], self.shape[1], 4), dtype=int)
         for k in range(duration):
@@ -314,6 +313,8 @@ class RightTurnSolver(object):
             raise AssertionError('The maze must be stored to make this plot')
         if self.path is None:
             raise AssertionError('To plot the solution, the solution must be found')
+        from matplotlib import pyplot as plt
+
         image = self._form_maze_image_for_plotting()
         for k in range(len(self.path)):
             self._plot_maze_alone_from_image(image, None, figsize, markersize)

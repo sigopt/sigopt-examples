@@ -1,9 +1,5 @@
 import numpy
 from timeit import default_timer
-try:  # This can still be used without matplotlib, if no plotting is required
-    import matplotlib.pyplot as plt
-except ImportError:
-    plt = NotImplemented
 
 from maze_tools import RightTurnSolver
 
@@ -141,6 +137,7 @@ def plot_pareto_frontier(pareto_front, non_pareto_front, mean_on_y_axis=PREFER_M
     :param fontsize: Size of the text for matplotlib axis labels
     :type fontsize: int > 0
     """
+    from matplotlib import pyplot as plt
     plt.plot(non_pareto_front[:, 0], non_pareto_front[:, 1], 'o', color='#1F407D')
     plt.plot(pareto_front[:, 0], pareto_front[:, 1], 'o', color='#E84557')
     if mean_on_y_axis:
@@ -169,6 +166,7 @@ def plot_hist_prop(data, plot_it=False, **histogram_kwargs):
 
     bins = bins[:-1]
     if plot_it:
+        from matplotlib import pyplot as plt
         plt.bar(bins, hist, widths)
         plt.xlim((0, 2))  # The mouse can never take more than double the number of cells to solve the maze
         plt.ylabel('proportion')
@@ -186,8 +184,8 @@ class SigOptMazeFrontierSolver(object):
     def __init__(self, api_token=None, parameter_domain=None, maze_size=(30, 30), num_tests=100, down_prob=1.0):
         """Create a new SigOpt testing tool.
 
-        The api_token is a long string which can be found on your account at www.sigopt.com.  You can either pass that
-            string here or you can modify this file to save it on your local machine.
+        The api_token is a long string which can be found on your account at www.sigopt.com/user/profile.
+            You can either pass that string here or you can modify this file to save it on your local machine.
 
         parameter_domain describes the allowable values for the relative probabilities of constructing the maze with
             "left", "up" or "right" moves.  These probabilities are relative to the probability of moving "down" which
