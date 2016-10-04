@@ -165,6 +165,7 @@ for jk in xrange(experiment.observation_budget):
     opt_metric += chunk_acc * chunk_perc
   print(opt_metric)
   print("Total Time :", (time.time() - t0))
+  sess.close()
 
   # report to SigOpt
   conn.experiments(experiment.id).observations().create(
