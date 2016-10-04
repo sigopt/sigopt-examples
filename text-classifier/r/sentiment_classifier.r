@@ -9,7 +9,7 @@ library(text2vec)
 install.packages("glmnet", repos = "http://cran.us.r-project.org")
 library(glmnet)
 
-Sys.setenv(SIGOPT_API_TOKEN="VVRAMYYSQLDPYRVFSJXFCIVVLGPGSFMXXKCCFDADGMZSFOMA")
+Sys.setenv(SIGOPT_API_TOKEN="YOUR_API_TOKEN_HERE")
 
 # load text training data
 POSITIVE_TEXT <- fromJSON(file="http://sigopt-public.s3-website-us-west-2.amazonaws.com/POSITIVE_list.json")
