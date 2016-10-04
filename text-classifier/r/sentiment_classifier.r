@@ -1,3 +1,7 @@
+# Use SigOpt to tune a text classifier in R
+# Learn more about SigOpt's R Client:
+# https://sigopt.com/docs/overview/R
+
 install.packages("devtools", repos = "http://cran.us.r-project.org")
 library(devtools)
 install_github("sigopt/SigOptR")
@@ -9,6 +13,8 @@ library(text2vec)
 install.packages("glmnet", repos = "http://cran.us.r-project.org")
 library(glmnet)
 
+# Learn more about authenticating the SigOpt API:
+# https://sigopt.com/docs/overview/authentication
 Sys.setenv(SIGOPT_API_TOKEN="YOUR_API_TOKEN_HERE")
 
 # load text training data
@@ -29,6 +35,7 @@ sentiment_metric <- function(POS_TEXT, NEG_TEXT, params) {
   pruned_vocab = prune_vocabulary(vocab, doc_proportion_min = min_doc_freq, doc_proportion_max = max_doc_freq)
   it <- itoken(text, tolower, word_tokenizer)
   vectorizer <- vocab_vectorizer(pruned_vocab)
+
   X <- create_dtm(it, vectorizer)
   y <- c(rep(1, length(POSITIVE_TEXT)), rep(0, length(NEGATIVE_TEXT)))
 
@@ -63,13 +70,16 @@ experiment <- create_experiment(list(
     list(name="log_min_df",    type="double", bounds=list(min=log(0.00000001), max=log(0.1))),
     list(name="df_offset",     type="double", bounds=list(min=0.01, max=0.25))
   ),
+  # Run the Optimization Loop between 10x - 20x the number of parameters
   observation_budget=60
 ))
 
 # run experimentation loop
 for(i in 1:experiment$observation_budget) {
   suggestion <- create_suggestion(experiment$id)
+
   opt_metric <- sentiment_metric(POSITIVE_TEXT, NEGATIVE_TEXT, suggestion$assignments)
+
   create_observation(experiment$id, list(
     suggestion=suggestion$id,
     value=opt_metric[1],
