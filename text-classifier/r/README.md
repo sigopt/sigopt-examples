@@ -1,18 +1,26 @@
 [![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)](https://sigopt.com)
 
-# Text Classifier Tuning
+# Text Classifier Tuning R Example
 
-Example using SigOpt to tune logistic regression model for text sentiment classification. This example is offered in Python and R.
+Example using SigOpt and R to tune logistic regression model for text sentiment classification.
 
 More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text).
 
-## [Python](python)
- * Python API Client
- * Notebook Version of Python API Client
- * SigOpt + scikit-learn Integration
+## Setup
 
-## [R](r)
- * R API Client
+1. Get a free SigOpt account at [https://sigopt.com/signup](https://sigopt.com/signup)
+2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile) and add it to line 12 of `sentiment_classifier.r`.
+3. `git clone https://github.com/sigopt/sigopt-examples.git`
+4. Execute the R script in R Studio, or in the terminal:
+
+```
+cd sigopt-examples/text-classifier/r
+RScript sentiment_classifier.R
+```
+
+## Optimize
+
+Once the text classifier model tuning loop is running, you can track the progress on your [experiment dashboard](https://sigopt.com/experiment/list).
 
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
