@@ -1,6 +1,6 @@
 # Use SigOpt to tune a text classifier in R
 # Learn more about SigOpt's R Client:
-# https://sigopt.com/docs/overview/R
+# https://sigopt.com/docs/overview/r
 
 install.packages("devtools", repos = "http://cran.us.r-project.org")
 library(devtools)
