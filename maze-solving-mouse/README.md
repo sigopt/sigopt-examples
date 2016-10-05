@@ -4,8 +4,7 @@
 
 Example using SigOpt to solve a multicriteria optimization problem
 
-More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/140871698423/sigopt-for-ml-unsupervised-learning-with-even).
-(((((((Correct this link once posted))))))))
+More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/151388283013/sigopt-in-depth-building-a-better-mousetrap-via).
 
 ## Setup
 
