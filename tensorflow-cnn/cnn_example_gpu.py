@@ -12,9 +12,6 @@ from skimage.color import rgb2gray
 from sklearn import preprocessing
 from sklearn.cross_validation import train_test_split
 
-conn = sigopt.Connection(client_token=client_token)
-experiment_id = 'fill me in'
-
 # load SVHN dataset
 extra_X = scipy.io.loadmat("extra_32x32.mat")['X'].astype('float64')
 extra_y = scipy.io.loadmat("extra_32x32.mat")['y'].astype('float64')
@@ -58,12 +55,28 @@ extra_yZ = numpy.concatenate((extra_yZ, train_yZ), axis=0)
 # only consider 75% of this dataset for now
 _, extra_XZ, _, extra_yZ = train_test_split(extra_XZ, extra_yZ, test_size=0.75, random_state=42)
 
-
+# create SigOpt experiment
+conn = sigopt.Connection()
+experiment = conn.experiments().create(
+  name='SVHN ConvNet',
+  parameters=[
+    {'name': 'filter1_w',      'type': 'int',    'bounds': {'min': 3,  'max': 10}},
+    {'name': 'filter1_depth',  'type': 'int',    'bounds': {'min': 10, 'max': 64}},
+    {'name': 'filter2_w',      'type': 'int',    'bounds': {'min': 3,  'max': 10}},
+    {'name': 'filter2_depth',  'type': 'int',    'bounds': {'min': 10, 'max': 64}},
+    {'name': 'drp_out_keep_p', 'type': 'double', 'bounds': {'min': 0.2, 'max': 1.0}},
+    {'name': 'log_rms_lr',     'type': 'double', 'bounds': {'min': math.log(0.00001),
+                                                            'max': math.log(1.0)}},
+    {'name': 'rms_mom',        'type': 'double', 'bounds': {'min': 0.5, 'max': 1.0}},
+    {'name': 'rms_decay',      'type': 'double', 'bounds': {'min': 0.5, 'max': 1.0}},
+  ],
+  observation_budget=100,
+)
 
 # SigOpt optimization loop
 for jk in xrange(100):
   # SigOpt params
-  suggestion = conn.experiments(experiment_id).suggestions().create()
+  suggestion = conn.experiments(experiment.id).suggestions().create()
   params = suggestion.assignments
 
   sess = tf.InteractiveSession()
@@ -155,7 +168,7 @@ for jk in xrange(100):
   sess.close()
 
   # report to SigOpt
-  conn.experiments(experiment_id).observations().create(
+  conn.experiments(experiment.id).observations().create(
     suggestion=suggestion.id,
     value=float(opt_metric),
     value_stddev=0.05
