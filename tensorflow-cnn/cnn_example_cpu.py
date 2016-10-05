@@ -73,7 +73,6 @@ experiment = conn.experiments().create(
 )
 
 # SigOpt optimization loop
-conn = sigopt.Connection(client_token=client_token)
 for jk in xrange(experiment.observation_budget):
   # SigOpt params
   suggestion = conn.experiments(experiment.id).suggestions().create()
