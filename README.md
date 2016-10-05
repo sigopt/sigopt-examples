@@ -21,7 +21,7 @@ If this is your first time using SigOpt, we recommend you work through the [Rand
 
 - [ipython-notebook-example](ipython-notebook-example): Simple example of using SigOpt to optimize a 2D function with plots and comparisons in an iPython Notebook.
 - [sigopt-beats-vegas](sigopt-beats-vegas): Using SigOpt to tune a model to beat the Vegas odds in Python ([blog post](http://blog.sigopt.com/post/136340340198/sigopt-for-ml-using-model-tuning-to-beat-vegas)).
-- [text-classifier](text-classifier): Example using SigOpt to tune a text classifier in Python ([blog post](http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text)).
+- [text-classifier](text-classifier): Example using SigOpt to tune a text classifier in Python and R ([blog post](http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text)).
 - [unsupervised-model](unsupervised-model): Example using SigOpt and xgboost to tune a combined unsupervised and supervised model for optical character recognition ([blog post](http://blog.sigopt.com/post/140871698423/sigopt-for-ml-unsupervised-learning-with-even))
 - [tensorflow-cnn](tensorflow-cnn): Example using SigOpt and TensorFlow to tune a convolutional neural network's structure and gradient descent algorithm ([blog post](http://blog.sigopt.com/post/141501625253/sigopt-for-ml-tensorflow-convnets-on-a-budget))
 - [classifier](classifier): Using SigOpt to tune a machine learning classifier in Python ([blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models)).
