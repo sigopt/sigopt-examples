@@ -2,7 +2,7 @@
 
 # XGBoost Supervised Softmax Classifier Tuning
 
-This example uses SigOpt to tune an xgboost softmax classifier on the IRIS dataset in R.
+This example uses SigOpt to tune an XGBoost softmax classifier on the IRIS dataset in R.
 
 ## Setup
 
