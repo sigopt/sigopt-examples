@@ -56,9 +56,10 @@ evaluate_model <- function(assignments, X, y) {
     y_train <- y[cv_split==1]
     X_valid <- X[cv_split==2, ]
     y_valid <- y[cv_split==2]
+    data_train <- xgb.DMatrix(data=as.matrix(X_train), label=as.numeric(y_train)-1)
 
     boosted_clf <- xgb.train(
-      data=data,
+      data=data_train,
       booster="gbtree",
       objective="multi:softmax",
       num_class=num_class,
