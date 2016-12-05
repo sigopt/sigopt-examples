@@ -80,21 +80,19 @@ def run_environment(
 
   neural_net = QNetwork(
     layer_dims,
-    dict(
-      learning_rate=learning_rate,
-      initial_weight_stddev=initial_weight_stddev,
-      initial_bias_stddev=initial_bias_stddev
-    )
+    learning_rate=learning_rate,
+    initial_weight_stddev=initial_weight_stddev,
+    initial_bias_stddev=initial_bias_stddev
   )
 
   with tf.Session() as session:
     agent = Agent(
-      session,
-      neural_net,
-      action_space_dim,
-      minibatch_size,
-      discount_factor,
-      epsilon_decay_steps
+      session=session,
+      neural_net=neural_net,
+      action_space_dim=action_space_dim,
+      minibatch_size=minibatch_size,
+      discount_factor=discount_factor,
+      epsilon_decay_steps=epsilon_decay_steps
     )
 
     session.run(tf.initialize_all_variables())
@@ -247,7 +245,7 @@ class Agent:
 
 class QNetwork:
 
-  def __init__(self, layer_dims, assignments):
+  def __init__(self, layer_dims, learning_rate, initial_weight_stddev, initial_bias_stddev):
     self._input_layer = tf.placeholder("float", [None, layer_dims[0]])
     hidden_layers = [self._input_layer]
 
@@ -259,13 +257,13 @@ class QNetwork:
       # Both weights and biases are initialized from a normal distribution
       weights.append(tf.Variable(tf.truncated_normal(
         [layer_dims[i], layer_dims[i+1]],
-        stddev=assignments.get('initial_weight_stddev'),
+        stddev=initial_weight_stddev,
         mean=0.0
       )))
 
       biases.append(tf.Variable(tf.truncated_normal(
          shape=[layer_dims[i+1]],
-         stddev=assignments.get('initial_bias_stddev'),
+         stddev=initial_bias_stddev,
          mean=0.0
       )))
 
@@ -281,13 +279,15 @@ class QNetwork:
     self._target_q_values = tf.placeholder("float", [None])
 
     # Calculating Q-values based on past states and actions
-    self._predicted_q_values = tf.reduce_sum(tf.mul(
-      self._output_layer, self._actions), reduction_indices=1)
+    self._predicted_q_values = tf.reduce_sum(
+      tf.mul(self._output_layer, self._actions),
+      reduction_indices=1
+    )
 
     # Back propagation using TensorFlow's Adam Optimizer
     # and mean squared error as the cost function
-    self._train_operation = tf.train.AdamOptimizer(
-      assignments.get('learning_rate')).minimize(self._mean_squared_error()
+    self._train_operation = tf.train.AdamOptimizer(learning_rate).minimize(
+      self._mean_squared_error()
     )
 
   def _sigmoid(self, x):
