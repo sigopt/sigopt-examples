@@ -6,7 +6,7 @@ import numpy as np
 import tensorflow as tf
 
 
-# You can find your API token at https://sigopt.com/user/tokens
+# You can find your API token at https://sigopt.com/docs/overview/authentication
 SIGOPT_API_KEY = 'YOUR_API_TOKEN_HERE'
 # The game to train the DQN on. The default is CartPole-v0. You can also try LunarLander-v0 and Acrobot-v1
 ENVIRONMENT_NAME = 'CartPole-v0'
