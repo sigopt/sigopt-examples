@@ -85,4 +85,4 @@ for(i in 1:experiment$observation_budget) {
     value=opt_metric[1],
     value_stddev=opt_metric[2]
   ))
-} # track progress on your experiment : https://sigopt.com/experiment/list
+} # track progress on your experiment : https://sigopt.com/experiments

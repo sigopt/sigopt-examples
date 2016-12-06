@@ -17,7 +17,7 @@ More details about this example can be found in [the associated blog post](http:
 
 ## Optimize
 
-If you execute any of the SigOpt experiments, you can track the progress on your [experiment dashboard](https://sigopt.com/experiment/list).
+If you execute any of the SigOpt experiments, you can track the progress on your [experiment dashboard](https://sigopt.com/experiments).
 
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).

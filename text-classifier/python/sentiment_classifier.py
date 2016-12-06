@@ -45,4 +45,4 @@ for _ in range(experiment.observation_budget):
     conn.experiments(experiment.id).observations().create(
         suggestion=suggestion.id,
         value=opt_metric,
-    ) # track progress on your experiment : https://sigopt.com/experiment/list
+    ) # track progress on your experiment : https://sigopt.com/experiments
