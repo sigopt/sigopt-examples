@@ -11,7 +11,7 @@ This example uses SigOpt to tune a Deep Q-Network (DQN) to solve a reinforcement
 3. `cd sigopt-examples/reinforcement-learning`
 4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) to line 10 of `dqn.py`
 5. Execute the script by running: `python dqn.py`
-6. Once the SigOpt optimization loop is initiated, you can track the progress on your [experiment dashboard](https://sigopt.com/experiments/list).
+6. Once the SigOpt optimization loop is initiated, you can track the progress on your [experiment dashboard](https://sigopt.com/experiments).
 
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
