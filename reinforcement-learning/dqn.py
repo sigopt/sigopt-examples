@@ -1,5 +1,4 @@
 import gym
-import time
 import math
 import sigopt
 import numpy as np
@@ -35,6 +34,7 @@ def main():
   )
 
   # Run the SigOpt experiment loop
+  # You can monitor the experiment's progress at https://sigopt.com/experiments
   for _ in range(experiment.observation_budget):
     suggestion = conn.experiments(experiment.id).suggestions().create()
 
