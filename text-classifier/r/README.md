@@ -20,7 +20,7 @@ RScript sentiment_classifier.R
 
 ## Optimize
 
-Once the text classifier model tuning loop is running, you can track the progress on your [experiment dashboard](https://sigopt.com/experiment/list).
+Once the text classifier model tuning loop is running, you can track the progress on your [experiment dashboard](https://sigopt.com/experiments).
 
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).

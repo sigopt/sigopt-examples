@@ -13,7 +13,7 @@ This example uses SigOpt to tune an XGBoost softmax classifier on the IRIS datas
 
 ## Optimize
 
-Once the SigOpt optimization loop is initiated, you can track the progress on your [experiment dashboard](https://sigopt.com/experiment/list).
+Once the SigOpt optimization loop is initiated, you can track the progress on your [experiment dashboard](https://sigopt.com/experiments).
 
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
