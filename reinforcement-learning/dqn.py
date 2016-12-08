@@ -79,7 +79,7 @@ def run_environment(
   ]
 
   neural_net = QNetwork(
-    layer_dims,
+    layer_dims=layer_dims,
     learning_rate=learning_rate,
     initial_weight_stddev=initial_weight_stddev,
     initial_bias_stddev=initial_bias_stddev
@@ -95,7 +95,7 @@ def run_environment(
       epsilon_decay_steps=epsilon_decay_steps
     )
 
-    session.run(tf.initialize_all_variables())
+    session.run(tf.global_variables_initializer())
 
     # Run the environment feedback loop
     for episode in range(1, MAX_EPISODES + 1):
@@ -166,7 +166,9 @@ class Agent:
       self._rewards_list.append(self._total_reward)
       average = np.mean(self._rewards_list[-self._num_rewards_to_average:])
 
-      if len(self._rewards_list) >= self._num_rewards_to_average and (self._best_average is None or self._best_average < average):
+      if (len(self._rewards_list) >= self._num_rewards_to_average
+        and (self._best_average is None or self._best_average < average)
+      ):
         self._best_average = average
 
       if self._epsilon > self._final_epsilon:
