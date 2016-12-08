@@ -79,7 +79,7 @@ def run_environment(
   ]
 
   neural_net = QNetwork(
-    layer_dims,
+    layer_dims=layer_dims,
     learning_rate=learning_rate,
     initial_weight_stddev=initial_weight_stddev,
     initial_bias_stddev=initial_bias_stddev
