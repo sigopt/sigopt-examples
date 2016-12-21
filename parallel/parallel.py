@@ -1,37 +1,79 @@
 import argparse
+import math
 import threading
-import time
 
-import sigopt
+from sigopt import Connection
 
-def evaluate_metric(assignments):
-  # Implement this to start optimizing. Assignments is a dict-like object that maps
-  # parameter names to values. Use those values to compute your metric value and return it.
-  raise NotImplementedError("Add your custom function to the `evaluate_metric` function.")
+from data import PARAMETERS, evaluate_model
 
-class Runner(threading.Thread):
-  def __init__(self, client_token, experiment_id):
+# You can find your API token at https://sigopt.com/docs/overview/authentication
+SIGOPT_API_KEY = 'YOUR_API_TOKEN_HERE'
+
+NUM_WORKERS = 2
+
+class Worker(threading.Thread):
+  def __init__(self, experiment_id):
     threading.Thread.__init__(self)
     self.experiment_id = experiment_id
-    self.conn = sigopt.Connection(client_token=client_token)
+    self.conn = Connection(client_token=SIGOPT_API_KEY)
+
+  @property
+  def metadata(self):
+    return dict(host=threading.current_thread().name)
+
+  @property
+  def remaining_observations(self):
+    experiment = self.conn.experiments(self.experiment_id).fetch()
+    return experiment.observation_budget - experiment.progress.observation_count
 
   def run(self):
-    for i in xrange(5):
-      suggestion = self.conn.experiments(self.experiment_id).suggestions().create()
-      value = evaluate_metric(suggestion.assignments)
-      self.conn.experiments(self.experiment_id).observations().create(suggestion=suggestion.id, value=value)
+    while self.remaining_observations > 0:
+      suggestion = self.conn.experiments(self.experiment_id).suggestions().create(metadata=self.metadata)
+      try:
+        value = evaluate_model(suggestion.assignments)
+        failed = False
+      except Exception:
+        value = None
+        failed = True
+      self.conn.experiments(self.experiment_id).observations().create(
+        suggestion=suggestion.id,
+        value=value,
+        failed=failed,
+        metadata=self.metadata,
+      )
 
-def parallel_example(client_token, experiment_id, count=2):
-  runners = [Runner(client_token, experiment_id) for _ in xrange(count)]
-  for runner in runners:
-    runner.start()
-  for runner in runners:
-    runner.join()
+class Master(threading.Thread):
+  def __init__(self):
+    threading.Thread.__init__(self)
+    self.conn = Connection(client_token=SIGOPT_API_KEY)
+    experiment = self.conn.experiments().create(
+      name='Parallel Experiment',
+      parameters=PARAMETERS,
+      observation_budget=len(PARAMETERS) * 20,
+      metadata=dict(num_workers=NUM_WORKERS),
+    )
+    print("View your experiment progress: https://sigopt.com/experiment/{}".format(experiment.id))
+    self.experiment_id = experiment.id
+
+  @property
+  def remaining_observations(self):
+    experiment = self.conn.experiments(self.experiment_id).fetch()
+    return experiment.observation_budget - experiment.progress.observation_count
+
+  def run(self):
+    tries = 3
+    while (tries > 0 and self.remaining_observations > 0):
+      workers = [Worker(self.experiment_id) for _ in xrange(NUM_WORKERS)]
+      for worker in workers:
+        worker.start()
+      for worker in workers:
+        worker.join()
+      self.conn.experiments(self.experiment_id).suggestions().delete(state='open')
+      tries -= 1
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser()
-  parser.add_argument('--experiment_id', type=int, required=True)
-  parser.add_argument('--client_token', type=str, required=True)
-  the_args = parser.parse_args()
+  master = Master()
+  master.start()
+  master.join()
 
-  parallel_example(the_args.client_token, the_args.experiment_id)
+
