@@ -8,7 +8,7 @@ from sigopt import Connection
 
 # Define the experiment you want to create, and how to evaluate suggested points.
 # For convenience we have included an example
-from .data import PARAMETERS, evaluate_model
+from data import PARAMETERS, evaluate_model
 
 # You can find your API token at https://sigopt.com/docs/overview/authentication
 SIGOPT_API_KEY = 'YOUR_API_TOKEN_HERE'
