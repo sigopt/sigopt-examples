@@ -2,11 +2,11 @@
 
 # Parallelism
 
-Examples of running SigOpt in parallel.
+Example using the [SigOpt Python API Client](https://sigopt.com/docs/overview/python) to tune a classifier in parallel. Shows how to create the experiment once on master, then spin up multiple workers to each run an optimization loop. SigOpt acts as the scheduler, making sure each worker gets the right Suggestion at the right time. Learn more from [the docs](https://sigopt.com/docs/overview/parallel).
 
 ## Setup
 1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile).
+2. Find your `SIGOPT_API_TOKEN` on your [user profile](https://sigopt.com/user/profile).
 3. Install requirements `pip install -r requirements.txt`
 
 ## Questions?
