@@ -63,9 +63,8 @@ for _ in range(60):
         value_stddev=std,
     )
 
-# Re-fetch the experiment to get the best observed value and assignments
-experiment = conn.experiments(experiment.id).fetch()
-best_assignments = experiment.progress.best_observation.assignments
+# Re-fetch the best observed value and assignments
+best_assignments = conn.experiments(experiment.id).best_assignments().fetch().data[0].assignments
 
 # To wrap up the Experiment, fit the RandomForest on the best assigments
 # and train on all available data
