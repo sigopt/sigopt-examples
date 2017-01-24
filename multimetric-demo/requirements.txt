@@ -1,0 +1,6 @@
+numpy
+sigopt>=2.7.0
+
+# Only required for svm_example.ipynb
+pandas
+scikit-learn==0.18.0
