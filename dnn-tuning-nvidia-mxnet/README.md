@@ -4,6 +4,8 @@
 
 Learn more at the associated blog post: _TBD_.
 
+_Limited Access: For those interested in replicating this blog post on your own you can so that we can provide a SigOpt account beyond our standard free trial, let us know!_
+
 
 ## AWS Setup
 
