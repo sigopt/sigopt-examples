@@ -8,7 +8,7 @@ CNNModel = namedtuple("CNNModel", ['cnn_exec', 'symbol', 'data', 'label', 'param
 
 def get_cnn_model(cnn, batch_size, sentence_size):
     # Define what device to train/test on
-    ctx=mx.gpu(0)
+    ctx = mx.gpu(0)
     # If you have no GPU on your machine change this to
     # ctx=mx.cpu(0)
 
@@ -29,7 +29,7 @@ def get_cnn_model(cnn, batch_size, sentence_size):
 
     param_blocks = []
     arg_dict = dict(zip(arg_names, cnn_exec.arg_arrays))
-    initializer=mx.initializer.Uniform(0.1)
+    initializer = mx.initializer.Uniform(0.1)
     for i, name in enumerate(arg_names):
         if name in ['softmax_label', 'data']: # input, output
             continue

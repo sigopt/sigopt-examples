@@ -16,13 +16,13 @@ def calculate_objective(assignments, data, with_architecture=False):
         filter_list = [3,4,5]
         num_filter = 100
     cnn = build_compute_graph(vocab_size=data.vocab_size,
-                        num_embed=assignments['embed_dim'],
-                        sentence_size=data.sentence_size,
-                        batch_size=assignments['batch_size'],
-                        dropout=assignments['dropout_rate'],
-                        filter_list=filter_list,
-                        num_filter=num_filter
-                        )
+                              num_embed=assignments['embed_dim'],
+                              sentence_size=data.sentence_size,
+                              batch_size=assignments['batch_size'],
+                              dropout=assignments['dropout_rate'],
+                              filter_list=filter_list,
+                              num_filter=num_filter
+                              )
     cnn_model = get_cnn_model(cnn=cnn,
                               batch_size=assignments['batch_size'],
                               sentence_size=data.sentence_size,
