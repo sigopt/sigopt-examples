@@ -1,0 +1,50 @@
+[
+    {
+        "type": "double",
+        "name": "dropout_rate",
+        "bounds": {
+            "max": 0.9,
+            "min": 0.1
+        }
+    },
+    {
+        "type": "double",
+        "name": "log_learning_rate",
+        "bounds": {
+            "max": 0.0,
+            "min": -18.420680743952367
+        }
+    },
+    {
+        "type": "double",
+        "name": "max_grad_norm",
+        "bounds": {
+            "max": 10,
+            "min": 1
+        }
+    },
+    {
+        "type": "int",
+        "name": "epochs",
+        "bounds": {
+            "max": 100,
+            "min": 5
+        }
+    },
+    {
+        "type": "int",
+        "bounds": {
+            "max": 100,
+            "min": 10
+        },
+        "name": "batch_size"
+    },
+    {
+        "type": "int",
+        "bounds": {
+            "max": 500,
+            "min": 100
+        },
+        "name": "embed_dim"
+    }
+]
