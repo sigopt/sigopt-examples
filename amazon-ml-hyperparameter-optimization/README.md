@@ -37,7 +37,7 @@ If want to use SigOpt to optimize your hyperparameters faster and better than tu
 Get the samples by cloning this repository.
 
 ```
-  git clone https://github.com/alexandraj777/machine-learning-samples.git
+  git clone https://github.com/sigopt/sigopt-examples
 ```
 
 ## Demo
