@@ -29,14 +29,47 @@ import argparse
 import config
 import threading
 import math
+from sigopt import Connection
 from fold import Fold
 from evaluation import Evaluation
 from collections import namedtuple
-from hyperparameters import HYPERPARAMETERS
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(config.APP_NAME)
 logging.getLogger('botocore.vendored.requests.packages.urllib3.connectionpool').setLevel(logging.WARN)
+
+def build_experiment(conn):
+    """
+    Create a SigOpt experiment to tune the l1 and l2 regularization hyperparameters.
+        Regularization amounts are very small so we choose to tune in log space.
+
+    Args:
+        conn: A SigOpt Connection object
+    Returns:
+        a new SigOpt Experiment
+    """
+    experiment = conn.experiments().create(
+        name="AWS ML Example",
+        parameters=[
+            dict(
+                name='regularization_type',
+                type='categorical',
+                categorical_values=[dict(name='sgd.l1RegularizationAmount'), dict(name='sgd.l2RegularizationAmount')],
+            ),
+            dict(
+                name='log_regularization_amount',
+                type='double',
+                bounds=dict(min=math.log(0.00000001), max=math.log(1)),
+            ),
+        ],
+        observation_budget=20,
+    )
+
+    logger.info("Created SigOpt experiment %s", experiment.id)
+    logger.info("View your experiment at https://www.sigopt.com/experiment/%s", experiment.id)
+
+    return experiment
 
 def build_folds(data_spec=None, kfolds=None):
     """
@@ -172,6 +205,10 @@ if __name__ == "__main__":
         help="enable debug mode, logging from DEBUG level"
              "[default: off]",
         )
+    parser.add_argument(
+        "--sigopt-api-token",
+        help="The API token for you SigOpt account, found at sigopt.com/user/profile/",
+    )
 
     args = parser.parse_args()
     if (args.debug):
@@ -209,20 +246,28 @@ if __name__ == "__main__":
         schema=schema,
     )
 
-    folds = build_folds(data_spec=data_spec, kfolds=kfolds)
+    sigopt_api_token = args.sigopt_api_token
 
-    best_assignments = None
-    best_auc = None
-    for assignments in HYPERPARAMETERS:
-        model_spec = build_model_spec(assignments=assignments)
+    folds = build_folds(data_spec=data_spec, kfolds=kfolds)
+    conn = Connection(client_token=sigopt_api_token)
+    experiment = build_experiment(conn)
+
+    for _ in range(experiment.observation_budget):
+        suggestion = conn.experiments(experiment.id).suggestions().create()
+        assignments = suggestion.assignments
+        model_spec = build_model_spec(
+            regularization_type=assignments['regularization_type'],
+            regularization_amount=math.exp(assignments['log_regularization_amount']),
+        )
         evaluations = build_evaluations(model_spec=model_spec, folds=folds)
         (avg_auc, std_auc) = collect_performance(evaluations)
-        if avg_auc > best_auc:
-            best_assignments = assignments
         cleanup_evaluations(evaluations)
+        conn.experiments(experiment.id).observations().create(
+            suggestion=suggestion.id,
+            value=avg_auc,
+            value_stddev=std_auc,
+        )
 
     cleanup_folds(folds)
 
-    print """Best assignments are:
- - Regularization Type: {regularization_type}
- - Regularization Amount: {regularization_amount}""".format(**assignments)
+    logger.info("View your experiment and its best hyperparameters at https://www.sigopt.com/experiment/%s", experiment.id)
