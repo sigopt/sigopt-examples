@@ -1,6 +1,6 @@
 # Performing Hyperparameter Optimization with Amazon Machine Learning
 
-This sample code builds a hyperparameter optimization pipeline for Amazon Machine Learning using the latest AWS SDK for Python (Boto 3). The user can optionally specify hyperparameters upfront for manual tuning or use [SigOpt](https://www.sigopt.com)'s API for Bayesian optimization.
+This sample code builds a hyperparameter optimization pipeline for Amazon Machine Learning using the latest AWS SDK for Python (Boto 3), and [SigOpt](https://www.sigopt.com)'s API for Bayesian optimization.
 
 This example is directly based off of Amazon's [K-Fold Cross Validation](https://github.com/awslabs/machine-learning-samples/tree/master/k-fold-cross-validation) example.
 
@@ -10,7 +10,7 @@ This example is directly based off of Amazon's [K-Fold Cross Validation](https:/
 
 This sample script was developed and tested in python 2.
 
-This sample script depends on the `boto3` and `sigopt` packages. If you have [pip](https://pip.pypa.io/en/stable/) installed you can install dependencies by running
+This sample script depends on the `boto3` and `sigopt` packages. If you have [pip](https://pip.pypa.io/en/stable/) installed you can install dependencies by running:
 
 ```
 pip install -r requirements.txt
@@ -28,13 +28,13 @@ Your AWS credentials must be stored in a `~/.boto` or `~/.aws/credentials` file.
 
 To learn more about configuring your AWS credentials with Boto 3, go to [Boto 3 Quickstart](http://boto3.readthedocs.io/en/latest/guide/quickstart.html).
 
-### Configure SigOpt Credentials (optional)
+### Configure SigOpt Credentials
 
-If want to use SigOpt to optimize your hyperparameters faster and better than tuning by hand, sign up for a free trial on our [website]([SigOpt](https://www.sigopt.com)) and grab your API token from your [user profile](https://www.sigopt.com/user/profile).
+To use SigOpt to optimize your hyperparameters faster and better than tuning by hand, sign up for a free trial on our [website]([SigOpt](https://www.sigopt.com)) and grab your API token from your [user profile](https://www.sigopt.com/user/profile).
 
 ### Get the Code
 
-Get the samples by cloning this repository.
+Get the samples by cloning this repository:
 
 ```
   git clone https://github.com/sigopt/sigopt-examples
@@ -42,21 +42,12 @@ Get the samples by cloning this repository.
 
 ## Demo
 
-The basic demo is in the script `hyperparameter_optimization.py`. This script relies on a manually specified list of hyperparameters to tune the hyperparameters of a linear binary classification model. Edit the hyperparameter assignments in `hyperparameters.py` to manually tune your model.
+The script `hyperparameter_optimization.py` uses the [SigOpt](https://www.sigopt.com) API to optimally suggest hyperparameters of a linear binary classification model.
 
-The arguments to `hyperparameter_optimization.py` are the number of folds (required), and an optional resource prefix.
-
-```
-python hyperparameter_optimization.py --name 4-fold-hy-opt-demo 4
-```
-
-The script `hyperparameter_optimization_with_sigopt.py` uses the [SigOpt](https://www.sigopt.com) API to optimally suggest hyperparameters for the model.
-
-
-Run the script `hyperparameter_optimization_with_sigopt.py` with all of the options in the above section, and additionally provide your SigOpt API token.
+The arguments to `hyperparameter_optimization.py` are the number of folds (required), your SigOpt API Token (required), and an optional resource prefix.
 
 ```
-python hyperparameter_optimization_with_sigopt.py --name 4-fold-hy-opt-sigopt-demo 4 --sigopt-api-token <SIGOPT_API_TOKEN>
+python hyperparameter_optimization.py --name 4-fold-hy-opt-sigopt-demo 4 --sigopt-api-token <SIGOPT_API_TOKEN>
 ```
 
 ### How it Works
@@ -73,13 +64,13 @@ In keeping with best practices for hyperparameter optimization, and to prevent o
 
 To perform the hyperparameter optimization the scripts iteratively choose new values of `regularization_type` and `regularization_amount`, evaluate a model with these new hyperparameters for every fold of the data, average the AUC metrics, and record the performance of the assignments. At the end of some number of evaluations, the assignments that produced the best model performance are selected. The final model will use these hyperparameters and be trained on all of the available data.
 
-If you optimize with SigOpt you can see the best hyperparameters on your [dashboard](https://www.sigopt.com/experiments).
+You can see the best hyperparameters for your model, along with all historical progress, on your [SigOpt experiment dashboard](https://www.sigopt.com/experiments).
 
 ### Under the Hood
 
 Assume `k` is the number of folds for cross validation. At startup each script will create `2k` datasources on Amazon ML: a train datasource and a complementary evaluation datasource for each fold. The datasources can be reused throughout hyperparameter optimization and are cleaned up at the end of the script.
 
-Next, the script grabs the next assignments for hyperparameters `regularization_type` and `regularization_amount`. In the basic script these hyperparameter are imported from `hyperparameters.py`; in the SigOpt example they are created via the SigOpt API. Each time the script evaluates a model on a new set of hyperparameters is creates `k` machine learning models, one for each train datasource, and `k` evaluations, one for each evaluate datasource, on Amazon ML. These objects cannot be reused and are deleted once all evaluations have completed.
+Next, the script grabs the next assignments for hyperparameters `regularization_type` and `regularization_amount` from the SigOpt API. Each time the script evaluates a model on a new set of hyperparameters is creates `k` machine learning models, one for each train datasource, and `k` evaluations, one for each evaluate datasource, on Amazon ML. These objects cannot be reused and are deleted once all evaluations have completed.
 
 After evaluations are created the script spawn threads to poll the Amazon ML API until the evaluations have status `"COMPLETED"`. Once every thread has completed we compute the average and standard deviation of the `k` AUC metrics. At this point the script is ready to grab the next assignments of hyperparameters and repeat. At SigOpt, we call this process the **optimization loop**.
 
@@ -87,7 +78,7 @@ After evaluations are created the script spawn threads to poll the Amazon ML API
 
 Amazon Machine Learning asynchronously creates datasources, machine learning models, and evaluations. API calls via the python SDK will return quickly so that you can build a datasource, machine learning model, and an evaluation while the datasource is still pending! Since your machine is not doing the heavy computation of training and testing the model, it has great opportunities for parallelization, splitting up the optimization loop between `n` different threads or processes.
 
-If you're running the SigOpt example, read how easy it is to [parallelize hyperparameter optimization with SigOpt](https://sigopt.com/docs/overview/parallel).
+Read how easy it is to [parallelize hyperparameter optimization with SigOpt](https://sigopt.com/docs/overview/parallel).
 
 ### Note from Amazon
 
