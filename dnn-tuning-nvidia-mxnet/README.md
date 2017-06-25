@@ -54,7 +54,7 @@ This section will get the following up and running:
 1. Sign up for a SigOpt account .
 
 8. Copy this repository over to your new MXNet + NVIDIA Ubuntu instance!
-  - scp -r dnn-tuning-nvidia-mxnet/ ubuntu@<hostname>:/home/ubuntu
+  - `scp -r dnn-tuning-nvidia-mxnet/ ubuntu@<hostname>:/home/ubuntu`
 
 9. ssh back into your machine, install the SigOpt Python client:
   - `sudo pip install sigopt`
@@ -70,5 +70,5 @@ This section will get the following up and running:
     - `nohup python run_experiments.py &> logs-no-architecture.out &`
     - `nohup python run_experiments.py --with-architecture &> logs-with-architecture.out &`
 
-12. Checkout your [experiment dashboard](http://www.sigopt.com/experiments) and view your experiment progress from anywhere!
+12. Check out your [experiment dashboard](http://www.sigopt.com/experiments) and view your experiment progress from anywhere!
   - As a reminder, we run useful analytics so you may start introspecting how your choice of hyperparameters impact your objective function.
