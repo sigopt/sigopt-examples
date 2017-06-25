@@ -2,7 +2,7 @@
 
 # Getting Started with SigOpt
 
-Welcome to SigOpt Examples. These examples show you how to use [SigOpt](https://sigopt.com) for model tuning tasks in various machine learning environments. 
+Welcome to SigOpt Examples. These examples show you how to use [SigOpt](https://sigopt.com) for model tuning tasks in various machine learning environments.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ If this is your first time using SigOpt, we recommend you work through the [Rand
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
 
 ## API Reference
-To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible. 
+To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
 
 ## About SigOpt
 
