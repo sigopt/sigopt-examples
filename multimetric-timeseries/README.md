@@ -2,12 +2,17 @@
 
 # Using SigOpt to tune Time Series Classifiers with Keras and Tensorflow
 
-> There are dozens of different types of time series data available at the [UCR Time Series Classification Archive](http://www.cs.ucr.edu/~eamonn/time_series_data/). The data that comes with this example is sequence data extracted from diatoms. We encourage users of this to train other time series classiers on different datasets and see how **optimal hyperparameter settings are data dependent**. Learn more at the associated blog post: _TBD_.
+
+## Summary
+
+There are dozens of different types of time series data available at the [UCR Time Series Classification Archive](http://www.cs.ucr.edu/~eamonn/time_series_data/). The data that comes with this example is sequence data extracted from diatoms. We encourage users of this to train other time series classiers on different datasets and see how **optimal hyperparameter settings are data dependent**. Learn more at the associated blog post: _TBD_.
+
+In this example, SigOpt _carves out an effecient [Pareto frontier](https://en.wikipedia.org/wiki/Pareto_efficiency)_, simultaneously looking for hyperparameter configurations which yield fast inference times and high classifier accuracy.
 
 > _Limited Access: For those interested in replicating this blog post, let us know so that we can provide a SigOpt account for you beyond your free trial!_
 
 
-## Installation Instructions
+## EC2 Setup
 
 This example is made for the US East (N. Virginia) region. Follow the instructions from [here](../dnn-tuning-nvidia-mxnet) to get your AWS EC2 GPU-enabled instance up and running with the following specifications:
 
@@ -17,7 +22,7 @@ This example is made for the US East (N. Virginia) region. Follow the instructio
   > - Server: Amazon EC2’s P2 instances
   > - DNN Library: Keras 2.0.5 on Tensorflow 1.2.0
 
-## Replicate Blog Post
+## Instructions to Replicate Blog Post
 
 > Post an issue or email us if you have any questions.
 
@@ -35,18 +40,16 @@ This example is made for the US East (N. Virginia) region. Follow the instructio
 
   - `{"SIGOPT_API_TOKEN":"<your-api-key>"}`
 
-## Run the example
-
-1. Navigate to the folder:
+5. Navigate to the folder:
 
   - `cd multimetric-timeseries`
 
-2. Edit _config.py_.
+6. Edit _config.py_:
 
   - `vi config.py`
 
-3. Run the example:
+7. Run the example!
 
   - `nohup python main.py &`
 
-4. Check out your [experiment dashboard](http://www.sigopt.com/experiments) to view your experiment progress.
+8. Check out your [experiment dashboard](http://www.sigopt.com/experiments) to view your experiment progress!
