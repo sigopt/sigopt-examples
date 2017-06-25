@@ -19,7 +19,7 @@ This section will get the following up and running:
 
 1. Sign up for [Amazon Web Services](https://aws.amazon.com/).
 
-2. This example is made for the US East (N. Virginia) region. Selecting from the dropdown menu on the top-right of the [EC2 Dashboard](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1).
+2. This example is made for the US East (N. Virginia) region by selecting it from the dropdown menu on the top-right of the [EC2 Dashboard](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1).
 
 3. Create Key pair in the region you'll be spinning up your instance.
   - _Tip: To make it easier to ssh or scp using this keypair, add it to the authentication agent on your machine: `ssh-add /path/to/key.pem`_
