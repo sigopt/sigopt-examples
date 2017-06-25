@@ -2,7 +2,7 @@
 
 # Using SigOpt, NVIDIA, and MXNet to Tune Machine Learning Pipelines
 
-Learn more at the associated blog post: _TBD_.
+Learn more at the associated blog post: [Fast CNN Tuning with AWS GPU Instances and SigOpt](https://aws.amazon.com/blogs/ai/fast-cnn-tuning-with-aws-gpu-instances-and-sigopt/).
 
 _Limited Access: For those interested in replicating this blog post, let us know so that we can provide a SigOpt account for you beyond your free trial!_
 
