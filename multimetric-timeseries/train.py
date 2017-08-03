@@ -10,7 +10,7 @@ from keras.callbacks import ReduceLROnPlateau
 from keras.models import Model
 from keras.utils import np_utils
 
-from .config import NB_EPOCHS
+from config import NB_EPOCHS
 
 def readucr(filename):
     """Load data from csv."""

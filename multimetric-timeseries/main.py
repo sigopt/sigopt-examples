@@ -2,10 +2,10 @@ from multiprocessing import Process, Queue
 
 from sigopt import Connection
 
-from .config import (SIGOPT_API_TOKEN, PARAMETERS, EXPERIMENT_NAME,
+from config import (SIGOPT_API_TOKEN, PARAMETERS, EXPERIMENT_NAME,
                      METRICS, OBSERVATION_BUDGET, DATASET_PATH)
 
-from .train import prepare_data, evaluate_assignments
+from train import prepare_data, evaluate_assignments
 
 conn = Connection(client_token=SIGOPT_API_TOKEN)
 

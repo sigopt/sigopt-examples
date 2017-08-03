@@ -44,12 +44,8 @@ This example is made for the US East (N. Virginia) region. Follow the instructio
 
   - `cd multimetric-timeseries`
 
-6. Edit _config.py_:
-
-  - `vi config.py`
-
 7. Run the example!
 
-  - `nohup python main.py &`
+  - `python main.py` (This can take a while, you may want to run it with `nohup` or `tmux`.)
 
 8. Check out your [experiment dashboard](http://www.sigopt.com/experiments) to view your experiment progress!
