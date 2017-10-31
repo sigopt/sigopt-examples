@@ -51,7 +51,7 @@ This section will get the following up and running:
 
 ## Replicate Blog Post
 
-1. Sign up for a SigOpt account .
+1. Sign up for a SigOpt account through [our website](https://sigopt.com) or [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B075Y4YKJK).
 
 8. Copy this repository over to your new MXNet + NVIDIA Ubuntu instance!
   - `scp -r dnn-tuning-nvidia-mxnet/ ubuntu@<hostname>:/home/ubuntu`
