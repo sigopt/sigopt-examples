@@ -7,7 +7,7 @@ Learn more at the associated blog post: [Much Deeper, Much Faster: Deep Neural N
 ## SigOpt Setup
 
 1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `client_token` on your [user profile](https://sigopt.com/tokens/info) and set it
+2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens/info) and set it
   as the `SIGOPT_API_TOKEN` environment variable.
 
 ## Ncloud Setup
