@@ -59,7 +59,7 @@ This section will get the following up and running:
 9. ssh back into your machine, install the SigOpt Python client:
   - `sudo pip install sigopt`
 
-10. Add an API key as an environmental variable (get this from the [API tokens page](http://www.sigopt.com/tokens/info)):
+10. Add an API key as an environmental variable (get this from the [API tokens page](http://www.sigopt.com/tokens)):
   - `export SIGOPT_API_TOKEN=<YOUR_API_KEY>`
 
 11. Run the example!

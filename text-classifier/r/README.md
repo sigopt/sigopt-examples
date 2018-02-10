@@ -9,7 +9,7 @@ More details about this example can be found in [the associated blog post](http:
 ## Setup
 
 1. Get a free SigOpt account at [https://sigopt.com/signup](https://sigopt.com/signup)
-2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens/info) and add it to line 12 of `sentiment_classifier.r`.
+2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens) and add it to line 12 of `sentiment_classifier.r`.
 3. `git clone https://github.com/sigopt/sigopt-examples.git`
 4. Execute the R script in R Studio, or in the terminal:
 
