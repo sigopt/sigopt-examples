@@ -10,7 +10,7 @@ You can modify this notebook to optimize any function.
 
 ## Setup
 1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile) and set it
+2. Find your `client_token` on your [user profile](https://sigopt.com/tokens/info) and set it
   as the `SIGOPT_API_TOKEN` environment variable.
 4. Run `sudo ./setup_env.sh`
 

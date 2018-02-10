@@ -6,7 +6,7 @@ Example using the [SigOpt Python API Client](https://sigopt.com/docs/overview/py
 
 ## Setup
 1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `SIGOPT_API_TOKEN` on your [user profile](https://sigopt.com/user/profile).
+2. Find your `SIGOPT_API_TOKEN` on your [user profile](https://sigopt.com/tokens/info).
 3. Install requirements `pip install -r requirements.txt`
 
 ## Questions?

@@ -9,7 +9,7 @@ Example using SigOpt to explore approximated how long it takes to train your mod
 ## Setup
 
 1. Get a free SigOpt account at [https://sigopt.com/signup](https://sigopt.com/signup)
-2. Find your `api_token` on your [user profile](https://sigopt.com/user/profile).
+2. Find your `api_token` on your [user profile](https://sigopt.com/tokens/info).
 3. Recommended: Set the environment variable `SIGOPT_API_TOKEN` to your API token. Alternative: insert your api token into the jupyter notebook.
 4. Clone the repo and install dependencies:
 

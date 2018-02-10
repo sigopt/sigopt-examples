@@ -184,7 +184,7 @@ class SigOptMazeFrontierSolver(object):
     def __init__(self, api_token=None, parameter_domain=None, maze_size=(30, 30), num_tests=100, down_prob=1.0):
         """Create a new SigOpt testing tool.
 
-        The api_token is a long string which can be found on your account at www.sigopt.com/user/profile.
+        The api_token is a long string which can be found on your account at www.sigopt.com/tokens/info.
             You can either pass that string here or you can modify this file to save it on your local machine.
 
         parameter_domain describes the allowable values for the relative probabilities of constructing the maze with

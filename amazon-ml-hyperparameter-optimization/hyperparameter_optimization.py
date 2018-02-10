@@ -207,7 +207,7 @@ if __name__ == "__main__":
         )
     parser.add_argument(
         "--sigopt-api-token",
-        help="The API token for you SigOpt account, found at sigopt.com/user/profile/",
+        help="The API token for you SigOpt account, found at sigopt.com/tokens/info/",
     )
 
     args = parser.parse_args()

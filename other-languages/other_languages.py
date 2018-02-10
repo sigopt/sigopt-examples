@@ -43,7 +43,7 @@ if __name__ == '__main__':
     help="The parameters of this experiment should be the "
       "same type and name of the command line arguments to your executable file."
   )
-  parser.add_argument('--client_token', required=True, help="Find your CLIENT_TOKEN at https://sigopt.com/user/profile")
+  parser.add_argument('--client_token', required=True, help="Find your CLIENT_TOKEN at https://sigopt.com/tokens/info")
   the_args = parser.parse_args()
 
   connection = Connection(client_token=the_args.client_token)
