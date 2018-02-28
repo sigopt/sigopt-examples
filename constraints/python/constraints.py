@@ -20,18 +20,18 @@ experiment = conn.experiments().create(
     dict(name="y", type="double", bounds=dict(min=-1, max=1)),
   ],
   linear_constraints=[
-    # Constraint equation: x + y <= 1
+    # Constraint equation: x + y >= 1
     dict(
-      type="less_than",
+      type="greater_than",
       threshold=1,
       terms=[
         dict(name="x", weight=1),
         dict(name="y", weight=1),
       ],
     ),
-    # Constraint equation: x - y <= 1
+    # Constraint equation: x - y >= 1
     dict(
-      type="less_than",
+      type="greater_than",
       threshold=1,
       terms=[
         dict(name="x", weight=1),
@@ -44,11 +44,12 @@ experiment = conn.experiments().create(
 
 print("Created experiment: https://sigopt.com/experiment/{}".format(experiment.id))
 
-# Constrained variation on the Adjiman Function  http://benchmarkfcns.xyz/benchmarkfcns/adjimanfcn.html
+# Constrained variation on the Adjiman Function http://benchmarkfcns.xyz/benchmarkfcns/adjimanfcn.html
 def adjiman_function(assignments):
   x = assignments["x"]
   y = assignments["y"]
-  return cos(x) * sin(y) - x / (y ** 2 + 1)
+  # Multiply by -1 because SigOpt maximizes instead
+  return -1 * (cos(x) * sin(y) - x / (y ** 2 + 1))
 
 # Run the Optimization Loop between 10x - 20x the number of parameters
 for _ in range(experiment.observation_budget):
