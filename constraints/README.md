@@ -14,6 +14,9 @@ If you're interested in diving deeper, you can [read the docs](https://sigopt.co
 ## [R](r)
  * R API Client
 
+## [Java](java)
+ * Java API Client
+
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
 
