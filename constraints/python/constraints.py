@@ -48,7 +48,7 @@ print("Created experiment: https://sigopt.com/experiment/{}".format(experiment.i
 def adjiman_function(assignments):
   x = assignments["x"]
   y = assignments["y"]
-  # Multiply by -1 because SigOpt maximizes instead
+  # Multiply by -1 because SigOpt maximizes functions
   return -1 * (cos(x) * sin(y) - x / (y ** 2 + 1))
 
 # Run the Optimization Loop between 10x - 20x the number of parameters
