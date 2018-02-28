@@ -2,20 +2,20 @@
 # Learn more about SigOpt's R Client:
 # https://sigopt.com/docs/overview/r
 
-# Learn more about authenticating the SigOpt API:
-# https://sigopt.com/docs/overview/authentication
-Sys.setenv(SIGOPT_API_TOKEN="INSERT_YOUR_TOKEN_HERE")
-
 # Install Packages
 install.packages("SigOptR", repos = "http://cran.us.r-project.org")
 library(SigOptR)
+
+# Learn more about authenticating the SigOpt API:
+# https://sigopt.com/docs/overview/authentication
+Sys.setenv(SIGOPT_API_TOKEN="YOUR_SIGOPT_API_TOKEN")
 
 # Create a SigOpt Experiment
 experiment <- create_experiment(list(
   name="Adjiman Optimization with Constraints (R)",
   parameters=list(
     list(name="x", bounds=list(min=-1, max=2), type="double"),
-    list(name="y", bounds=list(min=-1, max=2), type="double"),
+    list(name="y", bounds=list(min=-1, max=1), type="double")
   ),
   linear_constraints=list(
     # Constraint equation: x + y >= 1
@@ -24,8 +24,8 @@ experiment <- create_experiment(list(
       threshold=1,
       terms=list(
         list(name="x", weight=1),
-        list(name="y", weight=1),
-      ),
+        list(name="y", weight=1)
+      )
     ),
     # Constraint equation: x - y >= 1
     list(
@@ -33,17 +33,17 @@ experiment <- create_experiment(list(
       threshold=1,
       terms=list(
         list(name="x", weight=1),
-        list(name="y", weight=-1),
-      ),
+        list(name="y", weight=-1)
+      )
     )
   ),
-  observation_budget=30,
+  observation_budget=30
 ))
 
 print(paste("Created experiment: https://sigopt.com/experiment", experiment$id, sep="/"))
 
 # Constrained variation on the Adjiman Function http://benchmarkfcns.xyz/benchmarkfcns/adjimanfcn.html
-evaluate_model <- function(assignments) {
+adjiman_function <- function(assignments) {
   x = assignments$x
   y = assignments$y
   # Multiply by -1 because SigOpt maximizes functions
@@ -56,8 +56,8 @@ for (i in 1:experiment$observation_budget) {
   suggestion <- create_suggestion(experiment$id)
 
   # Evaluate the function
-  value <- evaluate_model(suggestion$assignments)
+  value <- adjiman_function(suggestion$assignments)
 
   # Report an Observation back to SigOpt
-  create_observation(experiment$id, list(suggestion=suggestion$id, value=value)
+  create_observation(experiment$id, list(suggestion=suggestion$id, value=value))
 }

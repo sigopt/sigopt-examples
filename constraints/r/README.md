@@ -7,7 +7,7 @@ Here we demonstrate defining constraints for SigOpt experiments in R.
 We will be optimizing a constrained version of the [Adjiman Function](http://benchmarkfcns.xyz/benchmarkfcns/adjimanfcn.html).
 
 ## R
-Simply add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in line 7 of `constraints.R` and then execute the R script in R Studio, or in the terminal:
+Simply add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in line 11 of `constraints.R` and then execute the R script in R Studio, or in the terminal:
 
 ```
 RScript constraints.R
