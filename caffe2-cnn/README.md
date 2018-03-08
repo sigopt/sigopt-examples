@@ -11,7 +11,7 @@ This example is an extension of the Caffe2 MNIST example that can be found [here
 Note: The easiest way to try this example is to use [Amazon's Deep Learning AMI](https://aws.amazon.com/marketplace/pp/B01M0AXXQB) as it has Caffe2 preinstalled. If you want to do this on your local machine, you can visit Caffe2's [website](https://caffe2.ai/) for Caffe2 installation instructions.
 
 1. Get a free SigOpt account at [https://sigopt.com/signup](https://sigopt.com/signup)
-2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile).
+2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens).
 3. `git clone https://github.com/sigopt/sigopt-examples.git`
 4. `cd sigopt-examples/caffe2-cnn/`
 5. `sudo ./setup.sh`

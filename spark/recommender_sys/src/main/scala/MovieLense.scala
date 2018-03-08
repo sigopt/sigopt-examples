@@ -49,7 +49,7 @@ object MovieLensExperiment {
   }
 
   def main(args: Array[String]): Unit ={
-    // Find your SigOpt client token here : https://sigopt.com/user/profile
+    // Find your SigOpt client token here : https://sigopt.com/tokens
     Sigopt.clientToken = "<YOUR_CLIENT_TOKEN>"
     val conf = new SparkConf().setAppName("SigOpt Spark Test")
     val sc = new SparkContext(conf)

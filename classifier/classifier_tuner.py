@@ -215,7 +215,7 @@ if __name__ == '__main__':
     parser.add_argument(
       '--client-token',
       type=str,
-      help='Your sigopt API token. Get this from https://sigopt.com/user/profile',
+      help='Your sigopt API token. Get this from https://sigopt.com/tokens',
       required=True,
     )
     parser.add_argument(

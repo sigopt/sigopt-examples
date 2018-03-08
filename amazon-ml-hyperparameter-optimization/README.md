@@ -30,7 +30,7 @@ To learn more about configuring your AWS credentials with Boto 3, go to [Boto 3 
 
 ### Configure SigOpt Credentials
 
-To use SigOpt to optimize your hyperparameters faster and better than tuning by hand, sign up for a free trial on our [website]([SigOpt](https://www.sigopt.com)) and grab your API token from your [user profile](https://www.sigopt.com/user/profile).
+To use SigOpt to optimize your hyperparameters faster and better than tuning by hand, sign up for a free trial on our [website]([SigOpt](https://www.sigopt.com)) and grab your API token from the [API tokens page](https://www.sigopt.com/tokens).
 
 ### Get the Code
 

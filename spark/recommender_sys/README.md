@@ -7,7 +7,7 @@ Example using SigOpt and Spark / MLLib to tune an alternating least squares algo
 ## Setup
 
 1. Get a free SigOpt account at [https://sigopt.com/signup](https://sigopt.com/signup)
-2. Find your `client_token` on your [user profile](https://sigopt.com/user/profile) and set it
+2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens) and set it
   as the `SIGOPT_API_TOKEN` environment variable.
 3. `git clone https://github.com/sigopt/sigopt-examples.git`
 4. `cd sigopt-examples/spark/recommender_sys`

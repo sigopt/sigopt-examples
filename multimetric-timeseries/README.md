@@ -36,7 +36,7 @@ This example is made for the US East (N. Virginia) region. Follow the instructio
 
   - `sudo pip install sigopt tensorflow-gpu keras pandas`
 
-4. Create a file named _sigopt.secret_ and the following line, entering your API key (see your [profile](http://www.sigopt.com/user/profile)):
+4. Create a file named _sigopt.secret_ and the following line, entering your API key (see the [API tokens page](http://www.sigopt.com/tokens)):
 
   - `{"SIGOPT_API_TOKEN":"<your-api-key>"}`
 
