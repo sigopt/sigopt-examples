@@ -41,7 +41,7 @@ experiment = conn.experiments().create(
       conditions=dict(gaussian=['gaussian1', 'gaussian2']),
     )
   ],
-  observation_budget=45,
+  observation_budget=90,
 )
 
 print("Created experiment: https://sigopt.com/experiment/{}".format(experiment.id))

@@ -75,7 +75,7 @@ public class ConditionalsApp
                         .values(java.util.Arrays.asList("gaussian1", "gaussian2"))
                         .build()
                 ))
-                .observationBudget(45)
+                .observationBudget(90)
                 .build())
             .call();
         System.out.println("Created experiment: https://sigopt.com/experiment/" + experiment.getId());

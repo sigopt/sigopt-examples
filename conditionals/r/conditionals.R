@@ -39,7 +39,7 @@ experiment <- create_experiment(list(
         conditions=list(gaussian=c('gaussian1', 'gaussian2'))
     )
   ),
-  observation_budget=45
+  observation_budget=90
 ))
 
 print(paste("Created experiment: https://sigopt.com/experiment", experiment$id, sep="/"))
