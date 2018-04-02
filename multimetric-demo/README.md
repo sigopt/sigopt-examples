@@ -1,33 +1,24 @@
 [![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)](https://sigopt.com)
 
-Use SigOpt's [Java API Client](https://sigopt.com/docs/overview/java) to tune the [Franke function](http://www.sfu.ca/~ssurjano/franke2d.html)
+# SigOpt Multimetric Demo
 
-# Installation
-You will need [maven](https://maven.apache.org/) to compile and run this example.
-On OS X, you can install maven with Homebrew by running
+This folder contains 3 notebooks to explore the SigOpt Multimetric feature.
 
-```bash
-brew install maven
-```
+## Setup
+1. Get a free SigOpt account at https://sigopt.com/signup
+2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens) and set it
+  as the `SIGOPT_API_TOKEN` environment variable.
+3. Run `pip install -r requirements.txt`
 
-# Compile
-
-```bash
-mvn compile
-```
-
-# Run
-Insert your SigOpt API Token into the example below
-
-```bash
-mvn exec:java -Dexec.mainClass="com.example.App" -Dexec.cleanupDaemonThreads="false" -Dexec.args="--client_token SIGOPT_API_TOKEN"
-```
+## Run
+We recommend using [Jupyter](http://jupyter.readthedocs.org/en/latest/install.html) to walk through this example. Start Jupyter (run `jupyter notebook`), then open the desired notebook.
 
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
 
 ## API Reference
 To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
+
 ## About SigOpt
 
 With SigOpt, data scientists and machine learning engineers can build better models with less trial and error.
