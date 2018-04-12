@@ -11,6 +11,7 @@ ipaddress==1.0.15
 joblib==0.9.3
 jupyter==1.0.0
 lxml==3.5.0
+matplotlib
 numpy==1.9.1
 pyOpenSSL==0.15.1
 pyasn1-modules==0.0.8

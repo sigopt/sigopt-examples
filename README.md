@@ -2,7 +2,7 @@
 
 # Getting Started with SigOpt
 
-Welcome to SigOpt Examples. These examples show you how to use [SigOpt](https://sigopt.com) for model tuning tasks in various machine learning environments.
+Welcome to the SigOpt Examples. These examples show you how to use [SigOpt](https://sigopt.com) for model tuning tasks in various machine learning environments.
 
 ## Requirements
 
@@ -14,12 +14,12 @@ If this is your first time using SigOpt, we recommend you work through the [Rand
  * [Python](random-forest/python)
  * [R](random-forest/r)
  * [Java](random-forest/java)
- * [Python inside notebook](random-forest/python#notebook-version)
+ * [Jupyter notebook](random-forest/python#notebook-version)
  * [scikit-learn integration](random-forest/python#scikit-learn-integration)
 
 ## More Examples
 
-- [ipython-notebook-example](ipython-notebook-example): Simple example of using SigOpt to optimize a 2D function with plots and comparisons in an iPython Notebook.
+- [jupyter-notebook-example](jupyter-notebook-example): Simple example of using SigOpt to optimize a 2D function with plots and comparisons in a Jupyter Notebook.
 - [sigopt-beats-vegas](sigopt-beats-vegas): Using SigOpt to tune a model to beat the Vegas odds in Python ([blog post](http://blog.sigopt.com/post/136340340198/sigopt-for-ml-using-model-tuning-to-beat-vegas)).
 - [text-classifier](text-classifier): Example using SigOpt to tune a text classifier in Python and R ([blog post](http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text)).
 - [unsupervised-model](unsupervised-model): Example using SigOpt and xgboost to tune a combined unsupervised and supervised model for optical character recognition ([blog post](http://blog.sigopt.com/post/140871698423/sigopt-for-ml-unsupervised-learning-with-even))
@@ -39,8 +39,8 @@ With SigOpt, data scientists and machine learning engineers can build better mod
 
 Machine learning models depend on hyperparameters that trade off bias/variance and other key outcomes. SigOpt provides Bayesian hyperparameter optimization using an ensemble of the latest research.
 
-SigOpt can tune any machine learning model, including popular techniques like gradient boosting, deep neural networks, and support vector machines. SigOpt’s REST API, Python, and R libraries integrate into any existing ML workflow.
+SigOpt can tune any machine learning model, including popular techniques like gradient boosting, deep neural networks, and support vector machines. SigOpt’s REST API and client libraries (Python, R, Java) integrate into any existing ML workflow.
 
 SigOpt augments your existing model training pipeline, suggesting parameter configurations to maximize any online or offline objective, such as AUC ROC, model accuracy, or revenue. You only send SigOpt your metadata, not the underlying training data or model.
 
-SigOpt is available for a [30 day free trial](https://sigopt.com/signup), and is available [free forever for academic users](https://sigopt.com/edu).
+SigOpt is available through [Starter, Workgroup, and Enterprise plans](https://sigopt.com/pricing), and is [free forever for academic users](https://sigopt.com/edu).
