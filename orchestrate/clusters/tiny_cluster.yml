@@ -1,0 +1,6 @@
+cloud_provider: aws
+cluster_name: tiny-cluster
+cpu:
+  instance_type: t2.small
+  max_nodes: 1
+  min_nodes: 1
