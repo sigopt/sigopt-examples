@@ -10,7 +10,7 @@ SigOpt Orchestrate requires that AWS accounts creating clusters have full access
  * autoscaling
  * eks
 
-For your convenience, we have created a JSON policy document, `orchestrate_full_access_policy_document.json`.
+For your convenience, we have created a JSON policy document, [orchestrate_full_access_policy_document.json](orchestrate_full_access_policy_document.json).
 
 You can use this document to [Create an IAM Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) on AWS for your orchestrate users via the console, the command line, or one of the clients.
 
