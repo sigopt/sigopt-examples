@@ -19,3 +19,5 @@ You can use this document to [Create an IAM Policy](https://docs.aws.amazon.com/
 "Run only" users can connect to existing clusters and run experiments, but cannot create clusters.
 
 These users require permission to assume the orchestrate-generated <cluster-name>-k8s-access-role role (available in your AWS console).
+
+Run only users also require full acccess to ECR. You can use the document [orchestrate_run_only_policy_document.json](orchestrate_run_only_policy_document.json) to create an IAM policy for run only users.
