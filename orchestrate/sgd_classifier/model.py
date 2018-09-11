@@ -1,5 +1,3 @@
-import math
-
 import orchestrate.io
 from sklearn import datasets
 from sklearn.linear_model  import SGDClassifier
@@ -16,7 +14,7 @@ def evaluate_model(X, y):
   classifier = SGDClassifier(
     loss=orchestrate.io.assignment('loss', default='log'),
     penalty=orchestrate.io.assignment('penalty', default='elasticnet'),
-    alpha=math.pow(orchestrate.io.assignment('log_alpha', -4), 10),
+    alpha=10**orchestrate.io.assignment('log_alpha', -4),
     l1_ratio=orchestrate.io.assignment('l1_ratio', 0.15),
     max_iter=orchestrate.io.assignment('max_iter', default=1000),
     tol=orchestrate.io.assignment('tol', default=0.001),
