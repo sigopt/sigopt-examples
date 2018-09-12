@@ -3,7 +3,7 @@
 SigOpt Orchestrate is a command-line tool for managing training clusters and running optimization experiments.
 
 ## Installation
-Instructions coming soon!
+[Installation instructions](https://app.sigopt.com/docs/orchestrate/installation)
 
 ## Examples
 * [Cluster yml files](clusters/)
