@@ -13,7 +13,7 @@ jupyter==1.0.0
 lxml==3.5.0
 matplotlib
 numpy==1.9.1
-pyOpenSSL==0.15.1
+pyOpenSSL==18.0.0
 pyasn1-modules==0.0.8
 pyasn1==0.1.9
 pycparser==2.14
