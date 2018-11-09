@@ -1,4 +1,4 @@
-cloud_provider: aws
+provider: aws
 cluster_name: gpu-cluster
 gpu:
   min_nodes: 1
