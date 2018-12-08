@@ -1,0 +1,6 @@
+cloud_provider: aws
+cluster_name: i3-test
+cpu:
+  instance_type: i3.large
+  max_nodes: 2
+  min_nodes: 1
