@@ -15,8 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# SOURCE: https://github.com/apache/spark/blob/master/examples/src/main/python/pi.py
-# No changes made.
+# Originally from https://github.com/apache/spark/blob/master/examples/src/main/python/pi.py
+# Edited to show use with Sigopt Orchestrate
 
 from __future__ import print_function
 
