@@ -41,8 +41,8 @@ if __name__ == "__main__":
     n = 100000 * partitions
 
     def f(_):
-        x = orchestrate.io.assignment('rand_num', 0.4) * 2 - 1
-        y = orchestrate.io.assignment('rand_num', 0.2) * 2 - 1
+        x = orchestrate.io.assignment('x', 0.4) * 2 - 1
+        y = orchestrate.io.assignment('y', 0.2) * 2 - 1
         return 1 if x ** 2 + y ** 2 <= 1 else 0
 
     count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
