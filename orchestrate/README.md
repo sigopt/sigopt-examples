@@ -14,6 +14,7 @@ SigOpt Orchestrate is a command-line tool for managing training clusters and run
 * [Keras](keras_mnist/) (CPU and GPU)
 * [PyTorch](pytorch_mnist/) (CPU and GPU)
 * [XGBoost](xgboost/)
+* [Apache Spark](apache_spark/)
 
 ## Join the Orchestrate Alpha
 Customer alpha (for AWS) coming in October 2018.

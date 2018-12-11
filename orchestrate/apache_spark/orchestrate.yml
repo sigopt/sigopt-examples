@@ -1,0 +1,32 @@
+language: python3.6
+name: Orchestrate Spark Example (python)
+install:
+  -  wget --quiet http://apache.claz.org/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz
+  -  tar -xvf spark-2.4.0-bin-hadoop2.7.tgz
+  -  rm spark-2.4.0-bin-hadoop2.7.tgz
+  -  apt-get update
+  -  apt-get install -y default-jdk
+  -  export SPARK_MASTER_HOST=localhost SPARK_MASTER_PORT=7077
+  -  spark-2.4.0-bin-hadoop2.7/sbin/start-master.sh
+  -  spark-2.4.0-bin-hadoop2.7/sbin/start-slave.sh spark://localhost:7077
+run:
+  -  spark-2.4.0-bin-hadoop2.7/bin/spark-submit model.py
+optimization:
+  metrics:
+    - name: accuracy
+  parameters:  # Fill in parameters to optimize
+    - name: x
+      type: double
+      bounds:
+        min: 0
+        max: 1.0
+    - name: y
+      type: double
+      bounds:
+        min: 0
+        max: 1.0
+  parallel_bandwidth: 1
+  observation_budget: 1
+aws:
+  ecr:
+    repository: orchestrate/spark-example
