@@ -17,7 +17,7 @@ SigOpt Orchestrate is a command-line tool for managing training clusters and run
 * [Apache Spark](apache_spark/)
 
 ## Join the Orchestrate Alpha
-Customer alpha (for AWS) coming in October 2018.
+SigOpt Orchestrate is now in alpha release, and we're looking for partners to use our tool and give us feedback!
 
 If you're interested in joining our alpha testing of SigOpt Orchestrate, email us at <support@sigopt.com> to set up a demo.
 
