@@ -11,7 +11,7 @@ then launch a hyperparameter tuning job for a model trained with Apache Spark.
 This example asssumes that you have already
 [installed SigOpt Orchestrate](https://app.sigopt.com/docs/orchestrate/installation).
 
-Follow the steps below the run this example:
+Follow the steps below to run this example:
 
 ```bash
 git clone https://github.com/sigopt/sigopt-examples.git  # Clone this repo
