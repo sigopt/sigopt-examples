@@ -4,7 +4,7 @@ This is an example showing how to start a standalone Apache Spark cluster with o
 This example uses Apache Spark 2.4.0 but you can replace this with the version you'd like to use by editing the
 [orchestrate.yml](orchestrate.yml) for this experiment.
 
-## Instructions to run this example using Orchestrate
+## Instructions to run this example
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/orchestrate`
