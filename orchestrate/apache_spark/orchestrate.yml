@@ -6,9 +6,6 @@ install:
   -  rm spark-2.4.0-bin-hadoop2.7.tgz
   -  apt-get update
   -  apt-get install -y default-jdk
-  -  export SPARK_MASTER_HOST=localhost SPARK_MASTER_PORT=7077
-  -  spark-2.4.0-bin-hadoop2.7/sbin/start-master.sh
-  -  spark-2.4.0-bin-hadoop2.7/sbin/start-slave.sh spark://localhost:7077
 run:
   -  spark-2.4.0-bin-hadoop2.7/bin/spark-submit model.py
 optimization:
@@ -25,8 +22,8 @@ optimization:
       bounds:
         min: 0
         max: 1.0
-  parallel_bandwidth: 1
-  observation_budget: 1
+  parallel_bandwidth: 2
+  observation_budget: 10
 aws:
   ecr:
     repository: orchestrate/spark-example
