@@ -25,6 +25,4 @@ optimization:
         max: 10
   parallel_bandwidth: 2
   observation_budget: 60
-aws:
-  ecr:
-    repository: orchestrate/random-forest
+repository: orchestrate/random-forest

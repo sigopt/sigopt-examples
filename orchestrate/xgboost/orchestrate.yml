@@ -30,6 +30,4 @@ optimization:
       type: double
   parallel_bandwidth: 2
   observation_budget: 60
-aws:
-  ecr:
-    repository: orchestrate/xgboost
+repository: orchestrate/xgboost

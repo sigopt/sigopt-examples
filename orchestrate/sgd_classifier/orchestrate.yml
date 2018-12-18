@@ -20,6 +20,4 @@ optimization:
         max: 2
   parallel_bandwidth: 2
   observation_budget: 60
-aws:
-  ecr:
-    repository: orchestrate/sgd-classifier
+repository: orchestrate/sgd-classifier

@@ -69,6 +69,4 @@ optimization:
         max: 20
   parallel_bandwidth: 2
   observation_budget: 20
-aws:
-  ecr:
-    repository: orchestrate/pytorch-mnist-gpu
+repository: orchestrate/pytorch-mnist-gpu
