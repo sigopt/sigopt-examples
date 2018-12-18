@@ -46,6 +46,4 @@ optimization:
         max: 20
   parallel_bandwidth: 4
   observation_budget: 200
-aws:
-  ecr:
-    repository: orchestrate/keras-mnist
+repository: orchestrate/keras-mnist

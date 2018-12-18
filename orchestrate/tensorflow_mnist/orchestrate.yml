@@ -88,6 +88,4 @@ optimization:
         max: 10
   parallel_bandwidth: 4
   observation_budget: 200
-aws:
-  ecr:
-    repository: orchestrate/tensorflow-mnist
+repository: orchestrate/tensorflow-mnist

@@ -24,6 +24,4 @@ optimization:
         max: 1.0
   parallel_bandwidth: 1
   observation_budget: 1
-aws:
-  ecr:
-    repository: orchestrate/spark-example
+repository: orchestrate/spark-example
