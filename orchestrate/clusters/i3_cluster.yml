@@ -1,4 +1,4 @@
-cloud_provider: aws
+provider: aws
 cluster_name: i3-cluster
 cpu:
   instance_type: i3.large

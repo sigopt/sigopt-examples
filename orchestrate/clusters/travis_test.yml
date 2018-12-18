@@ -1,4 +1,4 @@
-cloud_provider: aws
+provider: aws
 cluster_name: travis-test
 cpu:
   instance_type: t2.small
