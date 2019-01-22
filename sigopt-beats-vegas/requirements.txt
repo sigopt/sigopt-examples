@@ -18,7 +18,7 @@ pyasn1-modules==0.0.8
 pyasn1==0.1.9
 pycparser==2.14
 queuelib==1.4.2
-requests==2.8.1
+requests==2.21.0
 scipy==0.16.1
 scikit-learn==0.17
 service-identity==14.0.0
