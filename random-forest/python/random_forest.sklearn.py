@@ -22,9 +22,9 @@ y = iris.target
 
 # Define domains for the Random Forest parameters
 random_forest_parameters = dict(
-  max_features=[1, len(iris) - 1],
-  n_estimators=[1, 100],
-  min_samples_leaf=[1, 10],
+  max_features=(1, len(iris) - 2),
+  n_estimators=(1, 100),
+  min_samples_leaf=(1, 10),
 )
 
 # define sklearn estimator

@@ -6,7 +6,8 @@
 # Run `pip install sklearn` to install scikit-learn, a machine learning
 # library in Python (http://scikit-learn.org)
 from sigopt import Connection
-from sklearn import cross_validation, datasets
+from sklearn import datasets
+from sklearn.model_selection import cross_val_score, ShuffleSplit
 from sklearn.ensemble import RandomForestClassifier
 import numpy
 
@@ -24,7 +25,7 @@ y = iris.target
 experiment = conn.experiments().create(
   name="Random Forest (Python)",
   parameters=[
-    dict(name="max_features", type="int", bounds=dict(min=1, max=len(iris)-1)),
+    dict(name="max_features", type="int", bounds=dict(min=1, max=len(iris)-2)),
     dict(name="n_estimators", type="int", bounds=dict(min=1, max=100)),
     dict(name="min_samples_leaf", type="int", bounds=dict(min=1, max=10))
   ]
@@ -35,9 +36,8 @@ print("Created experiment: https://sigopt.com/experiment/" + experiment.id)
 # We use cross validation to prevent overfitting
 def evaluate_model(assignments, X, y):
   # evaluate cross folds for accuracy
-  cv = cross_validation.ShuffleSplit(
-    X.shape[0],
-    n_iter=5,
+  cv = ShuffleSplit(
+    n_splits=5,
     test_size=0.3,
   )
   classifier = RandomForestClassifier(
@@ -45,7 +45,7 @@ def evaluate_model(assignments, X, y):
     max_features=assignments['max_features'],
     min_samples_leaf=assignments['min_samples_leaf']
   )
-  cv_accuracies = cross_validation.cross_val_score(classifier, X, y, cv=cv)
+  cv_accuracies = cross_val_score(classifier, X, y, cv=cv)
   return (numpy.mean(cv_accuracies), numpy.std(cv_accuracies))
 
 # Run the Optimization Loop between 10x - 20x the number of parameters
