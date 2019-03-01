@@ -31,6 +31,7 @@ class Master(threading.Thread):
     self.conn = Connection(client_token=SIGOPT_API_KEY)
     experiment = self.conn.experiments().create(
       name='Parallel Experiment',
+      project='sigopt-examples',
       parameters=PARAMETERS,
       observation_budget=len(PARAMETERS) * 20,
     )

@@ -27,6 +27,7 @@ def sentiment_metric(POS_TEXT, NEG_TEXT, params):
 conn = sigopt.Connection()
 experiment = conn.experiments().create(
   name='Sentiment LR Classifier (Python)',
+  project='sigopt-examples',
   parameters=[
     { 'name':'l1_coef',      'type': 'double', 'bounds': { 'min': 0, 'max': 1.0 }},
     { 'name':'log_reg_coef', 'type': 'double', 'bounds': { 'min': math.log(0.000001), 'max': math.log(100.0) }},

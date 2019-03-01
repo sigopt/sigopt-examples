@@ -13,6 +13,7 @@ def create_sigopt_experiment(conn, sigopt_depth):
   """Creates and returns a SigOpt experiment object."""
   experiment = conn.experiments().create(
     name='NBA Over/Under',
+    project='sigopt-examples',
     parameters=[
               {'name': 'fast_ma',
                'type': 'int',

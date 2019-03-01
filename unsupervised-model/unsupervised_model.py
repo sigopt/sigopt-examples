@@ -38,6 +38,7 @@ train_X = convert_rgb2gray(train_X)
 conn = sigopt.Connection()
 experiment = conn.experiments().create(
   name='SVHN Classifier',
+  project='sigopt-examples',
   parameters=[
     {'name': 'filter_w',       'type': 'int', 'bounds': {'min': 7, 'max': 10}},
     {'name': 'slide_w',        'type': 'int', 'bounds': {'min': 2, 'max': 8}},
