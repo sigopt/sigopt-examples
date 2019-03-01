@@ -25,6 +25,7 @@ class JobRunner(object):
     conn = sigopt.interface.Connection()
     experiment = conn.experiments().create(
       name="Nervana POC - {num}".format(num=int(time.time())),
+      project="sigopt-examples",
       parameters=TUNABLE_PARAMS
     )
     return experiment

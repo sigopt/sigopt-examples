@@ -21,6 +21,7 @@ def main():
 
   experiment = conn.experiments().create(
     name= ENVIRONMENT_NAME + ' (DQN)',
+    project='sigopt-examples',
     observation_budget=128,
     parameters=[
       dict(name='hm', type='int', bounds=dict(min=5, max=100)),

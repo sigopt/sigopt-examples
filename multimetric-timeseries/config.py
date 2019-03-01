@@ -31,6 +31,8 @@ DATASET_PATH = os.path.join(THIS_DIR, DATASET_FOLDER, DATASET_FILE)
 
 EXPERIMENT_NAME = 'multimetric time series accuracy vs. inference time'
 
+PROJECT_NAME = 'sigopt-examples'
+
 METRIC_1 = 'val_acc'
 METRIC_2 = 'negative_inference_time'
 

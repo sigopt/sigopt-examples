@@ -106,6 +106,7 @@ class ExampleRunner(object):
         try:
             return conn.experiments().create(
                 name="Example Classifier",
+                project="sigopt-examples",
                 parameters=params,
                 observation_budget=self.num_sigopt_suggestions,
             )

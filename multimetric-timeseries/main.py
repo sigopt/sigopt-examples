@@ -3,7 +3,7 @@ from multiprocessing import Process, Queue
 from sigopt import Connection
 
 from config import (SIGOPT_API_TOKEN, PARAMETERS, EXPERIMENT_NAME,
-                     METRICS, OBSERVATION_BUDGET, DATASET_PATH)
+                     PROJECT_NAME, METRICS, OBSERVATION_BUDGET, DATASET_PATH)
 
 from train import prepare_data, evaluate_assignments
 
@@ -11,6 +11,7 @@ conn = Connection(client_token=SIGOPT_API_TOKEN)
 
 experiment = conn.experiments().create(
     name=EXPERIMENT_NAME,
+    project=PROJECT_NAME,
     parameters=PARAMETERS,
     metrics = METRICS,
     observation_budget = OBSERVATION_BUDGET

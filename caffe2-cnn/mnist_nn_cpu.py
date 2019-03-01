@@ -53,6 +53,7 @@ def data_setup():
 def setup_sigopt_experiment(conn):
   experiment = conn.experiments().create(
     name='MNIST Dataset Deep Neural Net (Caffe2)',
+    project='sigopt-examples',
     observation_budget=40,
     parameters=[
       {

@@ -15,6 +15,7 @@ conn = Connection(client_token="YOUR_SIGOPT_API_TOKEN")
 # Create a SigOpt Experiment
 experiment = conn.experiments().create(
   name="Adjiman Optimization with Constraints (Python)",
+  project="sigopt-examples",
   parameters=[
     dict(name="x", type="double", bounds=dict(min=-1, max=2)),
     dict(name="y", type="double", bounds=dict(min=-1, max=1)),

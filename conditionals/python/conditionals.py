@@ -15,6 +15,7 @@ conn = Connection(client_token="YOUR_SIGOPT_API_TOKEN")
 # Create a SigOpt Experiment
 experiment = conn.experiments().create(
   name="Multivariate Gaussian distribution Optimization with Conditionals (Python)",
+  project="sigopt-examples",
   conditionals=[
     dict(
       name='gaussian',
