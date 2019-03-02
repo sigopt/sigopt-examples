@@ -95,7 +95,7 @@ for (i in 1:100) {
 experiment <- fetch_experiment(experiment$id)
 best_assignments <- experiment$progress$best_observation$assignments
 
-# To wrap up the Experiment, fit the model with the best assigments
+# To wrap up the Experiment, fit the model with the best assignments
 # and train on all available data
 boosted_clf <- xgb.train(
   data=data,

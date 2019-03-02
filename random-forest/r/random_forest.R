@@ -80,7 +80,7 @@ for (i in 1:80) {
 experiment <- fetch_experiment(experiment$id)
 best_assignments <- experiment$progress$best_observation$assignments
 
-# To wrap up the Experiment, fit the RandomForest on the best assigments
+# To wrap up the Experiment, fit the RandomForest on the best assignments
 # and train on all available data
 rf <- randomForest(x=X,
                    y=y,

@@ -67,7 +67,7 @@ for _ in range(60):
 # Re-fetch the best observed value and assignments
 best_assignments = conn.experiments(experiment.id).best_assignments().fetch().data[0].assignments
 
-# To wrap up the Experiment, fit the RandomForest on the best assigments
+# To wrap up the Experiment, fit the RandomForest on the best assignments
 # and train on all available data
 rf = RandomForestClassifier(
     n_estimators=best_assignments['n_estimators'],

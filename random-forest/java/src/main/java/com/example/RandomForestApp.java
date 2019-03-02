@@ -92,7 +92,7 @@ public class RandomForestApp
         experiment = Experiment.fetch(experiment.getId()).call();
         Assignments bestAssignments = experiment.getProgress().getBestObservation().getAssignments();
 
-        // To wrap up the Experiment, fit the RandomForest on the best assigments and train on all available data
+        // To wrap up the Experiment, fit the RandomForest on the best assignments and train on all available data
         RandomForest bestRandomForest = RandomForestApp.randomForestFromAssignments(bestAssignments);
         bestRandomForest.buildClassifier(irisData);
     }
