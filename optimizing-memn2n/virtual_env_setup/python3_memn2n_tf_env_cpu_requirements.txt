@@ -1,0 +1,15 @@
+certifi==2018.11.29
+chardet==3.0.4
+idna==2.8
+numpy==1.15.3
+pandas==0.23.4
+protobuf==3.6.1
+python-dateutil==2.7.5
+pytz==2018.9
+requests==2.21.0
+scikit-learn==0.17.1
+scipy==1.1.0
+sigopt==3.6.0
+six==1.10.0
+tensorflow==1.0.0
+urllib3==1.24.1
