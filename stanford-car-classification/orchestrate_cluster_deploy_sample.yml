@@ -1,0 +1,18 @@
+# cluster.yml
+
+provider: aws
+
+# We have provided a name that is short and descriptive
+cluster_name: stanford-cars-run-gpu-cluster
+
+# Your cluster config can have CPU nodes, GPU nodes, or both.
+# The configuration of your nodes is defined in the sections below.
+
+
+# # (Optional) Define GPU compute here
+gpu:
+#   # AWS GPU-enabled instance type
+#   # This can be any p* instance type
+  instance_type: p2.xlarge
+  max_nodes: 2
+  min_nodes: 2
