@@ -17,7 +17,7 @@
     <dependency>
       <groupId>com.sigopt</groupId>
       <artifactId>sigopt-java</artifactId>
-      <version>4.10.0</version>
+      <version>3.1.0</version>
     </dependency>
     <dependency>
       <groupId>nz.ac.waikato.cms.weka</groupId>
