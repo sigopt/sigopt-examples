@@ -2,8 +2,7 @@ language: python3.6
 name: Orchestrate Random Forest (python)
 install:
   -  pip install -r requirements.txt
-run:
-  -  python model.py
+run: python model.py
 optimization:
   metrics:
     - name: accuracy
