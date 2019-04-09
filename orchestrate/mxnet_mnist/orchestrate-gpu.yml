@@ -2,9 +2,7 @@ name: Orchestrate MXNet MNIST Example (GPU)
 framework: mxnet
 resources_per_model:
   gpus: 1
-run:
-  - bash download_data.sh
-  - python model.py
+run: bash run.sh
 optimization:
   metrics:
     - name: accuracy
