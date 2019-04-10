@@ -24,4 +24,4 @@ optimization:
         max: 10
   parallel_bandwidth: 2
   observation_budget: 60
-repository: orchestrate/random-forest
+image: orchestrate/random-forest

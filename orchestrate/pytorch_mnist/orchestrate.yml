@@ -69,4 +69,4 @@ optimization:
         max: 20
   parallel_bandwidth: 4
   observation_budget: 200
-repository: orchestrate/pytorch-mnist
+image: orchestrate/pytorch-mnist

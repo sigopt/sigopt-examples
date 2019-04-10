@@ -71,4 +71,4 @@ optimization:
         max: 10
   parallel_bandwidth: 4
   observation_budget: 200
-repository: orchestrate/mxnet-mnist-gpu
+image: orchestrate/mxnet-mnist-gpu
