@@ -19,4 +19,4 @@ optimization:
         max: 2
   parallel_bandwidth: 2
   observation_budget: 60
-repository: orchestrate/sgd-classifier
+image: orchestrate/sgd-classifier
