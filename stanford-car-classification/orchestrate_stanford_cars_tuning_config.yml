@@ -82,4 +82,4 @@ optimization:
 # SigOpt Orchestrate creates a container for your model. Since we're using an AWS
 # cluster, it's easy to securely store the model in the Amazon Elastic Container Registry.
 # Chose a descriptive and unique name for each new experiment configuration file.
-repository: orchestrate/stanford-cars-fine-tuning-2
+image: orchestrate/stanford-cars-fine-tuning-2
