@@ -30,7 +30,7 @@ python sigopt_optimization_run.py --run_single_exp True --run_joint_exp False --
 
 ## Command Line Interface
 
-`python sigopt_optimization_run.py [--log_file <file path>] {--run_single_exp {True | False} --run_joint_exp False --task_id <task id> --sigopt_calc_accuracy_tasks None | --run_joint_exp {True | False} --run_single_exp False --sigopt_calc_accuracy_tasks <string of comma separated task ids> --task_id None} [--max_grad_norm <l2 norm clipping>] [--batch_size <batch size>] [--epochs <total number of epochs>] [--random_state <random seed>] [--data_dir <path to bAbI data directory>] --sigopt_connection_token <API token for Sigopt account> {--sigopt_observation_budget <number of Sigopt observations> --sigopt_experiment_name <Sigopt experiment name> --experiment_type {random|sigopt|conditionals} | --sigopt_experiment_id <existing Sigopt experiment id>}`  
+`python sigopt_optimization_run.py [--log_file <file path>] {--run_single_exp --task_id <task id> --sigopt_calc_accuracy_tasks None | --run_joint_exp --sigopt_calc_accuracy_tasks <string of comma separated task ids> --task_id None} [--max_grad_norm <l2 norm clipping>] [--batch_size <batch size>] [--epochs <total number of epochs>] [--random_state <random seed>] [--data_dir <path to bAbI data directory>] --sigopt_connection_token <API token for Sigopt account> {--sigopt_observation_budget <number of Sigopt observations> --sigopt_experiment_name <Sigopt experiment name> --experiment_type {random|sigopt|conditionals} | --sigopt_experiment_id <existing Sigopt experiment id>}`  
 
 If optional arguments are not provided, the above command line will use the following default parameters and assumes the working directory is ./end2end_mem_nn_tensorflow:
 
@@ -48,19 +48,19 @@ Validation is performed on the validation and test sets of the data at the end o
 
 #### Example: Task 20 optimization on English 1k dataset
 
-`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp True --run_joint_exp False --task_id 20 --sigopt_observation_budget 4 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name 'task 20 conditionals optimization' --experiment_type 'conditionals'`
+`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp --task_id 20 --sigopt_observation_budget 4 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name 'task 20 conditionals optimization' --experiment_type 'conditionals'`
 
 The above command will optimize bAbI task 20 using [Sigopt Conditionals](https://app.sigopt.com/docs/overview/conditionals) for 4 [observation cycles](https://app.sigopt.com/docs/overview/optimization) using default parameters for `max_grad_norm, batch_size, epochs, random_state, and data_dir`. Must be run with end2end_mem_nn_tensorflow as the working directory.
 
 #### Example: Task 1 optimization
 
-`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp True --run_joint_exp False --task_id 20 --max_grad_norm 10 --batch_size 31 --epochs 10 --data_dir '/Users/username/Downloads/tasks_1-20_v1-2/hn' --sigopt_observation_budget 2 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name 'task 1 random optimization' --experiment_type random`
+`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp --task_id 20 --max_grad_norm 10 --batch_size 31 --epochs 10 --data_dir '/Users/username/Downloads/tasks_1-20_v1-2/hn' --sigopt_observation_budget 2 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name 'task 1 random optimization' --experiment_type random`
 
 The above command will optimize bAbI task 1 using Sigopt's Random search implementation for 2 observation cycles with the specified max_grad_norm, batch_size, and epochs.
 
 #### Example: Task 4 optimization with existing experiment
 
-`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp True --run_joint_exp False --task_id 4 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_id 67770`
+`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp --task_id 4 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_id 67770`
 
 The above command will pick up an existing/already created experiment and continue to optimize until it meets the predefined number of optimization cycles. This can be found under the Experiment [properties page](https://app.sigopt.com/experiment/43973/properties). Must be run with end2end_mem_nn_tensorflow as the working directory. The task id specified on the CLI must match the task id previously specified for the experiment.
 
@@ -68,13 +68,13 @@ The above command will pick up an existing/already created experiment and contin
 
 #### Example: Joint training on 1k English dataset
 
-`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp False --run_joint_exp True --sigopt_calc_accuracy_tasks '7,8,10' --max_grad_norm 10 --batch_size 31 --epochs 10 --sigopt_observation_budget 200 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name '20 task sigopt optimization' --experiment_type sigopt`
+`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_joint_exp --sigopt_calc_accuracy_tasks '7,8,10' --max_grad_norm 10 --batch_size 31 --epochs 10 --sigopt_observation_budget 200 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name '20 task sigopt optimization' --experiment_type sigopt`
 
 The above command will run optimization on all 20 tasks using Sigopt's Bayesian Optimization for 200 observation cycles. For each Sigopt observation cycle, it will store the test accuracies for tasks 7,8,10 as [experiment metadata](https://app.sigopt.com/docs/objects/metadata). Must be run with end2end_mem_nn_tensorflow as the working directory.
 
 #### Example: Joint training with existing experiment
 
-`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp False --run_joint_exp True --sigopt_calc_accuracy_tasks '7,8,10' --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_id 67773`
+`python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_joint_exp --sigopt_calc_accuracy_tasks '7,8,10' --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_id 67773`
 
 The above command will pick up an existing experiment and continue to optimize until it meets the predefined number of optimization cycles. Must be run with end2end_mem_nn_tensorflow as the working directory.
 
