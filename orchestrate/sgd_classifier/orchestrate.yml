@@ -2,8 +2,7 @@ language: python3.6
 name: Orchestrate SGD Classifier (python)
 install:
   -  pip install -r requirements.txt
-run:
-  -  python model.py
+run: python model.py
 optimization:
   metrics:
     - name: accuracy
@@ -20,4 +19,4 @@ optimization:
         max: 2
   parallel_bandwidth: 2
   observation_budget: 60
-repository: orchestrate/sgd-classifier
+image: orchestrate/sgd-classifier

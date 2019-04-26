@@ -6,8 +6,7 @@ install:
   -  rm spark-2.4.0-bin-hadoop2.7.tgz
   -  apt-get update
   -  apt-get install -y default-jdk
-run:
-  -  spark-2.4.0-bin-hadoop2.7/bin/spark-submit model.py
+run: spark-2.4.0-bin-hadoop2.7/bin/spark-submit model.py
 optimization:
   metrics:
     - name: accuracy
@@ -24,4 +23,4 @@ optimization:
         max: 1.0
   parallel_bandwidth: 1
   observation_budget: 1
-repository: orchestrate/spark-example
+image: orchestrate/spark-example
