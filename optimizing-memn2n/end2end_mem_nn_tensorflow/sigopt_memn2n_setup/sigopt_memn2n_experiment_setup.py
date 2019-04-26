@@ -31,8 +31,13 @@ def setup_sigopt_memn2n_experiment(tensorflow_commandline_flags):
 
     if tensorflow_commandline_flags.sigopt_experiment_id is None:
 
+        # create command line flags dict
+        flags = {}
+        for commandline_entity in tensorflow_commandline_flags:
+            flags[tensorflow_commandline_flags[commandline_entity].name] = tensorflow_commandline_flags[
+                commandline_entity].value
+
         # create metadata for experiment from commandline flags
-        flags = tensorflow_commandline_flags.__dict__['__flags']
         metadata_dict = {}
         for name, commandline_value in flags.items():
             metadata_dict[name] = str(commandline_value)
