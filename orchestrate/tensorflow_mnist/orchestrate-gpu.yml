@@ -2,8 +2,7 @@ name: Orchestrate Tensorflow MNIST Example (GPU)
 resources_per_model:
   gpus: 1
 framework: tensorflow
-run:
-  -  python model.py
+run: python model.py
 optimization:
   metrics:
     - name: accuracy
@@ -89,4 +88,4 @@ optimization:
         max: 10
   parallel_bandwidth: 4
   observation_budget: 200
-repository: orchestrate/tensorflow-mnist-gpu
+image: orchestrate/tensorflow-mnist-gpu
