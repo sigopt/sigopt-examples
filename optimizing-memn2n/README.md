@@ -37,7 +37,7 @@ If optional arguments are not provided, the above command line will use the foll
 * log_file = [WORKING DIRECTORY]/memn2n_optimization_run.log
 * max_grad_norm = 40
 * batch_size = 32
-* epochs = 60
+* epochs = 6
 * random_state = None
 * data_dir = ./data/tasks_1-20_v1-2/en/ (English 1k dataset)
 * sigopt_experiment_id = None
