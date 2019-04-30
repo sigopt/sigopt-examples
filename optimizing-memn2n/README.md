@@ -4,7 +4,7 @@ Implementation of [End-To-End Memory Networks](http://arxiv.org/abs/1503.08895) 
 
 ## Requirements
 
-* tensorflow 1.0.0
+* tensorflow 1.13.1
 * scikit-learn 0.17.1
 * six 1.10.0
 
