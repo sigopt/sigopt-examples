@@ -37,7 +37,7 @@ def data_setup():
   if not os.path.exists(data_folder):
     os.makedirs(data_folder)
   if not os.path.exists(label_file_train):
-    download_dataset("https://s3.amazonaws.com/caffe2/datasets/mnist/mnist.zip", data_folder)
+    download_dataset("https://caffe2.s3.amazonaws.com/datasets/mnist/mnist.zip", data_folder)
 
   if os.path.exists(root_folder):
     shutil.rmtree(root_folder)
