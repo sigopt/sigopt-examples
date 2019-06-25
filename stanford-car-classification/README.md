@@ -156,7 +156,7 @@ Example:
 
 ```
 source ./stanford-car-classification-venv/bin/activate
-python run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay -3 --momentum 0.9 --learning_rate -1 --scheduler_rate 5 --nesterov --freeze_weights
+python run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --nesterov --freeze_weights
 
 ```
 
@@ -166,7 +166,7 @@ The above example tunes the fully connected layer of a pretrained ResNet18 with 
 
 ```
 source ./stanford-car-classification-venv/bin/activate
-python run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay -3 --momentum 0.9 --learning_rate -3 --scheduler_rate 5 --no-nesterov --no-freeze_weights
+python run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --no-nesterov --no-freeze_weights
 
 ```
 
