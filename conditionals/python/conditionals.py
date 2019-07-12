@@ -22,7 +22,7 @@ experiment = conn.experiments().create(
       values=['gaussian1', 'gaussian2'],
     )
   ],
-  metrics=[dict(name='value', objective='maximize')],
+  metrics=[dict(name='score', objective='maximize')],
   parameters=[
     dict(
       name='x',
