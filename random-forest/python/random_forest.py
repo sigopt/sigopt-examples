@@ -25,7 +25,7 @@ y = iris.target
 experiment = conn.experiments().create(
   name="Random Forest (Python)",
   project="sigopt-examples",
-  metrics=[dict(name='value', objective='maximize')],
+  metrics=[dict(name='accuracy', objective='maximize')],
   parameters=[
     dict(name="max_features", type="int", bounds=dict(min=1, max=len(iris)-2)),
     dict(name="n_estimators", type="int", bounds=dict(min=1, max=100)),
