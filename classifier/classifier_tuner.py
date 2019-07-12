@@ -108,7 +108,7 @@ class ExampleRunner(object):
                 name="Example Classifier",
                 project="sigopt-examples",
                 parameters=params,
-                metrics=[dict(name='score', objective='maximize')],
+                metrics=[dict(name='classifier_score', objective='maximize')],
                 observation_budget=self.num_sigopt_suggestions,
             )
         except ApiException as err:
