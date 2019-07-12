@@ -23,7 +23,7 @@ def main():
     name= ENVIRONMENT_NAME + ' (DQN)',
     project='sigopt-examples',
     observation_budget=128,
-    metrics=[dict(name='score', objective='maximize')],
+    metrics=[dict(name='average_reward', objective='maximize')],
     parameters=[
       dict(name='hm', type='int', bounds=dict(min=5, max=100)),
       dict(name='mb_size', type='int', bounds=dict(min=10, max=500)),
