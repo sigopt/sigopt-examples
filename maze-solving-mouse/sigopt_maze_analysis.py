@@ -276,6 +276,7 @@ class SigOptMazeFrontierSolver(object):
         self.experiment = self.conn.experiments().create(
             name=name or 'Scalarized Mouse Maze Solver',
             project='sigopt-examples',
+            metrics=[dict(name='weighted_sum_scalarization', objective='maximize')],
             parameters=[
                 {'name': 'left_prob_log', 'bounds': {'max': numpy.log(100), 'min': numpy.log(0.01)}, 'type': 'double'},
                 {'name': 'up_prob_log', 'bounds': {'max': numpy.log(100), 'min': numpy.log(0.01)}, 'type': 'double'},

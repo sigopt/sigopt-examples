@@ -29,6 +29,7 @@ conn = sigopt.interface.Connection()
 experiment = conn.experiments().create(
   name='Nervana All CNN GPU '+datetime.datetime.now().strftime("%Y_%m_%d_%I%M_%S"),
   project='sigopt-examples',
+  metrics=[dict(name='value', objective='maximize')],
   parameters=[
     { "name": "log(learning_rate)",   "type": "double", "bounds": {"max": -0.3,  "min": -3.0,}},
     { "name": "log(weight_decay)",    "type": "double", "bounds": {"max": 0.0,   "min": -3.0,}},

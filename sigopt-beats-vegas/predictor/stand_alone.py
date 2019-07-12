@@ -14,6 +14,7 @@ def create_sigopt_experiment(conn, sigopt_depth):
   experiment = conn.experiments().create(
     name='NBA Over/Under',
     project='sigopt-examples',
+    metrics=[dict(name='winnings', objective='maximize')],
     parameters=[
               {'name': 'fast_ma',
                'type': 'int',

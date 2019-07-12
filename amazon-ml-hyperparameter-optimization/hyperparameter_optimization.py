@@ -64,6 +64,7 @@ def build_experiment(conn):
                 bounds=dict(min=math.log(0.00000001), max=math.log(1)),
             ),
         ],
+        metrics=[dict(name='avg_auc', objective='maximize')],
         observation_budget=20,
     )
 

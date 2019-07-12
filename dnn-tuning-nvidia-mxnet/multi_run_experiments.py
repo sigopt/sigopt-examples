@@ -40,7 +40,10 @@ if experiment_id is None:
         project='sigopt-examples',
         parameters=hyperparams,
         observation_budget=30 * len(hyperparams),
-        metrics=[{'name': 'accuracy'}, {'name': 'negative_train_time'}],
+        metrics=[
+            {'name': 'accuracy', 'objective': 'maximize'},
+            {'name': 'train_time', 'objective': 'minimize'},
+        ],
     )
 
     print("Created experiment: https://sigopt.com/experiment/" + experiment.id)
@@ -62,7 +65,7 @@ def create_observation_dict(suggestion):
         'suggestion': suggestion.id,
         'values': [
             {'name': 'accuracy', 'value': accuracy},
-            {'name': 'negative_train_time', 'value': start - end},
+            {'name': 'train_time', 'value': end - start},
         ],
     }
 

@@ -35,6 +35,7 @@ if experiment_id is None:
     experiment = conn.experiments().create(
                          name=exp_name,
                          project='sigopt-examples',
+                         metrics=[dict(name='value', objective='maximize')],
                          parameters=hyperparams,
                          observation_budget=40*len(hyperparams))
 

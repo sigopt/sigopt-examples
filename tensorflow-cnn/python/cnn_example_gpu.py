@@ -60,6 +60,7 @@ conn = sigopt.Connection()
 experiment = conn.experiments().create(
   name='SVHN ConvNet',
   project='sigopt-examples',
+  metrics=[dict(name='value', objective='maximize')],
   parameters=[
     {'name': 'filter1_w',      'type': 'int',    'bounds': {'min': 3,  'max': 10}},
     {'name': 'filter1_depth',  'type': 'int',    'bounds': {'min': 10, 'max': 64}},
