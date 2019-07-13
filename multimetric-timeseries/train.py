@@ -157,7 +157,7 @@ def evaluate_assignments(experiment, suggestion,
     inference_time = calculate_inference_time(model, x_test)
 
     metrics = [dict(name='val_acc', value=log.iat[-1, -2]),
-               dict(name='negative_inference_time', value=-inference_time)]
+               dict(name='inference_time', value=-inference_time)]
 
     metadata = {k:v[NB_EPOCHS-1] for k,v in log[-1:].to_dict().items()}
 
