@@ -17,7 +17,7 @@ if __name__ == "__main__":
   e = conn.experiments().create(
     name='sigopt-examples test experiment',
     project='sigopt-examples',
-    metrics=[dict(name='value', objective='maximize')],
+    metrics=[dict(name='score', objective='maximize')],
     parameters=[
       {'type': 'double', 'name': 'd', 'bounds': {'min': 10, 'max': 20}},
       {'type': 'int', 'name': 'i', 'bounds': {'min': 1, 'max': 100}},

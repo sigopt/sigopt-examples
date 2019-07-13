@@ -33,7 +33,7 @@ class Master(threading.Thread):
       name='Parallel Experiment',
       project='sigopt-examples',
       parameters=PARAMETERS,
-      metrics=[dict(name='value', objective='maximize')],
+      metrics=[dict(name='cv_accuracies', objective='maximize')],
       observation_budget=len(PARAMETERS) * 20,
     )
     print("View your experiment progress: https://sigopt.com/experiment/{}".format(experiment.id))
