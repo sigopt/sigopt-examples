@@ -2,9 +2,7 @@ name: Orchestrate MXNet MNIST Example
 framework: python
 install:
   - pip install -r requirements.txt
-run:
-  - bash download_data.sh
-  - python model.py
+run: ./run_model
 optimization:
   metrics:
     - name: accuracy

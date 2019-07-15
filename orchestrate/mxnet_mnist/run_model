@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+BASE_MNIST_URL='https://s3-us-west-2.amazonaws.com/sigopt-public/experiment-templates/mnist'
+if ! [ -d data ]; then
+  mkdir -p data
+  cd data
+  for DATA_PATH in \
+    train-images \
+    train-labels \
+    test-images \
+    test-labels
+  do
+    wget "$BASE_MNIST_URL/$DATA_PATH"
+  done
+fi
+
+python model.py

@@ -1,6 +1,6 @@
 provider: aws
-cluster_name: cpu-cluster
+cluster_name: taylor-thresholds-cluster
 cpu:
-  min_nodes: 1
+  min_nodes: 4
   max_nodes: 4
   instance_type: c5.xlarge

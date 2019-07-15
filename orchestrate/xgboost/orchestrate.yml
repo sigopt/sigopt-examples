@@ -2,8 +2,7 @@ language: python3.6
 name: Orchestrate Gradient Boosted Machine (python)
 install:
   - pip install -r requirements.txt
-run:
-  - python model.py
+run: python model.py
 optimization:
   metrics:
     - name: accuracy
@@ -30,4 +29,4 @@ optimization:
       type: double
   parallel_bandwidth: 2
   observation_budget: 60
-repository: orchestrate/xgboost
+image: orchestrate/xgboost
