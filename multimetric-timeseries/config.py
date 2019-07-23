@@ -34,10 +34,12 @@ EXPERIMENT_NAME = 'multimetric time series accuracy vs. inference time'
 PROJECT_NAME = 'sigopt-examples'
 
 METRIC_1 = 'val_acc'
-METRIC_2 = 'negative_inference_time'
+METRIC_2 = 'inference_time'
 
-METRICS = [{'name': METRIC_1},
-           {'name': METRIC_2}]
+METRICS = [
+  {'name': METRIC_1, 'objective': 'maximize'},
+  {'name': METRIC_2, 'objective': 'maximize'},
+]
 
 NB_EPOCHS = 500
 

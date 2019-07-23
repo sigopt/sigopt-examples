@@ -22,6 +22,7 @@ experiment = conn.experiments().create(
       values=['gaussian1', 'gaussian2'],
     )
   ],
+  metrics=[dict(name='mgd_value', objective='maximize')],
   parameters=[
     dict(
       name='x',

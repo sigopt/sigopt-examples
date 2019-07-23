@@ -35,6 +35,7 @@ if experiment_id is None:
     experiment = conn.experiments().create(
                          name=exp_name,
                          project='sigopt-examples',
+                         metrics=[dict(name='dev_acc', objective='maximize')],
                          parameters=hyperparams,
                          observation_budget=40*len(hyperparams))
 
@@ -46,8 +47,8 @@ else:
 data = get_data()
 for _ in range(experiment.observation_budget):
     suggestion = conn.experiments(experiment.id).suggestions().create()
-    value = calculate_objective(suggestion.assignments, data,
+    dev_acc = calculate_objective(suggestion.assignments, data,
                                 with_architecture=with_architecture)
     observation = conn.experiments(experiment.id).observations().create(
-                                value=value,
+                                value=dev_acc,
                                 suggestion=suggestion.id)

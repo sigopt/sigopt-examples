@@ -17,7 +17,7 @@ parameters_list = [dict(name=ParametersList.LEARNING_RATE.value, bounds=dict(min
                                             dict(name=SGDOptimizer.RMSPROP.value), dict(name=SGDOptimizer.ADAM.value),
                                             dict(name=SGDOptimizer.ADADELTA.value)])
                    ]
-metrics_list = [dict(name="accuracy")]
+metrics_list = [dict(name="accuracy", objective="maximize")]
 
 conditionals_list = []
 

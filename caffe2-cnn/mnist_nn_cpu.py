@@ -55,6 +55,7 @@ def setup_sigopt_experiment(conn):
     name='MNIST Dataset Deep Neural Net (Caffe2)',
     project='sigopt-examples',
     observation_budget=40,
+    metrics=[dict(name='accuracy', objective='maximize')],
     parameters=[
       {
         'name': 'conv1_dim',

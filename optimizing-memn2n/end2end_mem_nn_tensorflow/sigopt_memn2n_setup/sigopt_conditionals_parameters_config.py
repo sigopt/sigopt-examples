@@ -23,6 +23,6 @@ parameters_list = [dict(name=ParametersList.LEARNING_RATE.value, bounds=dict(min
                    dict(name=ParametersList.MEMORY_SIZE.value, bounds=dict(min=1, max=50), type="int"),
                    dict(name=ParametersList.HOP_SIZE.value, bounds=dict(min=1, max=3), type="int")
                    ]
-metrics_list = [dict(name="accuracy")]
+metrics_list = [dict(name="accuracy", objective="maximize")]
 
 experiment_type = "offline"

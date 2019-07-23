@@ -20,6 +20,7 @@ experiment = conn.experiments().create(
     dict(name="x", type="double", bounds=dict(min=-1, max=2)),
     dict(name="y", type="double", bounds=dict(min=-1, max=1)),
   ],
+  metrics=[dict(name='adjiman_func_value', objective='maximize')],
   linear_constraints=[
     # Constraint equation: x + y >= 1
     dict(

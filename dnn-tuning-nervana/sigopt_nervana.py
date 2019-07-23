@@ -26,6 +26,7 @@ class JobRunner(object):
     experiment = conn.experiments().create(
       name="Nervana POC - {num}".format(num=int(time.time())),
       project="sigopt-examples",
+      metrics=[dict(name='score', objective='maximize')],
       parameters=TUNABLE_PARAMS
     )
     return experiment
