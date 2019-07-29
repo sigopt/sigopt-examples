@@ -1,0 +1,84 @@
+# The model.py file is written to run in python3.6, so we specify that language here
+language: python3.6
+
+# Select the framework to use for your model
+# We want to setup our environment manually so we just choose python
+framework: cuda
+
+# Choose the number of GPUs that your model will use
+# We don't need any GPUs for this example, so we'll leave this commented out
+resources_per_model:
+  gpus: 1
+
+# Choose a descriptive name for your model
+name:  Stanford Cars Orchestrate CUDA Full Tuning
+
+# Here, we install the requirements
+install:
+  -  pip install -r stanford_cars_venv_requirements.txt
+
+# Here, we run the model
+run: python orchestrate_stanford_cars_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 35 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --no-freeze_weights
+# Here, we define optimization details
+optimization:
+  # Use this name when logging a metric with:
+  # orchestrate.io.log_metric()
+  # Every experiment needs at least one named metric.
+  metrics:
+    - name: accuracy
+
+  # Parameter that are defined here are available to
+  # orchestrate.io.assignment()
+  parameters:
+    - name: learning_rate
+      type: double
+      bounds:
+        min: -9.21
+        max: 0.0
+    - name: learning_rate_scheduler
+      type: double
+      bounds:
+        min: 0.00
+        max: 0.99
+    - name: batch_size
+      type: int
+      bounds:
+        min: 4
+        max: 8
+    - name: nesterov
+      type: categorical
+      categorical_values: ["True", "False"]
+    - name: weight_decay
+      type: double
+      bounds:
+        min: -11.3306
+        max: 0.00
+    - name: momentum
+      type: double
+      bounds:
+        min: 0.001
+        max: 0.90
+    - name: scheduler_rate
+      type: int
+      bounds:
+        min: 0
+        max: 20
+  tasks:
+    - name: full
+      cost: 1.00
+    - name: medium
+      cost: 0.50
+    - name: small
+      cost: 0.10
+
+  # Our exaxmple cluster has two machines, so we have enough compute power
+  # to execute two models in parallel.
+  parallel_bandwidth: 20
+
+  # We want to evaluate our model on sixty different sets of hyperparameters
+  observation_budget: 220
+
+# SigOpt Orchestrate creates a container for your model. Since we're using an AWS
+# cluster, it's easy to securely store the model in the Amazon Elastic Container Registry.
+# Chose a descriptive and unique name for each new experiment configuration file.
+image: orchestrate/stanford-cars-fine-tuning-2
