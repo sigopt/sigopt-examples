@@ -135,12 +135,7 @@ pip3 install -r stanford_cars_venv_requirements.txt
 
 ## Training Pre-trained ResNet Models
 
-
-<<<<<<< HEAD
 ### <a name='cli_training_no_image_aug'></a>Training Pre-trained ResNet Models without Image Augmentation
-=======
-### Training Pre-trained ResNet Models without Image Augmentation
->>>>>>> origin/master
 
 #### CommandLine Interface
 
@@ -205,11 +200,7 @@ python resnet_stanford_cars_training.py --path_images ./stanford-augmented-car-c
 
 ```
 
-<<<<<<< HEAD
 ###<a name='cli_training_with_image_aug'></a>Training Pre-trained ResNet Models with Image Augmentation
-=======
-### Training Pre-trained ResNet Models with Image Augmentation
->>>>>>> origin/master
 
 #### CommandLine Interface
 
