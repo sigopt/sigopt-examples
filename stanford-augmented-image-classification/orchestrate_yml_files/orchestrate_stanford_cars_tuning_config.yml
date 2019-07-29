@@ -18,8 +18,7 @@ install:
   -  pip install -r stanford_cars_venv_requirements.txt
 
 # Here, we run the model
-run:
-  -  python orchestrate_stanford_cars_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 35 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --no-freeze_weights
+run: python orchestrate_stanford_cars_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 35 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --no-freeze_weights
 # Here, we define optimization details
 optimization:
   # Use this name when logging a metric with:
