@@ -11,7 +11,7 @@ resources_per_model:
   gpus: 1
 
 # Choose a descriptive name for your model
-name:  Stanford Cars Orchestrate CUDA Full Tuning
+name:  Stanford Cars Augmentation and Fine Tuning with CUDA and Orchestrate
 
 # Here, we install the requirements
 install:
@@ -19,7 +19,7 @@ install:
 
 # Here, we run the model
 run:
-  -  python orchestrate_experiment_wrapper_stanford_cars_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 35 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --no-freeze_weights
+  -  python orchestrate_stanford_cars_augmentation_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 35 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --no-freeze_weights --multiplier 1 --store_to_s3 --s3_bucket_name <BUCKET NAME> --probability 1.0
 # Here, we define optimization details
 optimization:
   # Use this name when logging a metric with:
@@ -64,6 +64,26 @@ optimization:
       bounds:
         min: 0
         max: 20
+    - name: brightness
+      type: double
+      bounds:
+        min: 0
+        max: 10
+    - name: contrast
+      type: double
+      bounds:
+        min: 0
+        max: 100
+    - name: saturation
+      type: double
+      bounds:
+        min: 0
+        max: 100
+    - name: hue
+      type: double
+      bounds:
+        min: -0.5
+        max: 0.5
   tasks:
     - name: full
       cost: 1.00
@@ -82,4 +102,4 @@ optimization:
 # SigOpt Orchestrate creates a container for your model. Since we're using an AWS
 # cluster, it's easy to securely store the model in the Amazon Elastic Container Registry.
 # Chose a descriptive and unique name for each new experiment configuration file.
-image: orchestrate/stanford-cars-fine-tuning-2
+image: orchestrate/stanford-cars-augmented-fine-tuning

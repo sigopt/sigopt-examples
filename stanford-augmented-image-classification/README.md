@@ -14,7 +14,7 @@ The following CLI supports:
 * ResNet model training (from a pretrained start)
   * with Image Augmentation (in preprocessing)
   * without Image Augmentation (will only use the original Stanford Cars dataset images)
-* ResNet model tuning (requires Orchesrate)
+* ResNet model tuning (requires [Orchestrate](https://app.sigopt.com/docs/orchestrate))
   * with Image Augmentation (augmentation will be included in the tuning loop)
   * without Image Augmentation (will tune the model off of the original dataset)
 
@@ -24,6 +24,10 @@ The following CLI supports:
 * [CLI](### Training Pre-trained ResNet Models with Image Augmentation) for training ResNet with Image Augmentation
 * [Orchestrate](https://app.sigopt.com/docs/orchestrate) [run config](./orchestrate_stanford_cars_tuning_config.yml) for hyperparameter tuning without Image Augmentation
 * [Orchestrate](https://app.sigopt.com/docs/orchestrate) [run config](./orchestrate_stanford_cars_augmented_tuning_config.yml) for hyperparameter tuning with Image Augmentation
+
+### Quick Reads
+
+* Post on [Insights for Building High-Performing Image Classification Models](https://mlconf.com/blog/insights-for-building-high-performing-image-classification-models/)
 
 ## Getting Started
 
@@ -378,7 +382,7 @@ To run HPO on fine tuning the whole network: --no-freeze_weights must be include
 The data_subset option is used to specify the fraction of the Stanford Cars dataset to use (data_subset = 0.5 means 50% of the data is used).
 A 20% validation split is applied to the data used.
 
-The bounds of these hyperparameters are specified in the Orchestrate experiment configuration file `orchestrate_stanford_cars_augmented_tuning_config.yml`.
+The bounds of these hyperparameters are specified in the Orchestrate experiment configuration file `orchestrate_stanford_cars_augmented_tuning_config.yml`. Make sure to change the config file to include the name of your AWS S3 bucket used to store the augmented images.
 
 ### Cluster Configuration
 
@@ -429,6 +433,8 @@ sigopt cluster create -f cluster_deploy.yml
 sigopt run -f orchestrate_stanford_cars_augmented_tuning_config.yml
 
 ```
+
+Note: Make sure to change `orchestrate_stanford_cars_augmented_tuning_config.yml`  to include the name of your AWS S3 bucket used to store the augmented images.
 
 To follow the progression of your job, look at the SigOpt dashboard or the following commands:
 
