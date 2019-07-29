@@ -20,7 +20,6 @@ The following CLI supports:
 
 ### Quick Links
 
-<<<<<<< HEAD
 * [CLI](#cli_training_no_image_aug) for training ResNet without Image Augmentation
 * [CLI](#cli_training_with_image_aug) for training ResNet with Image Augmentation
 * [Orchestrate](https://app.sigopt.com/docs/orchestrate) [run config](./orchestrate_stanford_cars_tuning_config.yml) for hyperparameter tuning without Image Augmentation
