@@ -20,8 +20,9 @@ The following CLI supports:
 
 ### Quick Links
 
-* [CLI](### Training Pre-trained ResNet Models without Image Augmentation) for training ResNet without Image Augmentation
-* [CLI](### Training Pre-trained ResNet Models with Image Augmentation) for training ResNet with Image Augmentation
+<<<<<<< HEAD
+* [CLI](#cli_training_no_image_aug) for training ResNet without Image Augmentation
+* [CLI](#cli_training_with_image_aug) for training ResNet with Image Augmentation
 * [Orchestrate](https://app.sigopt.com/docs/orchestrate) [run config](./orchestrate_stanford_cars_tuning_config.yml) for hyperparameter tuning without Image Augmentation
 * [Orchestrate](https://app.sigopt.com/docs/orchestrate) [run config](./orchestrate_stanford_cars_augmented_tuning_config.yml) for hyperparameter tuning with Image Augmentation
 
@@ -134,8 +135,7 @@ pip3 install -r stanford_cars_venv_requirements.txt
 
 ## Training Pre-trained ResNet Models
 
-
-### Training Pre-trained ResNet Models without Image Augmentation
+### <a name='cli_training_no_image_aug'></a>Training Pre-trained ResNet Models without Image Augmentation
 
 #### CommandLine Interface
 
@@ -200,7 +200,7 @@ python resnet_stanford_cars_training.py --path_images ./stanford-augmented-car-c
 
 ```
 
-### Training Pre-trained ResNet Models with Image Augmentation
+###<a name='cli_training_with_image_aug'></a>Training Pre-trained ResNet Models with Image Augmentation
 
 #### CommandLine Interface
 
