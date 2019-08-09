@@ -65,7 +65,7 @@ def create_observation_dict(suggestion):
     failed = True
     values = None
     duration = end - start
-    if accuracy > 75 and duration > -250:
+    if accuracy > 75 and duration < 250:
         values = [
             {'name': 'accuracy', 'value': accuracy},
             {'name': 'train_time', 'value': duration},
