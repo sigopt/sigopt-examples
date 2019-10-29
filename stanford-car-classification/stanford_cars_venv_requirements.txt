@@ -24,7 +24,7 @@ numpy==1.16.1
 oauthlib==3.0.1
 orchestrate==0.3.3
 pandas==0.24.1
-Pillow==5.4.1
+Pillow==6.2.0
 pyasn1==0.4.5
 pyasn1-modules==0.2.4
 pycparser==2.19
