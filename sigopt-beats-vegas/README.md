@@ -8,10 +8,10 @@ Dive right in with [the iPython Notebook](https://github.com/sigopt/sigopt-examp
 
 ## Setup
 
-1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens) and set it
+1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
+2. Find your API Token on the [API tokens page](https://app.sigopt.com/tokens).
   as the `SIGOPT_API_TOKEN` environment variable.
-4. Run `sudo ./setup_env.sh`
+3. Run `sudo ./setup_env.sh`
 
 ## Run
 

@@ -118,7 +118,7 @@ class ExampleRunner(object):
                     raise Exception(
                         "You have existing experiments on sigopt.com: {0}."
                         " You have exceeded the number of experiments that can be created under your plan."
-                        " Please visit https://sigopt.com/pricing to learn about plans."
+                        " Please visit https://sigopt.com/contact to upgrade your plan."
                         .format(['https://sigopt.com/experiment/{0}'.format(e.id) for e in existing_experiments])
                     )
             raise

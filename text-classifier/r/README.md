@@ -8,8 +8,8 @@ More details about this example can be found in [the associated blog post](http:
 
 ## Setup
 
-1. Get a free SigOpt account at [https://sigopt.com/signup](https://sigopt.com/signup)
-2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens) and add it to line 12 of `sentiment_classifier.r`.
+1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
+2. Find your API Token on the [API tokens page](https://app.sigopt.com/tokens) and add it to line 12 of `sentiment_classifier.r`.
 3. `git clone https://github.com/sigopt/sigopt-examples.git`
 4. Execute the R script in R Studio, or in the terminal:
 
@@ -38,4 +38,4 @@ SigOpt can tune any machine learning model, including popular techniques like gr
 
 SigOpt augments your existing model training pipeline, suggesting parameter configurations to maximize any online or offline objective, such as AUC ROC, model accuracy, or revenue. You only send SigOpt your metadata, not the underlying training data or model.
 
-SigOpt is available for a [30 day free trial](https://sigopt.com/signup), and is available [free forever for academic users](https://sigopt.com/edu).
+[Visit our website](https://sigopt.com) to learn more!

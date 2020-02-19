@@ -6,8 +6,8 @@ Learn more at the associated blog post: [Much Deeper, Much Faster: Deep Neural N
 
 ## SigOpt Setup
 
-1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens) and set it
+1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
+2. Find your API Token on the [API tokens page](https://app.sigopt.com/tokens) and set it
   as the `SIGOPT_API_TOKEN` environment variable.
 
 ## Ncloud Setup
@@ -58,4 +58,4 @@ SigOpt can tune any machine learning model, including popular techniques like gr
 
 SigOpt augments your existing model training pipeline, suggesting parameter configurations to maximize any online or offline objective, such as AUC ROC, model accuracy, or revenue. You only send SigOpt your metadata, not the underlying training data or model.
 
-SigOpt is available through [Starter, Workgroup, and Enterprise plans](https://sigopt.com/pricing), and is [free forever for academic users](https://sigopt.com/edu).
+[Visit our website](https://sigopt.com) to learn more!

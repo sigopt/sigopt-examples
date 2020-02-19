@@ -4,8 +4,8 @@
 Our `other_languages` example is one way to use SigOpt when your metric evaluation function is in a language other than python. All you need to do is create an executable file that accepts parameters as command line arguments, and then create an experiment with the same parameter names as the executable. The executable file should accept the suggested parameters at the command line, evaluate the metric, and print out a float.
 
 ## Setup
-1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `client_token` on the [API tokens page](https://sigopt.com/tokens).
+1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
+2. Find your API Token on the [API tokens page](https://app.sigopt.com/tokens).
 3. `export CLIENT_TOKEN=<your client_token>`
 4. Install the SigOpt python client `pip install sigopt`
 
@@ -36,4 +36,4 @@ SigOpt can tune any machine learning model, including popular techniques like gr
 
 SigOpt augments your existing model training pipeline, suggesting parameter configurations to maximize any online or offline objective, such as AUC ROC, model accuracy, or revenue. You only send SigOpt your metadata, not the underlying training data or model.
 
-SigOpt is available for a [30 day free trial](https://sigopt.com/signup), and is available [free forever for academic users](https://sigopt.com/edu).
+[Visit our website](https://sigopt.com) to learn more!

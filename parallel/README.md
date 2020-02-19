@@ -5,8 +5,8 @@
 Example using the [SigOpt Python API Client](https://sigopt.com/docs/overview/python) to tune a classifier in parallel. Shows how to create the experiment once on master, then spin up multiple workers to each run an optimization loop. SigOpt acts as the scheduler, making sure each worker gets the right Suggestion at the right time. Learn more from [the docs](https://sigopt.com/docs/overview/parallel).
 
 ## Setup
-1. Get a free SigOpt account at https://sigopt.com/signup
-2. Find your `SIGOPT_API_TOKEN` on the [API tokens page](https://sigopt.com/tokens).
+1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
+2. Find your API Token on the [API tokens page](https://app.sigopt.com/tokens).
 3. Install requirements `pip install -r requirements.txt`
 
 ## Questions?
@@ -25,4 +25,4 @@ SigOpt can tune any machine learning model, including popular techniques like gr
 
 SigOpt augments your existing model training pipeline, suggesting parameter configurations to maximize any online or offline objective, such as AUC ROC, model accuracy, or revenue. You only send SigOpt your metadata, not the underlying training data or model.
 
-SigOpt is available for a [30 day free trial](https://sigopt.com/signup), and is available [free forever for academic users](https://sigopt.com/edu).
+[Visit our website](https://sigopt.com) to learn more!

@@ -34,4 +34,4 @@ SigOpt can tune any machine learning model, including popular techniques like gr
 
 SigOpt augments your existing model training pipeline, suggesting parameter configurations to maximize any online or offline objective, such as AUC ROC, model accuracy, or revenue. You only send SigOpt your metadata, not the underlying training data or model.
 
-SigOpt is available through [Starter, Workgroup, and Enterprise plans](https://sigopt.com/pricing), and is [free forever for academic users](https://sigopt.com/edu).
+[Visit our website](https://sigopt.com) to learn more!

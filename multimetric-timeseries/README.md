@@ -26,7 +26,7 @@ This example is made for the US East (N. Virginia) region. Follow the instructio
 
 > Post an issue or email us if you have any questions.
 
-1. [Sign up](http://sigopt.com/signup) for a SigOpt account.
+1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
 
 2. Copy this folder over to your EC2 instance.
 
