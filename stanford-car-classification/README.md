@@ -12,9 +12,11 @@ The pretrained models supported are Resnet 18 and ResNet 50 are trained on Image
 
 ```buildoutcfg
 
-git clone https://github.com/sigopt/stanford-car-classification
+git clone https://github.com/sigopt/sigopt-examples.git
 
-mkdir -p stanford-car-classification/data
+mkdir -p sigopt-examples/stanford-car-classification/data
+
+cd sigopt-examples
 
 ```
 
@@ -100,12 +102,15 @@ python3 -m virtualenv ./stanford-car-classification-venv
 ```
 #### Installing requirements in virtualenvironment
 
-Use the `stanford_cars_venv_requirements.txt` file in this repository to install requirements to your virtualenvironment.
  
 ```buildoutcfg
 source [PATH TO VIRTUALENV]/bin/activate (ex: ./stanford-car-classification-venv/bin/activate)
 
-pip3 install -r stanford_cars_venv_requirements.txt
+pip install orchestrate
+pip install sklearn
+pip install matplotlib
+pip install torch torchvision
+pip install botocore
 
 ```
 
@@ -251,6 +256,8 @@ gpu:
   instance_type: p2.xlarge
   max_nodes: 2
   min_nodes: 2
+
+kubernetes_version: '1.12'
 
 ```
 
