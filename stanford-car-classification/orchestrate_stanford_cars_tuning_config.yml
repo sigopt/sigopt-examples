@@ -15,10 +15,16 @@ name:  Stanford Cars Orchestrate CUDA Full Tuning
 
 # Here, we install the requirements
 install:
-  -  pip install -r stanford_cars_venv_requirements_2.txt
+  -  pip install orchestrate
+  -  pip install sklearn
+  -  pip install matplotlib
+  -  pip install torch torchvision
+  -  pip install botocore
+  -  pip install retrying
 
 # Here, we run the model
-run: python orchestrate_experiment_wrapper_stanford_cars_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 4 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --freeze_weights
+run: python orchestrate_experiment_wrapper_stanford_cars_cli.py --path_images ./data/ --path_data ./data/cars_annos.mat --path_labels ./data/cars_meta.mat --model ResNet18 --epochs 4 --validation_frequency 10 --data_subset 1.0 --number_of_classes 196 --freeze_weights
+
 # Here, we define optimization details
 optimization:
   # Use this name when logging a metric with:
