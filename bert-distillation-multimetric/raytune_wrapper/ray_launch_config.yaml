@@ -83,7 +83,7 @@ worker_nodes:
 
     # Additional options in the boto docs.
     IamInstanceProfile:
-        Arn: # workers need full access
+        Arn: # workers need full access to s3
 
 # Files or directories to copy to the head and worker nodes. The format is a
 # dictionary from REMOTE_PATH: LOCAL_PATH, e.g.
