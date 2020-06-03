@@ -71,7 +71,7 @@ auth:
 # http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.ServiceResource.create_instances
 head_node:
     InstanceType: p3.2xlarge
-    ImageId: ami-082df341ccb08dc60 # custom deep learning image
+    ImageId: ami-0b5664a1c8c6b5a72 # custom deep learning image
 
 # Provider-specific config for worker nodes, e.g. instance type. By default
 # Ray will auto-configure unspecified fields such as SubnetId and KeyName.
@@ -79,11 +79,11 @@ head_node:
 # http://boto3.readthedocs.io/en/latest/reference/services/ec2.html#EC2.ServiceResource.create_instances
 worker_nodes:
     InstanceType: p3.2xlarge
-    ImageId: ami-082df341ccb08dc60 # custom deep learning image
+    ImageId: ami-0b5664a1c8c6b5a72 # custom deep learning image
 
     # Additional options in the boto docs.
     IamInstanceProfile:
-        Arn: 'arn:aws:iam::865449382976:instance-profile/s3fullaccess-ec2'
+        Arn: # workers need full access
 
 # Files or directories to copy to the head and worker nodes. The format is a
 # dictionary from REMOTE_PATH: LOCAL_PATH, e.g.
