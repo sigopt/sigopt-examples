@@ -43,6 +43,10 @@ pip3 install sigopt
 pip3 install 'ray[tune]'
 ```
 
+## Logging
+
+All logs are set to standard out and to CloudWatch. To specify your logstream and loghandler, change the `cw_handler` in `logger.py`.
+
 ## CLI Options
 
 You have 3 main ways to run the repo:
