@@ -7,8 +7,8 @@ logger = logging.getLogger(__name__)
 os.environ["AWS_DEFAULT_REGION"] = "us-west-2"
 
 cw_handler = CloudWatchLogsHandler(
-    log_group_name='meghana_log_group',
-    log_stream_name='meghana_log_stream',
+    log_group_name='my_log_group',
+    log_stream_name='my_log_stream',
     buffer_duration=10000,
     batch_count=10,
     batch_size=1048576
