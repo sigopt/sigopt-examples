@@ -11,10 +11,10 @@ def get_sigopt_hyperparameter_list():
     """Creates SigOpt formatted hyperparameter dictionary of enums and values above."""
 
     parameters_list = [
-        dict(name=ArchitectureHyperparameter.ATTENTION_DROPOUT.value, bounds=dict(min=0.0, max=1.0),
+        dict(name=ArchitectureHyperparameter.ATTENTION_DROPOUT.value, bounds=dict(min=0.0, max=0.5),
              type=sigopt_experiment_datatypes.SigOptDataTypes.DOUBLE.value),
 
-        dict(name=ArchitectureHyperparameter.DROPOUT.value, bounds=dict(min=0.0, max=1.0),
+        dict(name=ArchitectureHyperparameter.DROPOUT.value, bounds=dict(min=0.0, max=0.5),
              type=sigopt_experiment_datatypes.SigOptDataTypes.DOUBLE.value),
 
         dict(name=SGDHyperparameter.LEARNING_RATE.value, bounds=dict(min=np.log(1e-14), max=np.log(1e-5)),
@@ -26,7 +26,7 @@ def get_sigopt_hyperparameter_list():
         dict(name=ArchitectureHyperparameter.N_LAYERS.value, bounds=dict(min=1, max=10),
              type=sigopt_experiment_datatypes.SigOptDataTypes.INT.value),
 
-        dict(name=ArchitectureHyperparameter.QA_DROPOUT.value, bounds=dict(min=0.0, max=1.0),
+        dict(name=ArchitectureHyperparameter.QA_DROPOUT.value, bounds=dict(min=0.0, max=0.5),
              type=sigopt_experiment_datatypes.SigOptDataTypes.DOUBLE.value),
 
         ]

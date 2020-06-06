@@ -42,8 +42,7 @@ class SigOptExperiment:
 
     def get_suggestions(self, experiment):
         sugg = self.connection.experiments(experiment.id).suggestions().create()
-        sugg.assignments  = dict(sugg.assignments)
-        sugg.assignments.update({
+        sugg._body['assignments'].update({
              "adam_epsilon": -11.512925464970229,
              "alpha_ce": 0.6977594228111134,
              "beta_1": 0.7484889259006229,
