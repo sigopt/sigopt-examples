@@ -74,31 +74,19 @@ def main(ray_config_dict):
     all_parameters.update(args_dict)
     all_parameters.update(parameter_values)
 
-    sigopt_experiment_id = args_dict[OptimizationRunParameters.SIGOPT_EXPERIMENT_ID.value]
-    with sigopt.create_run(name="Distillation Run_experiment_{}_suggestion_{}".format(sigopt_experiment_id, suggestion_id),
-                      project=args_dict[OptimizationRunParameters.PROJECT_NAME.value]) as run:
-        run.log_dataset("SQUAD 2.0")
-        run.log_model("DistilBert for question answering")
-        run.log_metadata("suggestion_id", suggestion_id)
-        run.log_metadata("experiment_id", sigopt_experiment_id)
-
-        failed, error_str, evaluated_values, results, model = tune_optimize_squad_distillation.try_distillation_tuning(
-            run_training_squad_distillation,
-            all_parameters,
-            model,
-            run)
-        tune_track_dict = dict()
-        tune_track_dict["error_str"] = error_str
-        tune_track_dict["failed"] = failed
-        if failed is True:
-            run.log_failure()
-            run.log_metadata(key="error_str", value=error_str)
-        else:
-            run.log_checkpoint(results)
-            for evaluated_metric in evaluated_values:
-                run.log_metric(evaluated_metric["name"], evaluated_metric["value"])
-            track_results_dict = tune_track_metrics(evaluated_values)
-            tune_track_dict.update(track_results_dict)
-        tune.track.log(**tune_track_dict)
+    failed, error_str, evaluated_values, results, model = tune_optimize_squad_distillation.try_distillation_tuning(
+        run_training_squad_distillation,
+        all_parameters,
+        model,
+        None)
+    tune_track_dict = dict()
+    tune_track_dict["error_str"] = error_str
+    tune_track_dict["failed"] = failed
+    if failed is True:
+        pass
+    else:
+        track_results_dict = tune_track_metrics(evaluated_values)
+        tune_track_dict.update(track_results_dict)
+    tune.track.log(**tune_track_dict)
     tune_optimize_squad_distillation.sync_ray_checkpoints(args_dict)
     return model, evaluated_values, failed, error_str

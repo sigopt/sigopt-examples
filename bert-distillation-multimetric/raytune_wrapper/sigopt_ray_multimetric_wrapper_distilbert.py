@@ -69,10 +69,12 @@ class SigOptMultimetricSearch(SuggestionAlgorithm):
         logging.info("On observation count {} of {}".format(self.experiment.progress.observation_count,
                                                             self.experiment.observation_budget))
         suggestion = self.sigopt_experiment_client.get_suggestions(self.experiment)
+        """
         suggestion = self.sigopt_experiment_client.update_suggestion(experiment_id=self.experiment.id,
                                                         suggestion_id=suggestion.id,
                                                         metadata_dict=dict(trial_id=trial_id,
                                                                            host=socket.gethostname()))
+        """
 
         self._live_trial_mapping[trial_id] = suggestion
 

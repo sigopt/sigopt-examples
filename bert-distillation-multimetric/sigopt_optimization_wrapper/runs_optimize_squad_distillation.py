@@ -22,24 +22,9 @@ def main(args_dict, config_dict, sigopt_experiment_id, suggestion_id):
     all_parameters.update(args_dict)
     all_parameters.update(parameter_values)
 
-    with sigopt.create_run(name="Distillation Run_experiment_{}_suggestion_{}".format(sigopt_experiment_id,
-                                                                                      suggestion_id),
-                           project=args_dict[OptimizationRunParameters.PROJECT_NAME.value]) as run:
-        run.log_dataset("SQUAD 2.0")
-        run.log_model("DistilBert for question answering")
-        run.log_metadata("suggestion_id", suggestion_id)
-        run.log_metadata("experiment_id", sigopt_experiment_id)
-        failed, error_str, evaluated_values, results, model = runs_optimize_squad_distillation.try_distillation_tuning(
-                                                                run_training_squad_distillation,
-                                                                 all_parameters,
-                                                                 model,
-                                                                 run)
-        if failed is True:
-            run.log_failure()
-            run.log_metadata(key="error_str", value=error_str)
-        else:
-            run.log_checkpoint(results)
-            for evaluated_metric in evaluated_values:
-                run.log_metric(evaluated_metric["name"], evaluated_metric["value"])
-
+    failed, error_str, evaluated_values, results, model = runs_optimize_squad_distillation.try_distillation_tuning(
+                                                            run_training_squad_distillation,
+                                                             all_parameters,
+                                                             model,
+                                                             None)
     return model, evaluated_values, failed, error_str

@@ -35,7 +35,7 @@ class OptimizeDistilBertQuadCLI(ARunDistilBertSquadCLI):
         parser.add_argument(super().parser_prefix + OptimizationRunParameters.API_URL.value, type=str, required=True,
                             help="SigOpt API URL to use")
 
-        parser.add_argument(super().parser_prefix + OptimizationRunParameters.SIGOPT_EXPERIMENT_ID.value, type=int,
+        parser.add_argument(super().parser_prefix + OptimizationRunParameters.SIGOPT_EXPERIMENT_ID.value, type=str,
                             required=False, default=None,
                             help="If provided, will load SigOpt experiment of given ID.")
 
