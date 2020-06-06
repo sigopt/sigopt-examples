@@ -8,8 +8,6 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-SIGOPT_API_TOKEN = "SIGOPT_API_TOKEN"
-
 
 class OptimizeDistilBertQuadCLI(ARunDistilBertSquadCLI):
 
@@ -34,6 +32,8 @@ class OptimizeDistilBertQuadCLI(ARunDistilBertSquadCLI):
                                  "hyperparameter values.")
         parser.add_argument(super().parser_prefix + OptimizationRunParameters.API_TOKEN.value, type=str, required=True,
                             help="SigOpt API Token to use")
+        parser.add_argument(super().parser_prefix + OptimizationRunParameters.API_URL.value, type=str, required=True,
+                            help="SigOpt API URL to use")
 
         parser.add_argument(super().parser_prefix + OptimizationRunParameters.SIGOPT_EXPERIMENT_ID.value, type=int,
                             required=False, default=None,

@@ -63,6 +63,7 @@ def main(ray_config_dict):
 
     logging.info("setting SigOpt API token")
     os.environ["SIGOPT_API_TOKEN"] = args_dict[OptimizationRunParameters.API_TOKEN.value]
+    os.environ["SIGOPT_API_URL"] = args_dict[OptimizationRunParameters.API_URL.value]
 
     tune_optimize_squad_distillation = RayTuneOptimizeSquadDistillation(args_dict=args_dict)
     suggestion_id = args_dict["suggestion_id"]

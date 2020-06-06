@@ -43,6 +43,7 @@ class RunParameters(Enum):
 class OptimizationRunParameters(Enum):
     EXPERIMENT_NAME = "experiment_name"
     API_TOKEN = "api_token"
+    API_URL = "api_url"
     USE_HPO_DEFAULT_RANGES = "use_hpo_default_ranges"
     PROJECT_NAME = "project_name"
     SIGOPT_EXPERIMENT_ID = "sigopt_experiment_id"

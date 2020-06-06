@@ -14,6 +14,7 @@ logging.basicConfig(
 )
 
 SIGOPT_API_TOKEN = "SIGOPT_API_TOKEN"
+SIGOPT_API_URL = "SIGOPT_API_URL"
 
 
 class SigOptDistilBertQuadCLI(OptimizeDistilBertQuadCLI):
@@ -36,8 +37,11 @@ if __name__ == "__main__":
     # set environment variable for SigOpt API Token
     logging.info("Setting SigOpt API Token")
     os.environ[SIGOPT_API_TOKEN] = args_dict[OptimizationRunParameters.API_TOKEN.value]
+    os.environ[SIGOPT_API_URL] = args_dict[OptimizationRunParameters.API_URL.value]
 
     sigopt_client_connection = Connection(client_token=args_dict[OptimizationRunParameters.API_TOKEN.value])
+    if args_dict[OptimizationRunParameters.API_URL.value]:
+        sigopt_client_connection.set_api_url(args_dict[OptimizationRunParameters.API_URL.value])
     sigopt_client = sigopt_experiment_client.SigOptExperiment(connection=sigopt_client_connection)
 
     logging.info("tracking flag turned on, will execute optimization with runs tracking")

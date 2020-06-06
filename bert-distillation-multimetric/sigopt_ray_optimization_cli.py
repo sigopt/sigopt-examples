@@ -13,6 +13,7 @@ import os
 import shutil
 
 SIGOPT_API_TOKEN = "SIGOPT_API_TOKEN"
+SIGOPT_API_URL = "SIGOPT_API_URL"
 
 
 class RayTuneSigOptDistilBertSquadCLI(OptimizeDistilBertQuadCLI):
@@ -64,8 +65,10 @@ if __name__ == "__main__":
     else:
         ray.init()
 
-    sigopt_client = sigopt_experiment_client.SigOptExperiment(connection=(
-        Connection(client_token=args_dict[OptimizationRunParameters.API_TOKEN.value])))
+    connection = Connection(client_token=args_dict[OptimizationRunParameters.API_TOKEN.value])
+    if args_dict[OptimizationRunParameters.API_URL.value]:
+        connection.set_api_url(args_dict[OptimizationRunParameters.API_URL.value])
+    sigopt_client = sigopt_experiment_client.SigOptExperiment(connection=connection)
 
     run_params_dict = dict()
     for default_param_key, default_param_value in args_dict.items():
@@ -75,7 +78,7 @@ if __name__ == "__main__":
             else:
                 run_params_dict[default_param_key] = "False"
         else:
-            if default_param_key is not OptimizationRunParameters.API_TOKEN.value:
+            if default_param_key not in (OptimizationRunParameters.API_TOKEN.value, OptimizationRunParameters.API_URL.value):
                 run_params_dict[default_param_key] = default_param_value
 
     if args_dict[OptimizationRunParameters.USE_HPO_DEFAULT_RANGES.value] is True:
