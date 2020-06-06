@@ -17,7 +17,7 @@ def get_sigopt_hyperparameter_list():
         dict(name=ArchitectureHyperparameter.DROPOUT.value, bounds=dict(min=0.0, max=0.5),
              type=sigopt_experiment_datatypes.SigOptDataTypes.DOUBLE.value),
 
-        dict(name=SGDHyperparameter.LEARNING_RATE.value, bounds=dict(min=np.log(1e-14), max=np.log(1e-5)),
+        dict(name=SGDHyperparameter.LEARNING_RATE.value, bounds=dict(min=-14, max=-5),
              type=sigopt_experiment_datatypes.SigOptDataTypes.DOUBLE.value),
 
         dict(name=ArchitectureHyperparameter.N_HEADS.value, bounds=dict(min=1, max=12),
