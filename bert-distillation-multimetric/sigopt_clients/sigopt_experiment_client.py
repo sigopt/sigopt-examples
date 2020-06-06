@@ -41,7 +41,22 @@ class SigOptExperiment:
         return self.connection.experiments(experiment_id).fetch()
 
     def get_suggestions(self, experiment):
-        return self.connection.experiments(experiment.id).suggestions().create()
+        sugg = self.connection.experiments(experiment.id).suggestions().create()
+        sugg.assignments  = dict(sugg.assignments)
+        sugg.assignments.update({
+             "adam_epsilon": -11.512925464970229,
+             "alpha_ce": 0.6977594228111134,
+             "beta_1": 0.7484889259006229,
+             "beta_2": 0.9999,
+             "initializer_range": 0.13239415454956469,
+             "per_compute_eval_batch_size": 25,
+             "per_compute_train_batch_size": 4,
+             "pruning_seed": 11,
+             "temperature": 1,
+             "warm_up_steps": 49,
+             "weight_decay": -13.313625531829498
+        })
+        return sugg
 
     def get_suggestions_meatadata(self, experiment, metadata_dict):
         return self.connection.experiments(experiment.id).suggestions().create(metadata=metadata_dict)
