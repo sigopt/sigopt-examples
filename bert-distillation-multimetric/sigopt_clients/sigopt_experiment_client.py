@@ -54,22 +54,7 @@ class SigOptExperiment:
             metadata=metadata_dict
         )
 
-    def update_experiment(self, experiment, suggestion, evaluated_value):
-        observation = self.connection.experiments(experiment.id).observations().create(suggestion=suggestion.id, value=evaluated_value)
-        return self.connection.experiments(experiment.id).fetch(), observation
-
-    def update_experiment_multimetric_metadata(self, experiment, suggestion, evaluated_value, metadata_dict, failed=False):
-        logging.info("updating experiment %s with metadata %s", experiment.id, str(metadata_dict))
-        self.connection.experiments(experiment.id).observations().create(suggestion=suggestion.id,
-                                                                                       values=evaluated_value,
-                                                                                       failed=failed,
-                                                                                       metadata=metadata_dict)
-        return self.connection.experiments(experiment.id).fetch()
-
-    def update_experiment_multimetric(self, experiment, suggestion, evaluated_values, failed=False):
-        self.connection.experiments(experiment.id).observations().create(suggestion=suggestion.id,
-                                                                         values=evaluated_values,
-                                                                         failed=failed)
+    def update_experiment(self, experiment):
         return self.connection.experiments(experiment.id).fetch()
 
     def create_experiment_metadata(self, experiment, metadata_dict):

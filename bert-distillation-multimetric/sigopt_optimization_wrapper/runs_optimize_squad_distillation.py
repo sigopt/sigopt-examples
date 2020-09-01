@@ -42,5 +42,3 @@ def main(args_dict, config_dict, sigopt_experiment_id, suggestion_id):
             run.log_checkpoint(results)
             for evaluated_metric in evaluated_values:
                 run.log_metric(evaluated_metric["name"], evaluated_metric["value"])
-
-    return model, evaluated_values, failed, error_str

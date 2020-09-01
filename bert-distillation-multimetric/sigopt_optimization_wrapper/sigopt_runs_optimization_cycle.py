@@ -33,30 +33,27 @@ class SigOptCycle(object):
 
     def run_optimization_cycle(self, sigopt_experiment, run_parameters):
         while sigopt_experiment.progress.observation_count < sigopt_experiment.observation_budget:
-            logging.info("On observation count {} of {}".format(sigopt_experiment.progress.observation_count,
-                                                                sigopt_experiment.observation_budget))
+            logging.info(
+                "On observation count {} of {}".format(
+                    sigopt_experiment.progress.observation_count, sigopt_experiment.observation_budget
+                )
+            )
             # get suggestion
             suggestion = self.sigopt_experiment_client.get_suggestions(sigopt_experiment)
             # run fine-tuning DistilBert on Squad 2.0
             parameter_values = suggestion.assignments
             # setting flag to track runs
             logging.info("running distillation training process on SQUAD 2.0")
-            model, evaluated_values, failed, error_str = runs_optimize_squad_distillation.main(
+            runs_optimize_squad_distillation.main(
                 run_parameters,
                 config_dict=parameter_values,
                 sigopt_experiment_id=sigopt_experiment.id,
-                suggestion_id=suggestion.id)
+                suggestion_id=suggestion.id,
+            )
 
             # update experiment with metric values
-            sigopt_experiment = self.sigopt_experiment_client.update_experiment_multimetric_metadata(experiment=sigopt_experiment,
-                                                                                                     suggestion=suggestion,
-                                                                                                     evaluated_value=evaluated_values,
-                                                                                                     metadata_dict={
-                                                                                                         "error_string":
-                                                                                                         error_str,
-                                                                                                     DistillationHyperparameter.ALPHA_SQUAD.value:
-                                                                                                         parameter_values[DistillationHyperparameter.ALPHA_SQUAD.value],
-                                                                                                     },
-                                                                                                     failed=failed)
+            sigopt_experiment = self.sigopt_experiment_client.update_experiment(
+                experiment=sigopt_experiment,
+            )
 
         return sigopt_experiment
