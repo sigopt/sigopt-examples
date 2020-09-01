@@ -33,11 +33,7 @@ if __name__ == "__main__":
     args_dict = vars(args)
     logging.info("running optimization experiment with arguments: {}".format(args_dict))
 
-    # set environment variable for SigOpt API Token
-    logging.info("Setting SigOpt API Token")
-    os.environ[SIGOPT_API_TOKEN] = args_dict[OptimizationRunParameters.API_TOKEN.value]
-
-    sigopt_client_connection = Connection(client_token=args_dict[OptimizationRunParameters.API_TOKEN.value])
+    sigopt_client_connection = Connection()
     sigopt_client = sigopt_experiment_client.SigOptExperiment(connection=sigopt_client_connection)
 
     logging.info("tracking flag turned on, will execute optimization with runs tracking")

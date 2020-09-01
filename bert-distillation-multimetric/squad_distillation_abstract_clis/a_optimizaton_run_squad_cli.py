@@ -32,8 +32,6 @@ class OptimizeDistilBertQuadCLI(ARunDistilBertSquadCLI):
                             help="If flagged, "
                                  "will use default "
                                  "hyperparameter values.")
-        parser.add_argument(super().parser_prefix + OptimizationRunParameters.API_TOKEN.value, type=str, required=True,
-                            help="SigOpt API Token to use")
 
         parser.add_argument(super().parser_prefix + OptimizationRunParameters.SIGOPT_EXPERIMENT_ID.value, type=int,
                             required=False, default=None,
