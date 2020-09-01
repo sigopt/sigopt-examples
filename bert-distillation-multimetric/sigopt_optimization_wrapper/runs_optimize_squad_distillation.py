@@ -5,7 +5,6 @@ from squad_fine_tuning.optimize_squad_distillation import OptimizeSquadDistillat
 
 
 class RunsOptimizeSquadDistillation(OptimizeSquadDistillation):
-
     def __init__(self, args_dict):
         super().__init__(args_dict)
 
@@ -16,24 +15,26 @@ def main(args_dict, config_dict, sigopt_experiment_id, suggestion_id):
 
     runs_optimize_squad_distillation = RunsOptimizeSquadDistillation(args_dict=args_dict)
     parameter_values, args_dict, run_training_squad_distillation, model = runs_optimize_squad_distillation.setup_run(
-        suggestion_id, args_dict, config_dict)
+        suggestion_id, args_dict, config_dict
+    )
 
     all_parameters = dict()
     all_parameters.update(args_dict)
     all_parameters.update(parameter_values)
 
-    with sigopt.create_run(name="Distillation Run_experiment_{}_suggestion_{}".format(sigopt_experiment_id,
-                                                                                      suggestion_id),
-                           project=args_dict[OptimizationRunParameters.PROJECT_NAME.value]) as run:
+    connection = sigopt.Connection()
+    suggestion = connection.experiments(sigopt_experiment_id).suggestions(suggestion_id).fetch()
+
+    with sigopt.create_run(
+        name="Distillation Run_experiment_{}_suggestion_{}".format(sigopt_experiment_id, suggestion_id),
+        project=args_dict[OptimizationRunParameters.PROJECT_NAME.value],
+        suggestion=suggestion,
+    ) as run:
         run.log_dataset("SQUAD 2.0")
         run.log_model("DistilBert for question answering")
-        run.log_metadata("suggestion_id", suggestion_id)
-        run.log_metadata("experiment_id", sigopt_experiment_id)
         failed, error_str, evaluated_values, results, model = runs_optimize_squad_distillation.try_distillation_tuning(
-                                                                run_training_squad_distillation,
-                                                                 all_parameters,
-                                                                 model,
-                                                                 run)
+            run_training_squad_distillation, all_parameters, model, run
+        )
         if failed is True:
             run.log_failure()
             run.log_metadata(key="error_str", value=error_str)
