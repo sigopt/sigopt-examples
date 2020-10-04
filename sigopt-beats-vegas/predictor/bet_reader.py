@@ -40,6 +40,10 @@ def read_info(filename="bet_info.pkl", start_date=SEASON_1415_START, end_date=SE
       end_date,
     )
 
+    request_headers = {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) '
+                    'Chrome/60.0.3112.101 Safari/537.36'
+    }
     bet_info = {}
     day = end_date
     while day >= start_date:
@@ -52,7 +56,7 @@ def read_info(filename="bet_info.pkl", start_date=SEASON_1415_START, end_date=SE
       page = None
       for _ in range(5):
         try:
-          page = requests.get(page_url, timeout=10)
+          page = requests.get(page_url, timeout=10, headers=request_headers)
         except:
           print "retrying..."
           continue
