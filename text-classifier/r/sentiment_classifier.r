@@ -18,8 +18,8 @@ library(glmnet)
 Sys.setenv(SIGOPT_API_TOKEN="YOUR_API_TOKEN_HERE")
 
 # load text training data
-POSITIVE_TEXT <- fromJSON(file="http://sigopt-public.s3-website-us-west-2.amazonaws.com/POSITIVE_list.json")
-NEGATIVE_TEXT <- fromJSON(file="http://sigopt-public.s3-website-us-west-2.amazonaws.com/NEGATIVE_list.json")
+POSITIVE_TEXT <- fromJSON(file="https://public.sigopt.com/POSITIVE_list.json")
+NEGATIVE_TEXT <- fromJSON(file="https://public.sigopt.com/NEGATIVE_list.json")
 
 # optimization metric : see blogpost http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text
 sentiment_metric <- function(POS_TEXT, NEG_TEXT, params) {

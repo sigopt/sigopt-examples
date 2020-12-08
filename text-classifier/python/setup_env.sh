@@ -9,5 +9,5 @@ else
   sudo apt-get -y install python-pip python-dev libopenblas-dev liblapack-dev gfortran
 fi
 sudo pip install -r requirements.txt
-curl http://sigopt-public.s3-website-us-west-2.amazonaws.com/NEGATIVE_list.json -O
-curl http://sigopt-public.s3-website-us-west-2.amazonaws.com/POSITIVE_list.json -O
+curl https://public.sigopt.com/NEGATIVE_list.json -O
+curl https://public.sigopt.com/POSITIVE_list.json -O
