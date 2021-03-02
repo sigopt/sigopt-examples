@@ -4,7 +4,7 @@ from enum import Enum
 from torch.utils.data import DataLoader
 import torch
 from resnet import PalmNet
-import orchestrate.io
+import sigopt
 import numpy as np
 import math
 from resnet_stanford_cars_cli import StanfordCarsCLI, Hyperparameters, CLI
@@ -23,7 +23,7 @@ class OrchestrateCLI(StanfordCarsCLI):
         logging.info("loading pretrained model and establishing model characteristics")
 
         logging.debug("sigopt assignments being used: %s",
-                      {hyperparameter.value: orchestrate.io.assignment(hyperparameter.value) for hyperparameter in
+                      {hyperparameter.value: sigopt.get_parameter(hyperparameter.value) for hyperparameter in
                        Hyperparameters})
 
         resnet_pretrained_model = get_pretrained_resnet(parsed_cli_arguments[CLI.FREEZE_WEIGHTS.value],
@@ -32,19 +32,19 @@ class OrchestrateCLI(StanfordCarsCLI):
         cross_entropy_loss = torch.nn.CrossEntropyLoss()
 
         sgd_optimizer = torch.optim.SGD(resnet_pretrained_model.parameters(),
-                                        lr=np.exp(orchestrate.io.assignment(Hyperparameters.LEARNING_RATE.value)),
-                                        momentum=orchestrate.io.assignment(Hyperparameters.MOMENTUM.value),
+                                        lr=np.exp(sigopt.get_parameter(Hyperparameters.LEARNING_RATE.value)),
+                                        momentum=sigopt.get_parameter(Hyperparameters.MOMENTUM.value),
                                         weight_decay=np.exp(
-                                            orchestrate.io.assignment(Hyperparameters.WEIGHT_DECAY.value)),
-                                        nesterov=orchestrate.io.assignment(Hyperparameters.NESTEROV.value))
+                                            sigopt.get_parameter(Hyperparameters.WEIGHT_DECAY.value)),
+                                        nesterov=sigopt.get_parameter(Hyperparameters.NESTEROV.value))
         learning_rate_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(sgd_optimizer, mode='min',
-                                                                             factor=orchestrate.io.assignment(
+                                                                             factor=sigopt.get_parameter(
                                                                                  Hyperparameters.LEARNING_RATE_SCHEDULER.value),
-                                                                             patience=orchestrate.io.assignment(
+                                                                             patience=sigopt.get_parameter(
                                                                                  Hyperparameters.SCEDULER_RATE.value),
                                                                              verbose=True)
 
-        task = orchestrate.io.task
+        task = sigopt.get_task()
         num_epochs = Multitask[task.name].value
         logging.info("task assignment for multitask run: %s at cost %f", task.name, task.cost)
         logging.info("task corresponds to %d epochs", num_epochs)
@@ -59,12 +59,12 @@ class OrchestrateCLI(StanfordCarsCLI):
 
         trained_model, validation_metric = palm_net.train_model(training_data=DataLoader(training_data,
                                                                                          batch_size=2 ** (
-                                                                                             orchestrate.io.assignment(
+                                                                                             sigopt.get_parameter(
                                                                                                  Hyperparameters.BATCH_SIZE.value)),
                                                                                          shuffle=True),
                                                                 validation_data=DataLoader(validation_data,
                                                                                            batch_size=2 ** (
-                                                                                               orchestrate.io.assignment(
+                                                                                               sigopt.get_parameter(
                                                                                                    Hyperparameters.BATCH_SIZE.value)),
                                                                                            shuffle=True),
                                                                 number_of_labels=parsed_cli_arguments[

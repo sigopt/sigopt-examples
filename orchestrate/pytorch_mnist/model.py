@@ -6,7 +6,7 @@ import torchvision.transforms as transforms
 from torch.autograd import Variable
 from torch.utils.data.sampler import SubsetRandomSampler
 
-import orchestrate.io
+import sigopt
 
 train_dataset = dsets.MNIST(root='./data', train=True, transform=transforms.ToTensor(), download=True)
 
@@ -35,18 +35,18 @@ def create_model():
     class CNN(nn.Module):
         def __init__(self):
             super(CNN, self).__init__()
-            conv1_output = orchestrate.io.assignment('conv1_output', default=20)
-            conv1_kernel = orchestrate.io.assignment('conv1_kernel', default=5)
-            conv1_act = orchestrate.io.assignment('conv1_act', default='relu')
+            conv1_output = sigopt.get_parameter('conv1_output', default=20)
+            conv1_kernel = sigopt.get_parameter('conv1_kernel', default=5)
+            conv1_act = sigopt.get_parameter('conv1_act', default='relu')
             self.layer1 = nn.Sequential(
                 nn.Conv2d(1, conv1_output, kernel_size=conv1_kernel),
                 nn.BatchNorm2d(conv1_output),
                 activation_functions[conv1_act],
                 nn.MaxPool2d(2)
             )
-            conv2_output = orchestrate.io.assignment('conv2_output', default=20)
-            conv2_kernel = orchestrate.io.assignment('conv2_kernel', default=5)
-            conv2_act = orchestrate.io.assignment('conv2_act', default='relu')
+            conv2_output = sigopt.get_parameter('conv2_output', default=20)
+            conv2_kernel = sigopt.get_parameter('conv2_kernel', default=5)
+            conv2_act = sigopt.get_parameter('conv2_act', default='relu')
             self.layer2 = nn.Sequential(
                 nn.Conv2d(conv1_output, conv2_output, kernel_size=conv2_kernel),
                 nn.BatchNorm2d(conv2_output),
@@ -56,8 +56,8 @@ def create_model():
             fc1_input_dim = (((((28 - conv1_kernel + 1) // 2) - conv2_kernel + 1) // 2) *
                              ((((28 - conv1_kernel + 1) // 2) - conv2_kernel + 1) // 2) *
                              conv2_output)
-            fc1_hidden = orchestrate.io.assignment('fc1_hidden', default=500)
-            fc1_act = orchestrate.io.assignment('fc1_act', default='sigmoid')
+            fc1_hidden = sigopt.get_parameter('fc1_hidden', default=500)
+            fc1_act = sigopt.get_parameter('fc1_act', default='sigmoid')
             self.fc1 = nn.Linear(fc1_input_dim, fc1_hidden)
             self.fc1_act = activation_functions[fc1_act]
             self.fc2 = nn.Linear(fc1_hidden, 10)
@@ -73,12 +73,12 @@ def create_model():
 
     cnn = CNN()
     cost = nn.CrossEntropyLoss()
-    optimizer = optimizers[orchestrate.io.assignment('optimizer', default='adam')](
+    optimizer = optimizers[sigopt.get_parameter('optimizer', default='adam')](
       cnn.parameters(),
-      lr=10**orchestrate.io.assignment('log_learning_rate', default=-3.)
+      lr=10**sigopt.get_parameter('log_learning_rate', default=-3.)
     )
 
-    for _ in range(orchestrate.io.assignment('epochs', default=10)):
+    for _ in range(sigopt.get_parameter('epochs', default=10)):
         for (images, labels) in train_loader:
             images = Variable(images)
             labels = Variable(labels)
@@ -104,4 +104,4 @@ def evaluate_model():
     return float(correct) / total
 
 if __name__ == '__main__':
-    orchestrate.io.log_metric('accuracy', evaluate_model())
+    sigopt.log_metric('accuracy', evaluate_model())

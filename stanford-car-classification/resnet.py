@@ -4,7 +4,7 @@ from stanford_cars import StanfordCars
 import os
 import time
 import logging
-import orchestrate.io
+import sigopt
 from sklearn.metrics import f1_score
 from sklearn.metrics import confusion_matrix
 import numpy as np
@@ -214,7 +214,7 @@ class PalmNet(object):
                                                                                           validation_accuracy))
 
         # orchestrate hook to keep track of metric
-        orchestrate.io.log_metric('accuracy', validation_accuracy)
+        sigopt.log_metric('accuracy', validation_accuracy)
 
         logging.info('Finished Training')
 

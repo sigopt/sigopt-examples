@@ -20,7 +20,7 @@
 
 from __future__ import print_function
 
-import orchestrate.io
+import sigopt
 import sys
 from random import random
 from operator import add
@@ -41,13 +41,13 @@ if __name__ == "__main__":
     n = 100000 * partitions
 
     def f(_):
-        x = orchestrate.io.assignment('x', 0.4) * 2 - 1
-        y = orchestrate.io.assignment('y', 0.2) * 2 - 1
+        x = sigopt.get_parameter('x', 0.4) * 2 - 1
+        y = sigopt.get_parameter('y', 0.2) * 2 - 1
         return 1 if x ** 2 + y ** 2 <= 1 else 0
 
     count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
     curr_pi_val = (4.0 * count / n)
     print("Pi is roughly %f" % curr_pi_val)
-    orchestrate.io.log_metric('accuracy', curr_pi_val)
+    sigopt.log_metric('accuracy', curr_pi_val)
 
     spark.stop()

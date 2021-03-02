@@ -22,13 +22,13 @@ run: python orchestrate_stanford_cars_cli.py --path_images ./stanford-car-classi
 # Here, we define optimization details
 optimization:
   # Use this name when logging a metric with:
-  # orchestrate.io.log_metric()
+  # sigopt.log_metric()
   # Every experiment needs at least one named metric.
   metrics:
     - name: accuracy
 
   # Parameter that are defined here are available to
-  # orchestrate.io.assignment()
+  # sigopt.get_parameter()
   parameters:
     - name: learning_rate
       type: double

@@ -1,6 +1,6 @@
 import logging
 import shutil
-import orchestrate.io
+import sigopt
 
 from a_resnet_training_common_cli import AStanfordCarsCLI, CLI
 from enum import Enum
@@ -108,7 +108,7 @@ class StanfordCarsAugmentationCLI(AStanfordCarsCLI):
         parameter_assignments, num_epochs = self.get_run_arguments(parsed_cli_dict)
         training_data, validation_data, augmented_data_directory = self.load_datasets(
             parsed_cli_arguments=parsed_cli_dict, dataset_parameters=parameter_assignments)
-        orchestrate.io.log_metadata('augmented_directory_name', augmented_data_directory)
+        sigopt.log_metadata('augmented_directory_name', augmented_data_directory)
         logging.info("augmentation data directory at: {}".format(augmented_data_directory))
         parameter_assignments.update(parsed_cli_dict)
         self.run(parameter_assignments, num_epochs, training_data, validation_data)

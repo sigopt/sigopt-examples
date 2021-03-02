@@ -1,4 +1,4 @@
-import orchestrate.io
+import sigopt
 from sklearn import datasets
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
@@ -12,9 +12,9 @@ def load_data():
 
 def evaluate_model(X, y):
   classifier = RandomForestClassifier(
-    n_estimators=orchestrate.io.assignment('n_estimators', default=3),
-    max_features=orchestrate.io.assignment('max_features', default=3),
-    min_samples_leaf=orchestrate.io.assignment('min_samples_leaf', default=80)
+    n_estimators=sigopt.get_parameter('n_estimators', default=3),
+    max_features=sigopt.get_parameter('max_features', default=3),
+    min_samples_leaf=sigopt.get_parameter('min_samples_leaf', default=80)
   )
   cv_accuracies = cross_val_score(classifier, X, y, cv=5)
   return (numpy.mean(cv_accuracies), numpy.std(cv_accuracies))
@@ -22,4 +22,4 @@ def evaluate_model(X, y):
 if __name__ == "__main__":
   (X, y) = load_data()
   (mean, std) = evaluate_model(X=X, y=y)
-  orchestrate.io.log_metric('accuracy', mean, std)
+  sigopt.log_metric('accuracy', mean, std)
