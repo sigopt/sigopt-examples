@@ -10,7 +10,8 @@
                 "ec2:*",
                 "cloudformation:*",
                 "autoscaling:*",
-                "eks:*"
+                "eks:*",
+                "ssm:*"
             ],
             "Resource": "*"
         }
