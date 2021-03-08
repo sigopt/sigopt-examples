@@ -1,7 +1,4 @@
-language: python3.6
 name: Orchestrate Gradient Boosted Machine (python)
-install:
-  - pip install -r requirements.txt
 run: python model.py
 optimization:
   metrics:

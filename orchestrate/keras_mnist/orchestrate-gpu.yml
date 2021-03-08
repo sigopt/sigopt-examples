@@ -1,5 +1,4 @@
 name: Orchestrate Keras MNIST Example (GPU)
-framework: keras
 resources_per_model:
   gpus: 1
 run: python model.py

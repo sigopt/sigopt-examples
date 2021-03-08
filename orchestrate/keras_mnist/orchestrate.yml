@@ -1,7 +1,4 @@
 name: Orchestrate Keras MNIST Example
-framework: python
-install:
-  -  pip install tensorflow==1.15.2 keras==2.2.2
 run: python model.py
 optimization:
   metrics:

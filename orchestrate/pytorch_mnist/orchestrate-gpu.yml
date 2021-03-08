@@ -1,5 +1,4 @@
 name: Orchestrate Pytorch MNIST Example (GPU)
-framework: pytorch
 resources_per_model:
   gpus: 1
 run: python model.py

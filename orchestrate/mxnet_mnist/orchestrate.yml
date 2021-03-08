@@ -1,7 +1,4 @@
 name: Orchestrate MXNet MNIST Example
-framework: python
-install:
-  - pip install -r requirements.txt
 run: bash run.sh
 optimization:
   metrics:

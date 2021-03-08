@@ -1,5 +1,4 @@
 name: Orchestrate MXNet MNIST Example (GPU)
-framework: mxnet
 resources_per_model:
   gpus: 1
 run: bash run.sh

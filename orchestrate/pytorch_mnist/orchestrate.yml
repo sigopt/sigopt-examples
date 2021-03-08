@@ -1,8 +1,4 @@
 name: Orchestrate Pytorch MNIST Example
-framework: python
-install:
-  -  pip install http://download.pytorch.org/whl/cpu/torch-0.4.1-cp36-cp36m-linux_x86_64.whl
-  -  pip install torchvision==0.2.1
 run: python model.py
 optimization:
   metrics:
