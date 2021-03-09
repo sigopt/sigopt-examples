@@ -4,7 +4,7 @@ import os
 import struct
 import logging
 
-import orchestrate.io
+import sigopt
 
 logging.getLogger().setLevel(logging.DEBUG)
 
@@ -36,9 +36,9 @@ def create_model():
 
     data = mx.sym.Variable('data')
 
-    conv1_kernel = orchestrate.io.assignment('conv1_kernel', default=5)
-    conv1_filters = orchestrate.io.assignment('conv1_filters', default=10)
-    conv1_act = orchestrate.io.assignment('conv1_act', default='relu')
+    conv1_kernel = sigopt.get_parameter('conv1_kernel', default=5)
+    conv1_filters = sigopt.get_parameter('conv1_filters', default=10)
+    conv1_act = sigopt.get_parameter('conv1_act', default='relu')
     conv1 = mx.sym.Convolution(
         data=data,
         kernel=(conv1_kernel, conv1_kernel),
@@ -47,9 +47,9 @@ def create_model():
     act1 = mx.sym.Activation(data=conv1, act_type=conv1_act)
     pool1 = mx.sym.Pooling(data=act1, pool_type="max", kernel=(2, 2), stride=(2, 2))
 
-    conv2_kernel = orchestrate.io.assignment('conv2_kernel', default=5)
-    conv2_filters = orchestrate.io.assignment('conv2_filters', default=10)
-    conv2_act = orchestrate.io.assignment('conv2_act', default='relu')
+    conv2_kernel = sigopt.get_parameter('conv2_kernel', default=5)
+    conv2_filters = sigopt.get_parameter('conv2_filters', default=10)
+    conv2_act = sigopt.get_parameter('conv2_act', default='relu')
     conv2 = mx.sym.Convolution(
         data=pool1,
         kernel=(conv2_kernel, conv2_kernel),
@@ -58,8 +58,8 @@ def create_model():
     act2 = mx.sym.Activation(data=conv2, act_type=conv2_act)
     pool2 = mx.sym.Pooling(data=act2, pool_type="max", kernel=(2, 2), stride=(2, 2))
 
-    fc1_hidden = orchestrate.io.assignment('fc1_hidden', default=10)
-    fc1_act = orchestrate.io.assignment('fc1_act', default='relu')
+    fc1_hidden = sigopt.get_parameter('fc1_hidden', default=10)
+    fc1_act = sigopt.get_parameter('fc1_act', default='relu')
     flatten = mx.sym.Flatten(data=pool2)
     fc1 = mx.symbol.FullyConnected(data=flatten, num_hidden=fc1_hidden)
     act3 = mx.sym.Activation(data=fc1, act_type=fc1_act)
@@ -74,11 +74,11 @@ def create_model():
         eval_metric='acc',
         batch_end_callback=mx.callback.Speedometer(1, 100),
         # mxnet requires a string here, but orchestrate returns unicode in python2.7
-        optimizer=str(orchestrate.io.assignment('optimizer', default='adam')),
+        optimizer=str(sigopt.get_parameter('optimizer', default='adam')),
         optimizer_params={
-          'learning_rate': 10**orchestrate.io.assignment('log_learning_rate', default=-3)
+          'learning_rate': 10**sigopt.get_parameter('log_learning_rate', default=-3)
         },
-        num_epoch=orchestrate.io.assignment('epochs', default=1),
+        num_epoch=sigopt.get_parameter('epochs', default=1),
     )
     return model
 
@@ -90,4 +90,4 @@ def evaluate_model():
     return score[0][1]
 
 if __name__ == '__main__':
-    orchestrate.io.log_metric('accuracy', evaluate_model())
+    sigopt.log_metric('accuracy', evaluate_model())

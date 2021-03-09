@@ -1,4 +1,4 @@
-# SGDClassifier example without orchestrate.io
+# SGDClassifier example without SigOpt IO
 
 
 from sklearn import datasets

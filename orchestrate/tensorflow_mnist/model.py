@@ -1,4 +1,4 @@
-import orchestrate.io
+import sigopt
 import gzip
 import math
 import numpy as np
@@ -85,32 +85,32 @@ def create_model():
 
   block_1 = conv_pool_block(
     x_image,
-    orchestrate.io.assignment('conv_1_size', default=5),
-    orchestrate.io.assignment('conv_1_features', default=32),
-    orchestrate.io.assignment('conv_1_activation', default='relu'),
-    orchestrate.io.assignment('max_pool_1_size', default=2),
+    sigopt.get_parameter('conv_1_size', default=5),
+    sigopt.get_parameter('conv_1_features', default=32),
+    sigopt.get_parameter('conv_1_activation', default='relu'),
+    sigopt.get_parameter('max_pool_1_size', default=2),
   )
 
   block_2 = conv_pool_block(
     block_1,
-    orchestrate.io.assignment('conv_2_size', default=5),
-    orchestrate.io.assignment('conv_2_features', default=64),
-    orchestrate.io.assignment('conv_2_activation', default='relu'),
-    orchestrate.io.assignment('max_pool_2_size', default=2),
+    sigopt.get_parameter('conv_2_size', default=5),
+    sigopt.get_parameter('conv_2_features', default=64),
+    sigopt.get_parameter('conv_2_activation', default='relu'),
+    sigopt.get_parameter('max_pool_2_size', default=2),
   )
 
   _, block_2_height, block_2_width, block_2_features = block_2.get_shape()
   flattened = tf.reshape(block_2, [-1, block_2_height.value * block_2_width.value * block_2_features.value])
 
-  fc_1 = activation_functions[orchestrate.io.assignment('fc_activation', default='sigmoid')](
-    fully_connected_layer(flattened, orchestrate.io.assignment('fc_features', default=1024))
+  fc_1 = activation_functions[sigopt.get_parameter('fc_activation', default='sigmoid')](
+    fully_connected_layer(flattened, sigopt.get_parameter('fc_features', default=1024))
   )
   fc_1_drop = tf.nn.dropout(fc_1, keep_prob)
 
   y_conv = fully_connected_layer(fc_1_drop, OUTPUT_CLASSES)
   cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=y_conv))
-  optimizer = optimizers[orchestrate.io.assignment('optimizer', default='adam')]
-  learning_rate = 10**orchestrate.io.assignment('log_learning_rate', default=-2)
+  optimizer = optimizers[sigopt.get_parameter('optimizer', default='adam')]
+  learning_rate = 10**sigopt.get_parameter('log_learning_rate', default=-2)
   train_step = optimizer(learning_rate).minimize(cross_entropy)
   correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y, 1))
   accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
@@ -120,9 +120,9 @@ def create_model():
 def train_model(model, x_train, y_train):
   x, y, y_conv, keep_prob, train_step, _ = model
   train_length = len(x_train)
-  batch_size = orchestrate.io.assignment('batch_size', default=100)
-  dropout_probability = orchestrate.io.assignment('dropout_probability', default=0.2)
-  for i in range(orchestrate.io.assignment('epochs', default=1)):
+  batch_size = sigopt.get_parameter('batch_size', default=100)
+  dropout_probability = sigopt.get_parameter('dropout_probability', default=0.2)
+  for i in range(sigopt.get_parameter('epochs', default=1)):
     indices = np.arange(train_length)
     np.random.shuffle(indices)
     for start in range(0, train_length, batch_size):
@@ -143,8 +143,8 @@ if __name__ == '__main__':
     sess.run(tf.global_variables_initializer())
     train_start = time()
     train_model(model, x_train, y_train)
-    orchestrate.io.log_metric('train_time', time() - train_start)
+    sigopt.log_metric('train_time', time() - train_start)
     eval_start = time()
     accuracy = evaluate_model(model, x_test, y_test)
-    orchestrate.io.log_metric('evaluation_time',  time() - eval_start)
-    orchestrate.io.log_metric('accuracy', accuracy)
+    sigopt.log_metric('evaluation_time',  time() - eval_start)
+    sigopt.log_metric('accuracy', accuracy)
