@@ -9,6 +9,7 @@ SigOpt Orchestrate requires that AWS accounts creating clusters have full access
  * cloudformation
  * autoscaling
  * eks
+ * ssm
 
 For your convenience, we have created a JSON policy document, [orchestrate_full_access_policy_document.json](orchestrate_full_access_policy_document.json).
 

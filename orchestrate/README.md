@@ -5,17 +5,6 @@ SigOpt Orchestrate is a command-line tool for managing training clusters and run
 ## Installation
 [Installation instructions](https://app.sigopt.com/docs/orchestrate/installation)
 
-## Examples
-* [Cluster yml files](clusters/)
-* [SGD Classifier](sgd_classifier/)
-* [Random Forest](random_forest/)
-* [MXNet](mxnet_mnist/) (CPU and GPU)
-* [TensorFlow](tensorflow_mnist/) (CPU and GPU)
-* [Keras](keras_mnist/) (CPU and GPU)
-* [PyTorch](pytorch_mnist/) (CPU and GPU)
-* [XGBoost](xgboost/)
-* [Apache Spark](apache_spark/)
-
 ## Join the Orchestrate Alpha
 SigOpt Orchestrate is now in alpha release, and we're looking for partners to use our tool and give us feedback!
 
