@@ -11,7 +11,8 @@
                 "cloudformation:*",
                 "autoscaling:*",
                 "eks:*",
-                "ssm:*"
+                "ssm:*",
+                "s3:*"
             ],
             "Resource": "*"
         }
