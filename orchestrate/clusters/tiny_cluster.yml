@@ -2,5 +2,5 @@ provider: aws
 cluster_name: tiny-cluster
 cpu:
   instance_type: t2.small
+  min_nodes: 0
   max_nodes: 2
-  min_nodes: 2
