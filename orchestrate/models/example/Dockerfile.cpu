@@ -2,7 +2,7 @@
 # See the Dockerfile reference for more info https://docs.docker.com/engine/reference/builder/#format
 
 # The FROM line defines the starting image.
-FROM orchestrate/python-3.6:0.9.2
+FROM orchestrate/python-3.6:0.10.0
 
 # Uncomment/modify these lines to install your system dependencies.
 USER root
