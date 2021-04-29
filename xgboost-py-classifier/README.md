@@ -8,7 +8,7 @@ This example uses SigOpt to tune an XGBoost classifier on the Wisconsin breast c
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/xgboost-py-classifier`
-3. Run `jupyter lab` in that directory and open xgboost_py_classifier.ipynb in teh web interface
+3. Run `jupyter lab` in that directory and open xgboost_py_classifier.ipynb in the web interface
 4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in the Jupyter cell where you see `YOUR_API_TOKEN_HERE`
 5. Run all cells or step through the notebook
 
@@ -16,9 +16,8 @@ This example uses SigOpt to tune an XGBoost classifier on the Wisconsin breast c
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/xgboost-py-classifier`
-3. Run `jupyter lab` in that directory and open xgboost_py_classifier.ipynb in teh web interface
-4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) on line 127 where you see `YOUR_API_TOKEN_HERE`
-5. Run `python xgboost_classifier_py` or open the file in your favorite text editor to see what it does
+3. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) on line 127 where you see `YOUR_API_TOKEN_HERE`
+4. Run `python xgboost_classifier_py` or open the file in your favorite text editor to see what it does
 
 ## Optimize
 
