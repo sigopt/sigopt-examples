@@ -1,8 +1,8 @@
 [![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)](https://sigopt.com)
 
-# XGBoost Supervised Python Jupyter Notebook Classifier Tuning
+# XGBoost Supervised Python Jupyter Notebook Regression Tuning
 
-This example uses SigOpt to tune an XGBoost classifier on the Wisconsin breast cancer dataset in Python.
+This example uses SigOpt to tune an XGBoost regression on scikit-learn's California housing dataset in Python.
 
 ## Jupyter Setup
 
