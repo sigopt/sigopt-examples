@@ -2,14 +2,21 @@
 
 # Neural Architecture Search to Train a Computer Vision Classifier in Keras on CIFAR10 Data using Ray Tune and SigOpt
 
+<a href="https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/vision-nas-search-keras-cifar-ray/mininas.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 This example uses SigOpt to tune Neural Architecture search, using a Keras image classifier. Ray Tune is used to orchestrate training, and uses its built in interface to the SigOpt API.
+
+Its contributors are:
+
+[Ellick Chan](https://github.com/ellick-chan), Head, Intel AI Academy University Relations and Research
+[Barrett Williams](https://github.com/brwillia), Product Marketing Lead, SigOpt
 
 ## Jupyter Setup
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/vision-nas-search-keras-cifar-ray`
 3. Run `jupyter lab` in that directory and open xgboost_py_classifier.ipynb in the web interface
-4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in the Jupyter cell where you see `YOUR_API_TOKEN_HERE`
+4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in the Jupyter cell where you see `YOUR_SIGOPT_API_KEY_HERE`
 5. Run all cells or step through the notebook
 
 ## Optimize
@@ -33,3 +40,5 @@ SigOpt can tune any machine learning model, including popular techniques like gr
 SigOpt augments your existing model training pipeline, suggesting parameter configurations to maximize any online or offline objective, such as AUC ROC, model accuracy, or revenue. You only send SigOpt your metadata, not the underlying training data or model.
 
 [Visit our website](https://sigopt.com) to learn more, and be sure to [sign up for a free account](https://app.sigopt.com/signup) if you haven't already.
+
+<a href="https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/vision-nas-search-keras-cifar-ray/mininas.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
