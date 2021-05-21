@@ -1,4 +1,4 @@
 gym==0.5.6
 numpy==1.11.1
 sigopt>=2.6.1
-tensorflow==1.15.4
+tensorflow==2.5.0
