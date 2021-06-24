@@ -17,14 +17,6 @@ These notebook examples use SigOpt to track and optimize an XGBoost classifier m
 4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in the Jupyter cell where you see `YOUR_API_TOKEN_HERE`
 5. Run all cells or step through the notebook
 
-## Python Setup
-
-1. `git clone https://github.com/sigopt/sigopt-examples.git`
-2. `cd sigopt-examples/get-started`
-3. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) where you see `YOUR_API_TOKEN_HERE`
-4. Run `python xgboost_classifier_py` or open the file in your favorite text editor to see what it does
-
-
 ## Questions?
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
 
