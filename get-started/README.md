@@ -6,7 +6,7 @@ These notebook examples use SigOpt to track and optimize an XGBoost classifier m
 
 ## Google Colab
 
-1. Open the SigOpt Training Runs demo in https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/get-started/sigopt_runs_demo.ipynb
+1. Open the SigOpt Runs demo in https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/get-started/sigopt_runs_demo.ipynb
 2. Open the SigOpt Experiment and Optimization demo in https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/get-started/sigopt_experiment_and_optimization_demo.ipynb
 
 ## Jupyter Setup
