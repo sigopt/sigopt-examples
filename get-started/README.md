@@ -6,15 +6,15 @@ These notebook examples use SigOpt to track and optimize an XGBoost classifier m
 
 ## Google Colab
 
-1. Open the SigOpt Training Runs demo in https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/get-started/sigopt_training_runs_demo.ipynb
+1. Open the SigOpt Training Runs demo in https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/get-started/sigopt_runs_demo.ipynb
 2. Open the SigOpt Experiment and Optimization demo in https://colab.research.google.com/github/sigopt/sigopt-examples/blob/master/get-started/sigopt_experiment_and_optimization_demo.ipynb
 
 ## Jupyter Setup
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/get-started`
-3. Run `jupyter lab` in that directory and open sigopt_training_runs_demo.ipynb or sigopt_experiment_and_optimization_demo.ipynb in the web interface
-4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in the Jupyter cell where you see `YOUR_API_TOKEN_HERE`
+3. Run `jupyter lab` in that directory and open sigopt_runs_demo.ipynb or sigopt_experiment_and_optimization_demo.ipynb in the web interface
+4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) when prompted after running the `!sigopt config` command
 5. Run all cells or step through the notebook
 
 ## Questions?
