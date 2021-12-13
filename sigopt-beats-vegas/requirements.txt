@@ -10,7 +10,7 @@ idna==2.0
 ipaddress==1.0.15
 joblib==0.9.3
 jupyter==1.0.0
-lxml==4.6.3
+lxml==4.6.5
 matplotlib
 numpy==1.9.1
 pyOpenSSL==18.0.0
