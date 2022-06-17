@@ -1,5 +1,5 @@
 jupyter>=1.0.0
 matplotlib
-numpy==1.9.1
+numpy==1.21.0
 scipy==0.16.1
 sigopt>=1.6.4
