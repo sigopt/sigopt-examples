@@ -23,7 +23,7 @@ matplotlib==3.2.1
 numpy==1.22.0
 oauthlib==3.1.0
 orchestrate==0.8.2
-Pillow==8.1.1
+Pillow==9.0.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
