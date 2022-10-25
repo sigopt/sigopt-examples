@@ -12,7 +12,7 @@ joblib==0.9.3
 jupyter==1.0.0
 lxml==4.6.3
 matplotlib
-numpy==1.9.1
+numpy==1.22.0
 pyOpenSSL==18.0.0
 pyasn1-modules==0.0.8
 pyasn1==0.1.9
