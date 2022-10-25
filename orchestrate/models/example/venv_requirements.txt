@@ -23,7 +23,7 @@ joblib==1.0.1
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
 Markdown==3.3.3
-numpy==1.19.5
+numpy==1.22.0
 oauthlib==3.1.0
 opt-einsum==3.3.0
 pandas
