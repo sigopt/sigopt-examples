@@ -1,9 +1,0 @@
-cluster_name: cluster-with-s3-access
-provider: aws
-cpu:
-  instance_type: t2.small
-  min_nodes: 0
-  max_nodes: 2
-aws:
-  additional_policies:
-    - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
