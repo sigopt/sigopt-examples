@@ -51,7 +51,6 @@ def build_experiment(conn):
     """
     experiment = conn.experiments().create(
         name="AWS ML Example",
-        project="sigopt-examples",
         parameters=[
             dict(
                 name='regularization_type',

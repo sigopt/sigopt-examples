@@ -59,7 +59,6 @@ _, extra_XZ, _, extra_yZ = train_test_split(extra_XZ, extra_yZ, test_size=0.75, 
 conn = sigopt.Connection()
 experiment = conn.experiments().create(
   name='SVHN ConvNet',
-  project='sigopt-examples',
   metrics=[dict(name='accuracy', objective='maximize')],
   parameters=[
     {'name': 'filter1_w',      'type': 'int',    'bounds': {'min': 3,  'max': 10}},

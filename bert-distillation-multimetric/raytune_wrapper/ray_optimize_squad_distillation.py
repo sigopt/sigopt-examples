@@ -75,7 +75,6 @@ def main(ray_config_dict):
 
     sigopt_experiment_id = args_dict[OptimizationRunParameters.SIGOPT_EXPERIMENT_ID.value]
     with sigopt.create_run(name="Distillation Run_experiment_{}_suggestion_{}".format(sigopt_experiment_id, suggestion_id),
-                      project=args_dict[OptimizationRunParameters.PROJECT_NAME.value]) as run:
         run.log_dataset("SQUAD 2.0")
         run.log_model("DistilBert for question answering")
         run.log_metadata("suggestion_id", suggestion_id)
