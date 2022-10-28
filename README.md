@@ -19,7 +19,6 @@ If this is your first time using SigOpt, we recommend you work through the [Rand
 
 ## More Examples
 
-- [jupyter-notebook-example](jupyter-notebook-example): Simple example of using SigOpt to optimize a 2D function with plots and comparisons in a Jupyter Notebook.
 - [sigopt-beats-vegas](sigopt-beats-vegas): Using SigOpt to tune a model to beat the Vegas odds in Python ([blog post](http://blog.sigopt.com/post/136340340198/sigopt-for-ml-using-model-tuning-to-beat-vegas)).
 - [text-classifier](text-classifier): Example using SigOpt to tune a text classifier in Python and R ([blog post](http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text)).
 - [unsupervised-model](unsupervised-model): Example using SigOpt and xgboost to tune a combined unsupervised and supervised model for optical character recognition ([blog post](http://blog.sigopt.com/post/140871698423/sigopt-for-ml-unsupervised-learning-with-even))
