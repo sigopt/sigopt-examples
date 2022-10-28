@@ -21,7 +21,6 @@ def main():
 
   experiment = conn.experiments().create(
     name= ENVIRONMENT_NAME + ' (DQN)',
-    project='sigopt-examples',
     observation_budget=128,
     metrics=[dict(name='average_reward', objective='maximize')],
     parameters=[

@@ -37,7 +37,6 @@ if experiment_id is None:
 
     experiment = conn.experiments().create(
         name=exp_name,
-        project='sigopt-examples',
         parameters=hyperparams,
         observation_budget=30 * len(hyperparams),
         metrics=[

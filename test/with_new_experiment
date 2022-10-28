@@ -16,7 +16,6 @@ if __name__ == "__main__":
   conn = sigopt.Connection(client_token=os.environ['SIGOPT_API_TOKEN'])
   e = conn.experiments().create(
     name='sigopt-examples test experiment',
-    project='sigopt-examples',
     metrics=[dict(name='score', objective='maximize')],
     parameters=[
       {'type': 'double', 'name': 'd', 'bounds': {'min': 10, 'max': 20}},

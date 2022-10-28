@@ -11,7 +11,6 @@ conn = Connection(client_token=SIGOPT_API_TOKEN)
 
 experiment = conn.experiments().create(
     name=EXPERIMENT_NAME,
-    project=PROJECT_NAME,
     parameters=PARAMETERS,
     metrics = METRICS,
     observation_budget = OBSERVATION_BUDGET
