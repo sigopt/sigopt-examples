@@ -21,6 +21,7 @@ class SigOptExperiment:
                               observation_budget, metadata, experiment_type, parallel_bandwidth=1):
         experiment = self.connection.experiments().create(
             name=experiment_name,
+            project=project_name,
             # Define which parameters you would like to tune
             parameters=parameters_list,
             linear_constraints=linear_constraints_list,
