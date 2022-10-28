@@ -16,7 +16,7 @@ docutils==0.16
 google-auth==1.12.0
 idna==2.7
 jmespath==0.9.5
-joblib==0.14.1
+joblib==1.2.0
 kiwisolver==1.1.0
 kubernetes==8.0.0
 matplotlib==3.2.1
