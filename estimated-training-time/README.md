@@ -30,7 +30,7 @@ jupyter notebook
 Then open [`How are My Hyperparameter Affecting My Training Time?.ipynb`](https://github.com/sigopt/sigopt-examples/blob/master/estimated-training-time/How%20are%20My%20Hyperparameters%20Affecting%20My%20Training%20Time%3F.ipynb) in the browser window that pops up.
 
 ## Questions?
-Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
+Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
 To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.

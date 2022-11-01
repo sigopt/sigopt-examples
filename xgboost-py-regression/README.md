@@ -24,7 +24,7 @@ This example uses SigOpt to tune an XGBoost regression on scikit-learn's Califor
 Once the SigOpt optimization loop is initiated, you can track the progress on your [experiment dashboard](https://sigopt.com/experiments).
 
 ## Questions?
-Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
+Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
 To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible. 

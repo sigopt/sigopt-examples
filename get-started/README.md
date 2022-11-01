@@ -18,7 +18,7 @@ These notebook examples use SigOpt to track and optimize an XGBoost classifier m
 5. Run all cells or step through the notebook
 
 ## Questions?
-Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
+Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
 To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible. 
