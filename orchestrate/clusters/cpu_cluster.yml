@@ -1,6 +1,0 @@
-provider: aws
-cluster_name: cpu-cluster
-cpu:
-  min_nodes: 0
-  max_nodes: 4
-  instance_type: c5.xlarge

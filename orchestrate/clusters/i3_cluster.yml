@@ -1,6 +1,0 @@
-provider: aws
-cluster_name: i3-cluster
-cpu:
-  instance_type: i3.large
-  min_nodes: 0
-  max_nodes: 2
