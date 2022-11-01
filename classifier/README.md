@@ -4,7 +4,7 @@
 
 Machine learning classifier hyperparameter optimization example.
 
-More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/111903668663/tuning-machine-learning-models).
+More details about this example can be found in [the associated blog post](https://sigopt.com/blog/tuning-machine-learning-models/).
 
 ## Setup
 1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
@@ -29,7 +29,7 @@ python classifier_tuner.py --classifier-type SVC --dataset-name connect-4 --test
 Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
-To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
+To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [API](https://docs.sigopt.com) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
 
 ## About SigOpt
 

@@ -9,14 +9,14 @@ This example uses SigOpt to tune a Surprise Lib recommender model based on the S
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/surprise-py-recsys`
 3. Run `jupyter lab` in that directory and open surprise_recommender.ipynb in the web interface
-4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in the Jupyter cell where you see `YOUR_API_TOKEN_HERE`
+4. Add your SigOpt [API token](https://docs.sigopt.com/core-module-api-references/get_started) in the Jupyter cell where you see `YOUR_API_TOKEN_HERE`
 5. Run all cells or step through the notebook
 
 ## Python Setup
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/surprise-py-recsys`
-3. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) on line 127 where you see `YOUR_API_TOKEN_HERE`
+3. Add your SigOpt [API token](https://docs.sigopt.com/core-module-api-references/get_started) on line 127 where you see `YOUR_API_TOKEN_HERE`
 4. Run `python surprise_recommender.py` or open the file in your favorite text editor to see how it works 
 
 ## Optimize
@@ -27,7 +27,7 @@ Once the SigOpt optimization loop is initiated, you can track the progress on yo
 Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
-To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible. 
+To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [API](https://docs.sigopt.com) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible. 
 
 ## About SigOpt
 

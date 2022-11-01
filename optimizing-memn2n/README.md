@@ -50,7 +50,7 @@ Validation is performed on the validation and test sets of the data at the end o
 
 `python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_single_exp --task_id 20 --sigopt_observation_budget 4 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name 'task 20 conditionals optimization' --experiment_type 'conditionals'`
 
-The above command will optimize bAbI task 20 using [Sigopt Conditionals](https://app.sigopt.com/docs/overview/conditionals) for 4 [observation cycles](https://app.sigopt.com/docs/overview/optimization) using default parameters for `max_grad_norm, batch_size, epochs, random_state, and data_dir`. Must be run with end2end_mem_nn_tensorflow as the working directory.
+The above command will optimize bAbI task 20 using [Sigopt Conditionals](https://docs.sigopt.com/intro/main-concepts/parameter_space#define-conditional-parameters) for 4 [observation cycles](https://docs.sigopt.com/intro/main-concepts#optimization-loop) using default parameters for `max_grad_norm, batch_size, epochs, random_state, and data_dir`. Must be run with end2end_mem_nn_tensorflow as the working directory.
 
 #### Example: Task 1 optimization
 
@@ -70,7 +70,7 @@ The above command will pick up an existing/already created experiment and contin
 
 `python sigopt_optimization_run.py --log_file '/Users/username/memory_network_opt.log' --run_joint_exp --sigopt_calc_accuracy_tasks '7,8,10' --max_grad_norm 10 --batch_size 31 --epochs 10 --sigopt_observation_budget 200 --sigopt_connection_token 'OEIUROEAHE889823I' --sigopt_experiment_name '20 task sigopt optimization' --experiment_type sigopt`
 
-The above command will run optimization on all 20 tasks using Sigopt's Bayesian Optimization for 200 observation cycles. For each Sigopt observation cycle, it will store the test accuracies for tasks 7,8,10 as [experiment metadata](https://app.sigopt.com/docs/objects/metadata). Must be run with end2end_mem_nn_tensorflow as the working directory.
+The above command will run optimization on all 20 tasks using Sigopt's Bayesian Optimization for 200 observation cycles. For each Sigopt observation cycle, it will store the test accuracies for tasks 7,8,10 as [experiment metadata](https://docs.sigopt.com/core-module-api-references/api-topics/metadata). Must be run with end2end_mem_nn_tensorflow as the working directory.
 
 #### Example: Joint training with existing experiment
 

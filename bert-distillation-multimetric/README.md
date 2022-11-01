@@ -1,6 +1,6 @@
 # optimizing-distilbert-squad
 
-This repo supports code for tuning [DistilBERT](https://arxiv.org/abs/1910.01108) with [SigOpt's Multimetric Bayesian Optimization](https://app.sigopt.com/docs/overview/multimetric). Before using this repo, read through [HuggingFace's Transformer package](https://huggingface.co/transformers/) and reading the full blog post on this work for more context.
+This repo supports code for tuning [DistilBERT](https://arxiv.org/abs/1910.01108) with [SigOpt's Multimetric Bayesian Optimization](https://docs.sigopt.com/advanced_experimentation/multimetric_optimization). Before using this repo, read through [HuggingFace's Transformer package](https://huggingface.co/transformers/) and reading the full blog post on this work for more context.
 
 ## Download SQUAD 2.0
 
@@ -105,7 +105,7 @@ The above cli will run the distillation process for SQUAD 2.0 with the defaults 
 
 ### Optimize the distillation process
 
-Run [SigOpt's Multimetric Bayesian Optimization](https://app.sigopt.com/docs/overview/multimetric) with distillation.  
+Run [SigOpt's Multimetric Bayesian Optimization](https://docs.sigopt.com/advanced_experimentation/multimetric_optimization) with distillation.  
 
 Main CLI options:
 
@@ -142,7 +142,7 @@ The above CLI runs Multimetric Optimization on the distillation process using a 
 
 ## Using Ray to orchestrate the optimization process
 
-Run [SigOpt's Multimetric Bayesian Optimization](https://app.sigopt.com/docs/overview/multimetric) with distillation using [Ray](https://docs.ray.io/en/master/) for orchestration.
+Run [SigOpt's Multimetric Bayesian Optimization](https://docs.sigopt.com/advanced_experimentation/multimetric_optimization) with distillation using [Ray](https://docs.ray.io/en/master/) for orchestration.
 
 Before using this CLI, look through the [Ray documentation](https://docs.ray.io/en/master/).
 

@@ -12,7 +12,7 @@ Most of these examples will run on any Linux or Mac OS X machine from the comman
 Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
-To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
+To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [API](https://docs.sigopt.com) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
 
 ## About SigOpt
 
