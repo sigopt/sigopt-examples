@@ -1,4 +1,0 @@
-numpy==1.22.0
-scikit-learn==0.20.2
-sigopt_sklearn>=2.0.0
-sigopt>=3.2.0
