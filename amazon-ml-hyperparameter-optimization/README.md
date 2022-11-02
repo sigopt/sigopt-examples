@@ -78,7 +78,7 @@ After evaluations are created the script spawn threads to poll the Amazon ML API
 
 Amazon Machine Learning asynchronously creates datasources, machine learning models, and evaluations. API calls via the python SDK will return quickly so that you can build a datasource, machine learning model, and an evaluation while the datasource is still pending! Since your machine is not doing the heavy computation of training and testing the model, it has great opportunities for parallelization, splitting up the optimization loop between `n` different threads or processes.
 
-Read how easy it is to [parallelize hyperparameter optimization with SigOpt](https://sigopt.com/docs/overview/parallel).
+Read how easy it is to [parallelize hyperparameter optimization with SigOpt](https://docs.sigopt.com/advanced_experimentation/parallelism).
 
 ### Note from Amazon
 

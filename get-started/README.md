@@ -11,17 +11,17 @@ These notebook examples use SigOpt to track and optimize an XGBoost classifier m
 
 ## Jupyter Setup
 
-1. `git clone https://github.com/sigopt/sigopt-examples.git`
+1. `git clone https:https://docs.sigopt.com/ai-module-api-references/get_started//github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/get-started`
 3. Run `jupyter lab` in that directory and open sigopt_runs_demo.ipynb or sigopt_experiment_and_optimization_demo.ipynb in the web interface
-4. Add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) when prompted after running the `!sigopt config` command
+4. Add your SigOpt [API token](https://docs.sigopt.com/ai-module-api-references/get_started) when prompted after running the `!sigopt config` command
 5. Run all cells or step through the notebook
 
 ## Questions?
-Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
+Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
-To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible. 
+To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [API](https://docs.sigopt.com) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible. 
 
 ## About SigOpt
 

@@ -4,7 +4,7 @@
 
 Example using SigOpt to solve a multicriteria optimization problem
 
-More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/151388283013/sigopt-in-depth-building-a-better-mousetrap-via).
+More details about this example can be found in [the associated blog post](https://sigopt.com/blog/building-better-multicriteria-bayesian-optimization-algorith-sigopt/).
 
 ## Setup
 
@@ -17,13 +17,13 @@ More details about this example can be found in [the associated blog post](http:
 
 ## Optimize
 
-If you execute any of the SigOpt experiments, you can track the progress on your [experiment dashboard](https://sigopt.com/experiments).
+If you execute any of the SigOpt experiments, you can track the progress on your [experiment dashboard](https://app.sigopt.com/experiments).
 
 ## Questions?
-Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
+Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
 
 ## API Reference
-To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
+To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [API](https://docs.sigopt.com) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
 
 ## About SigOpt
 

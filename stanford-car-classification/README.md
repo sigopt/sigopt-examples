@@ -183,9 +183,9 @@ The Hyperparameter Optimization (HPO) conducted is a layer on top of the model t
 
 ### Pre-requistes
 
-The HPO uses [SigOpt](https://sigopt.com/)'s [Multitask](https://app.sigopt.com/docs/overview/multitask) feature as the optimizer as well as [Orchestrate](https://app.sigopt.com/docs/orchestrate) to manage AWS clusters. 
-In order to be able to run the optimization, please set up your SigOpt account and walk through the [Orchestrate tutorial](https://app.sigopt.com/docs/orchestrate/tutorial/1).
-At the end of the tutorial, you should have an Orchestrate specific virtualenvironment which we will use later.
+The HPO uses [SigOpt](https://sigopt.com/)'s [Multitask](https://docs.sigopt.com/advanced_experimentation/multitask-experiments) feature as the optimizer as well as [Orchestrate](https://docs.sigopt.com/ai-module-api-references/orchestrate) to manage AWS clusters. 
+In order to be able to run the optimization, please set up your SigOpt account and walk through the [Orchestrate tutorial](https://docs.sigopt.com/ai-module-api-references/orchestrate).
+At the end of the tutorial, you should have an Orchestrate specific virtual environment which we will use later.
 
 ### CommandLine Interface
 
@@ -234,7 +234,7 @@ python run_resnet_training_cli.py --path_images ./stanford-car-classification/da
 
 ### Cluster Configuration
 
-As seen in the [Orchestrate tutorial](https://app.sigopt.com/docs/orchestrate/tutorial/1), a cluster configuration file is necessary to deploy a cluster.
+As seen in the [Orchestrate tutorial](https://docs.sigopt.com/ai-module-api-references/orchestrate/install_sigopt), a cluster configuration file is necessary to deploy a cluster.
 The following snippet is an example cluster configuration `orchestrate_cluster_deploy_sample.yml` that deploys 2 p2.xlarge EC2 instances on AWS.
 
 ```buildoutcfg

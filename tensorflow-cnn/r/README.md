@@ -15,14 +15,14 @@ More details about this example can be found in [the associated blog post](http:
 5. `sudo ./setup.sh`
 
 ## R
-Simply add your SigOpt [API token](https://sigopt.com/docs/overview/authentication) in line 13 of `cnn_example.R` and then execute the R script in R Studio, or in the terminal:
+Simply add your SigOpt [API token](https://docs.sigopt.com/core-module-api-references/get_started) in line 13 of `cnn_example.R` and then execute the R script in R Studio, or in the terminal:
 
 ```
 cd r
 RScript cnn_example.R
 ```
 
-Learn more about our [R API Client](https://sigopt.com/docs/overview/r).
+Learn more about our [R API Client](https://docs.sigopt.com/overview/r).
 
 ## Optimize
 
@@ -32,7 +32,7 @@ Once the CNN model is being optimized, you can track the progress on your [exper
 Any questions? Drop us a line at [support@sigopt.com](mailto:support@sigopt.com).
 
 ## API Reference
-To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [core API](https://sigopt.com/docs) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
+To implement SigOpt for your use case, feel free to use or extend the code in this repository. Our [API](https://docs.sigopt.com) can bolt on top of any complex model or process and guide it to its optimal configuration in as few iterations as possible.
 
 ## About SigOpt
 
