@@ -21,7 +21,7 @@ Sys.setenv(SIGOPT_API_TOKEN="YOUR_API_TOKEN_HERE")
 POSITIVE_TEXT <- fromJSON(file="https://public.sigopt.com/POSITIVE_list.json")
 NEGATIVE_TEXT <- fromJSON(file="https://public.sigopt.com/NEGATIVE_list.json")
 
-# optimization metric : see blogpost http://blog.sigopt.com/post/133089144983/sigopt-for-ml-automatically-tuning-text
+# optimization metric : see blogpost https://sigopt.com/blog/automatically-tuning-text-classifiers/
 sentiment_metric <- function(POS_TEXT, NEG_TEXT, params) {
   min_ngram <- params$min_n_gram
   max_ngram <- min_ngram + params$n_gram_offset

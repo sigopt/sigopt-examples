@@ -4,7 +4,7 @@
 
 This example uses SigOpt to tune a Deep Q-Network (DQN) to solve a reinforcement learning problem using OpenAI's gym simulation environments.
 
-More details about this example can be found in [the associated blog post](http://blog.sigopt.com/post/154251615358/sigopt-for-ml-using-bayesian-optimization-for-reinforcement-learning).
+More details about this example can be found in [the associated blog post](https://sigopt.com/blog/using-bayesian-optimization-for-reinforcement-learning/).
 
 ## Setup
 
