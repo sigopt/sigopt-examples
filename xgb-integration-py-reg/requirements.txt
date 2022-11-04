@@ -1,5 +1,0 @@
-sigopt==8.4.0
-xgboost==1.5.2
-scikit-learn==1.1.1
-opendatasets==0.1.22
-pandas==1.4.2

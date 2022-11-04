@@ -1,16 +1,17 @@
 [![image](https://sigopt.com/static/img/SigOpt_logo_horiz.png?raw=true)](https://sigopt.com)
 
-# Using SigOpt's XGBoost Integration for Regression
+# Using SigOpt's XGBoost Integration for Fraud Classification
 
-This tutorial uses SigOpt's XGBoost integration to optimize a XGBoost regressor model. You will need a [SigOpt account](https://sigopt.com/signup) and SigOpt [API token](https://app.sigopt.com/tokens/info), as well as a Kaggle account and Kaggle API token in order to run this code.
+This tutorial uses SigOpt's [XGBoost integration](https://docs.sigopt.com/ai-module-api-references/xgboost) to optimize a fraud classifier. You will need a [SigOpt account](https://sigopt.com/signup) and SigOpt [API token](https://app.sigopt.com/tokens/info), as well as a Kaggle account and Kaggle API token in order to run this code.
 
 ## Jupyter Setup
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
-2. `cd sigopt-examples/xgb-integration-py-reg`
+2. `cd sigopt-examples/xgboost-integration-examples`
 3. `pip install -r requirements.txt` if you do not have all required packages installed
-4. Run `jupyter notebook` in that directory and open xgb-integration-py-reg.ipynb in the web interface
+4. Run `jupyter notebook` in that directory and open xgb-integration-py-class.ipynb or xgb-integration-py-reg.ipynb in the web interface
 5. Run all cells or step through the notebook
+
 
 ## Optimize
 
