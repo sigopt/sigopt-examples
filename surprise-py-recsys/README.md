@@ -12,12 +12,6 @@ This example uses SigOpt to tune a Surprise Lib recommender model based on the S
 4. Add your SigOpt [API token](https://docs.sigopt.com/core-module-api-references/get_started) in the Jupyter cell where you see `YOUR_API_TOKEN_HERE`
 5. Run all cells or step through the notebook
 
-## Python Setup
-
-1. `git clone https://github.com/sigopt/sigopt-examples.git`
-2. `cd sigopt-examples/surprise-py-recsys`
-3. Add your SigOpt [API token](https://docs.sigopt.com/core-module-api-references/get_started) on line 127 where you see `YOUR_API_TOKEN_HERE`
-4. Run `python surprise_recommender.py` or open the file in your favorite text editor to see how it works 
 
 ## Optimize
 
