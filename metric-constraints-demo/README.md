@@ -4,6 +4,7 @@
 
 This example showcases the [Metric Constraints](https://docs.sigopt.com/advanced_experimentation/metric_constraints) feature in SigOpt, as described in this [blog post](https://sigopt.com/blog/metric-constraints-demo/). We use the Metric Constraints feature to optimize for the top-1 accuracy of a CNN with a constraint of the size of the network. We demonstrate this feature using the German Traffic Signs Dataset (GTSRB).
 
+The CNN model is inspired by the [*MicronNet*](https://arxiv.org/abs/1804.00497) model.
 ## Run in Google Colab
 
 To run the notebooks in Google Colab, click the `Open in Colab` button in each notebook.
