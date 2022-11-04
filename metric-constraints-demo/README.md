@@ -11,6 +11,17 @@ To run the notebooks in Google Colab, click the `Open in Colab` button in each n
 * The `GTSRB_preprocessing_augmentation.ipynb` notebook preprocesses the dataset.
 * The `sigopt_metric_constraints_demo.ipynb` notebook runs the SigOpt experiment of tuning the neural network.
 
+## Run locally
+
+Alternatively, you can also run these notebooks locally in Jupyter notebooks. You will need to install the following dependencies. Note that this example uses the Tensorflow2/Keras API.
+
+```
+matplotlib
+numpy
+scikit-image
+sigopt
+tensorflow
+```
 
 ## Questions?
 Visit the [SigOpt Community page](https://community.sigopt.com) and leave your questions.
