@@ -12,13 +12,6 @@ This tutorial uses SigOpt's XGBoost integration to optimize a fraud classifier. 
 4. Run `jupyter notebook` in that directory and open xgb-integration-py-class.ipynb in the web interface
 5. Run all cells or step through the notebook
 
-## Python Setup
-
-1. `git clone https://github.com/sigopt/sigopt-examples.git`
-2. `cd sigopt-examples/xgb-integration-py-class`
-3. `pip install -r requirements.txt` if you do not have all required packages installed
-4.  Uncomment and add your SigOpt [API token](https://app.sigopt.com/tokens/info) where you see `YOUR_API_TOKEN_HERE`
-5. Run `python xgb-integration-py-class.py` or open the file in your favorite text editor to see what it does
 
 ## Optimize
 
