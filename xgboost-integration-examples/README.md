@@ -9,9 +9,10 @@ This tutorial uses SigOpt's [XGBoost integration](https://docs.sigopt.com/ai-mod
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/xgboost-integration-examples`
 3. `pip install -r requirements.txt` if you do not have all required packages installed
-4. Run `jupyter notebook` in that directory and open xgb-integration-py-class.ipynb or xgb-integration-py-reg.ipynb in the web interface
+4. Run `jupyter notebook` in that directory and open `xgb-integration-py-class.ipynb` or `xgb-integration-py-reg.ipynb` in the web interface
 5. Run all cells or step through the notebook
 
+Alternatively, you can also run these notebook in Google Colab by clicking the `Run in Colab` button.
 
 ## Optimize
 

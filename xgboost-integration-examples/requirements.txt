@@ -1,4 +1,4 @@
-sigopt==8.4.0
+sigopt[xgboost]
 xgboost==1.5.2
 scikit-learn==1.1.1
 opendatasets==0.1.22
