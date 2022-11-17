@@ -194,7 +194,7 @@ class ExampleRunner(object):
             conn = Connection(client_token=self.client_token)
             conn.experiments(experiment.id).observations().create(
                 assignments=assignments,
-                value=score,
+                values=[dict(name="classifier_score", value=score)],
             )
             conn.experiments(experiment.id).suggestions().delete()
 

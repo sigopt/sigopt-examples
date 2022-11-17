@@ -59,5 +59,5 @@ if __name__ == '__main__':
     print('Reporting observation of value: {0}'.format(value))
     connection.experiments(experiment.id).observations().create(
       suggestion=suggestion.id,
-      value=value,
+      values=[dict(name="optimized_metric", value=value)],
     )
