@@ -265,8 +265,7 @@ if __name__ == "__main__":
         cleanup_evaluations(evaluations)
         conn.experiments(experiment.id).observations().create(
             suggestion=suggestion.id,
-            value=avg_auc,
-            value_stddev=std_auc,
+            values=[dict(name="avg_auc", value=avg_auc, value_stddev=std_auc)],
         )
 
     cleanup_folds(folds)

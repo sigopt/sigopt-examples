@@ -49,5 +49,5 @@ for _ in range(experiment.observation_budget):
     dev_acc = calculate_objective(suggestion.assignments, data,
                                 with_architecture=with_architecture)
     observation = conn.experiments(experiment.id).observations().create(
-                                value=dev_acc,
+                                values=[dict(name="dev_acc", value=dev_acc)],
                                 suggestion=suggestion.id)
