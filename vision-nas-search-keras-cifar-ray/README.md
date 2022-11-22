@@ -15,7 +15,7 @@ Its contributors are:
 
 1. `git clone https://github.com/sigopt/sigopt-examples.git`
 2. `cd sigopt-examples/vision-nas-search-keras-cifar-ray`
-3. Run `jupyter lab` in that directory and open xgboost_py_classifier.ipynb in the web interface
+3. Run `jupyter lab` in that directory and open mininas.ipynb in the web interface
 4. Add your SigOpt [API token](https://docs.sigopt.com/core-module-api-references/get_started) in the Jupyter cell where you see `YOUR_SIGOPT_API_KEY_HERE`
 5. Run all cells or step through the notebook
 
