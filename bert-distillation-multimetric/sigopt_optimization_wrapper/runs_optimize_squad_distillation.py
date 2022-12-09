@@ -23,8 +23,7 @@ def main(args_dict, config_dict, sigopt_experiment_id, suggestion_id):
     all_parameters.update(parameter_values)
 
     with sigopt.create_run(name="Distillation Run_experiment_{}_suggestion_{}".format(sigopt_experiment_id,
-                                                                                      suggestion_id),
-                           project=args_dict[OptimizationRunParameters.PROJECT_NAME.value]) as run:
+                                                                                      suggestion_id)) as run:
         run.log_dataset("SQUAD 2.0")
         run.log_model("DistilBert for question answering")
         run.log_metadata("suggestion_id", suggestion_id)
