@@ -35,9 +35,9 @@ The following CLI supports:
 
 ```buildoutcfg
 
-git clone https://github.com/sigopt/stanford-augmented-car-classification
+git clone https://github.com/sigopt/stanford-augmented-image-classification
 
-mkdir -p stanford-augmented-car-classification/data
+mkdir -p stanford-augmented-image-classification/data
 
 ```
 
@@ -52,35 +52,35 @@ The dataset includes:
 
 ```buildoutcfg
 
-wget http://imagenet.stanford.edu/internal/car196/car_ims.tgz -P stanford-augmented-car-classification/data
+wget http://ai.stanford.edu/~jkrause/car196/car_ims.tgz -P stanford-augmented-image-classification/data
 
-wget http://imagenet.stanford.edu/internal/car196/cars_annos.mat -P stanford-augmented-car-classification/data
+wget http://ai.stanford.edu/~jkrause/car196/cars_annos.mat -P stanford-augmented-image-classification/data
 
-wget https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz -P stanford-augmented-car-classification/data
+wget https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz -P stanford-augmented-image-classification/data
 
 ```
 
 or using CURL:
 
 ```buildoutcfg
-curl http://imagenet.stanford.edu/internal/car196/car_ims.tgz -o stanford-augmented-car-classification/data/car_ims.tgz
+curl http://ai.stanford.edu/~jkrause/car196/car_ims.tgz -o stanford-augmented-image-classification/data/car_ims.tgz
 
-curl http://imagenet.stanford.edu/internal/car196/cars_annos.mat -o stanford-augmented-car-classification/data/cars_annos.mat
+curl http://ai.stanford.edu/~jkrause/car196/cars_annos.mat -o stanford-augmented-image-classification/data/cars_annos.mat
 
-curl https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz -o stanford-augmented-car-classification/data/car_devkit.tgz
+curl https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz -o stanford-augmented-image-classification/data/car_devkit.tgz
 
 ```
 
 Unzip folders:
 
 ```buildoutcfg
-tar -C stanford-augmented-car-classification/data -xzvf stanford-augmented-car-classification/data/car_ims.tgz
-tar -C stanford-augmented-car-classification/data -xzvf stanford-augmented-car-classification/data/car_devkit.tgz
+tar -C stanford-augmented-image-classification/data -xzvf stanford-augmented-image-classification/data/car_ims.tgz
+tar -C stanford-augmented-image-classification/data -xzvf stanford-augmented-image-classification/data/car_devkit.tgz
 
 Only keeping the meta file in the devkit:
 
-mv ./stanford-augmented-car-classification/data/devkit/cars_meta.mat ./stanford-augmented-car-classification/data
-rm -r ./stanford-augmented-car-classification/data/devkit
+mv ./stanford-augmented-image-classification/data/devkit/cars_meta.mat ./stanford-augmented-image-classification/data
+rm -r ./stanford-augmented-image-classification/data/devkit
 
 ```
 
@@ -118,7 +118,7 @@ python3 -m virtualenv [PATH TO VIRUALENV]
 
 example:
 
-python3 -m virtualenv ./stanford-augmented-car-classification-venv
+python3 -m virtualenv ./stanford-augmented-image-classification-venv
 
 ```
 #### Installing requirements in virtualenvironment
@@ -126,9 +126,15 @@ python3 -m virtualenv ./stanford-augmented-car-classification-venv
 Use the `stanford_cars_venv_requirements.txt` file in this repository to install requirements to your virtualenvironment.
 
 ```buildoutcfg
-source [PATH TO VIRTUALENV]/bin/activate (ex: ./stanford-augmented-car-classification-venv/bin/activate)
+source [PATH TO VIRTUALENV]/bin/activate (ex: ./stanford-augmented-image-classification-venv/bin/activate)
 
-pip3 install -r stanford_cars_venv_requirements.txt
+pip install orchestrate
+pip install sigopt
+pip install scikit-learn
+pip install matplotlib
+pip install torch torchvision
+pip install botocore
+pip install retrying
 
 ```
 
@@ -139,9 +145,10 @@ pip3 install -r stanford_cars_venv_requirements.txt
 #### CommandLine Interface
 
 ```
-python resnet_stanford_cars_training.py --path_images <path to parent directory of car_ims folder>
---path_data <path to cars_meta.mat>
---path_labels <path to cars_annos.meta>
+python resnet_stanford_cars_training.py 
+--path_images <path to parent directory of car_ims folder>
+--path_data <path to cars_annos.mat> 
+--path_labels <path to cars_meta.mat>
 [--path_model_checkpoint <path to model checkpointing directory, default: No checkpointing>]
 [--checkpoint_frequency <frequency to generate PyTorch checkpoint files>, default: No checkpointing]
 --model {ResNet18 | ResNet50}
@@ -184,8 +191,8 @@ Checkpoints will be stored under `<time since epoch in seconds>_model/model_chec
 Example:
 
 ```
-source ./stanford-augmented-car-classification-venv/bin/activate
-python resnet_stanford_cars_training.py --path_images ./stanford-augmented-car-classification/data/ --path_data ./stanford-augmented-car-classification/data/cars_annos.mat --path_labels ./stanford-augmented-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-car-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --nesterov --freeze_weights
+source ./stanford-augmented-image-classification-venv/bin/activate
+python ./stanford-augmented-image-classification/resnet_stanford_cars_training.py --path_images ./stanford-augmented-image-classification/data/ --path_data ./stanford-augmented-image-classification/data/cars_annos.mat --path_labels ./stanford-augmented-image-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-image-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --nesterov --freeze_weights
 
 ```
 
@@ -194,8 +201,8 @@ The above example tunes the fully connected layer of a pretrained ResNet18 with 
 ##### Fine Tuning the Network
 
 ```
-source ./stanford-augmented-car-classification-venv/bin/activate
-python resnet_stanford_cars_training.py --path_images ./stanford-augmented-car-classification/data/ --path_data ./stanford-augmented-car-classification/data/cars_annos.mat --path_labels ./stanford-augmented-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-car-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --no-nesterov --no-freeze_weights
+source ./stanford-augmented-image-classification-venv/bin/activate
+python ./stanford-augmented-image-classification/resnet_stanford_cars_training.py --path_images ./stanford-augmented-image-classification/data/ --path_data ./stanford-augmented-image-classification/data/cars_annos.mat --path_labels ./stanford-augmented-image-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-image-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --no-nesterov --no-freeze_weights
 
 ```
 
@@ -205,9 +212,9 @@ python resnet_stanford_cars_training.py --path_images ./stanford-augmented-car-c
 
 ```
 python resnet_stanford_cars_augmented_training.py
- --path_images <path to parent directory of car_ims folder>
---path_data <path to cars_meta.mat>
---path_labels <path to cars_annos.meta>
+--path_images <path to parent directory of car_ims folder>
+--path_data <path to cars_annos.mat> 
+--path_labels <path to cars_meta.mat>
 [--path_model_checkpoint <path to model checkpointing directory, default: No checkpointing>]
 [--checkpoint_frequency <frequency to generate PyTorch checkpoint files>, default: No checkpointing]
 --model {ResNet18 | ResNet50}
@@ -262,8 +269,8 @@ Checkpoints will be stored under `<time since epoch in seconds>_model/model_chec
 Example:
 
 ```
-source ./stanford-augmented-car-classification-venv/bin/activate
-python resnet_stanford_cars_augmented_training.py --path_images ./stanford-augmented-car-classification/data/ --path_data ./stanford-augmented-car-classification/data/cars_annos.mat --path_labels ./stanford-augmented-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-car-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --nesterov --freeze_weights --multiplier 2 --probability 1.0 --saturation 10 --hue -0.01 --brightness 20 --contrast 20 --store_to_s3 --s3_bucket_name stanford_cars_aug_bucket
+source ./stanford-augmented-image-classification-venv/bin/activate
+python ./stanford-augmented-image-classification/resnet_stanford_cars_augmented_training.py --path_images ./stanford-augmented-image-classification/data/ --path_data ./stanford-augmented-image-classification/data/cars_annos.mat --path_labels ./stanford-augmented-image-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-image-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --nesterov --freeze_weights --multiplier 2 --probability 1.0 --saturation 10 --hue -0.01 --brightness 20 --contrast 20 --store_to_s3 --s3_bucket_name stanford_cars_aug_bucket
 
 ```
 
@@ -272,8 +279,8 @@ The above example tunes the fully connected layer of a pretrained ResNet18 with 
 ##### Fine Tuning the Network with Image Augmentation
 
 ```
-source ./stanford-augmented-car-classification-venv/bin/activate
-python resnet_stanford_cars_augmented_training.py --path_images ./stanford-augmented-car-classification/data/ --path_data ./stanford-augmented-car-classification/data/cars_annos.mat --path_labels ./stanford-augmented-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-car-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --no-nesterov --no-freeze_weights --multiplier 1 --probability 1.0 --saturation 10 --hue -0.01 --brightness 20 --contrast 20 --store_to_disk
+source ./stanford-augmented-image-classification-venv/bin/activate
+python ./stanford-augmented-image-classification/resnet_stanford_cars_augmented_training.py --path_images ./stanford-augmented-image-classification/data/ --path_data ./stanford-augmented-image-classification/data/cars_annos.mat --path_labels ./stanford-augmented-image-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-augmented-image-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --no-nesterov --no-freeze_weights --multiplier 1 --probability 1.0 --saturation 10 --hue -0.01 --brightness 20 --contrast 20 --store_to_disk
 
 ```
 
@@ -313,7 +320,8 @@ SigOpt suggests values for the following hyperparameters for image augmentation:
 #### Hyperparameter Tuning without Image Augmentation CLI
 
 ```
-python orchestrate_stanford_cars_cli.py --path_images <path to parent directory of car_ims folder>
+python orchestrate_stanford_cars_cli.py 
+--path_images <path to parent directory of car_ims folder>
 --path_data <path to cars_meta.mat>
 --path_labels <path to cars_annos.meta>
 [--path_model_checkpoint <path to model checkpointing directory, default: No checkpointing>]
@@ -346,7 +354,7 @@ The bounds of these hyperparameters are specified in the Orchestrate experiment 
 
 ```
 python orchestrate_stanford_cars_augmentation_cli.py
- --path_images <path to parent directory of car_ims folder>
+--path_images <path to parent directory of car_ims folder>
 --path_data <path to cars_meta.mat>
 --path_labels <path to cars_annos.meta>
 [--path_model_checkpoint <path to model checkpointing directory, default: No checkpointing>]

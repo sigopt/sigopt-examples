@@ -16,8 +16,6 @@ git clone https://github.com/sigopt/sigopt-examples.git
 
 mkdir -p sigopt-examples/stanford-car-classification/data
 
-cd sigopt-examples
-
 ```
 
 ### Download data
@@ -31,9 +29,9 @@ The dataset includes:
 
 ```buildoutcfg
 
-wget http://imagenet.stanford.edu/internal/car196/car_ims.tgz -P stanford-car-classification/data
+wget http://ai.stanford.edu/~jkrause/car196/car_ims.tgz -P stanford-car-classification/data
 
-wget http://imagenet.stanford.edu/internal/car196/cars_annos.mat -P stanford-car-classification/data
+wget http://ai.stanford.edu/~jkrause/car196/cars_annos.mat -P stanford-car-classification/data
 
 wget https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz -P stanford-car-classification/data
 
@@ -42,9 +40,9 @@ wget https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz -P stanford-car-classi
 or using CURL:
 
 ```buildoutcfg
-curl http://imagenet.stanford.edu/internal/car196/car_ims.tgz -o stanford-car-classification/data/car_ims.tgz
+curl http://ai.stanford.edu/~jkrause/car196/car_ims.tgz -o stanford-car-classification/data/car_ims.tgz
 
-curl http://imagenet.stanford.edu/internal/car196/cars_annos.mat -o stanford-car-classification/data/cars_annos.mat
+curl http://ai.stanford.edu/~jkrause/car196/cars_annos.mat -o stanford-car-classification/data/cars_annos.mat
 
 curl https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz -o stanford-car-classification/data/car_devkit.tgz
 
@@ -107,10 +105,12 @@ python3 -m virtualenv ./stanford-car-classification-venv
 source [PATH TO VIRTUALENV]/bin/activate (ex: ./stanford-car-classification-venv/bin/activate)
 
 pip install orchestrate
-pip install sklearn
+pip install sigopt
+pip install scikit-learn
 pip install matplotlib
 pip install torch torchvision
 pip install botocore
+pip install retrying
 
 ```
 
@@ -119,9 +119,10 @@ pip install botocore
 ### CommandLine Interface
 
 ```
-python run_resnet_training_cli.py --path_images <path to parent directory of car_ims folder>
---path_data <path to cars_meta.mat> 
---path_labels <path to cars_annos.meta>
+python run_resnet_training_cli.py 
+--path_images <path to parent directory of car_ims folder>
+--path_data <path to cars_annos.mat> 
+--path_labels <path to cars_meta.mat>
 [--path_model_checkpoint <path to model checkpointing directory, default: No checkpointing>] 
 [--checkpoint_frequency <frequency to generate PyTorch checkpoint files>, default: No checkpointing]
 --model {ResNet18 | ResNet50}
@@ -161,7 +162,7 @@ Example:
 
 ```
 source ./stanford-car-classification-venv/bin/activate
-python run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --nesterov --freeze_weights
+python ./stanford-car-classification/run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet18 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --nesterov --freeze_weights
 
 ```
 
@@ -171,7 +172,7 @@ The above example tunes the fully connected layer of a pretrained ResNet18 with 
 
 ```
 source ./stanford-car-classification-venv/bin/activate
-python run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --no-nesterov --no-freeze_weights
+python ./stanford-car-classification/run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --path_model_checkpoint ./stanford-car-classification --checkpoint_frequency 10 --model ResNet50 --epochs 35 --validation_frequency 10  --number_of_classes 196 --data_subset 1.0 --learning_rate_scheduler 0.2 --batch_size 6 --weight_decay 0.80 --momentum 0.9 --learning_rate 0.04 --scheduler_rate 5 --no-nesterov --no-freeze_weights
 
 ```
 
@@ -192,8 +193,8 @@ At the end of the tutorial, you should have an Orchestrate specific virtual envi
 ```
 python run_resnet_training_cli.py
 --path_images <path to parent directory of car_ims folder>
---path_data <path to cars_meta.mat> 
---path_labels <path to cars_annos.meta>
+--path_data <path to cars_annos.mat> 
+--path_labels <path to cars_meta.mat>
 [--path_model_checkpoint <path to model checkpointing directory, default: No check-pointing>] 
 [--checkpoint_frequency <frequency to generate PyTorch checkpoint files>, default: No check-pointing]
 --model {ResNet18 | ResNet50}
@@ -229,7 +230,7 @@ Example:
 
 ```buildoutcfg
 source ./stanford-car-classification-venv/bin/activate
-python run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 2 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --no-freeze_weights
+python ./stanford-car-classification/run_resnet_training_cli.py --path_images ./stanford-car-classification/data/ --path_data ./stanford-car-classification/data/cars_annos.mat --path_labels ./stanford-car-classification/data/cars_meta.mat --model ResNet18 --epochs 2 --validation_frequency 10 --data_subset 1.0  --number_of_classes 196 --no-freeze_weights
 ```
 
 ### Cluster Configuration
