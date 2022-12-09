@@ -26,6 +26,10 @@ Change name of evaluation script:
 mv ./data/index.html ./data/evaluate-v2.0.py
 ```
 
+## Install Rust
+
+Install Rust following the instructions here: https://www.rust-lang.org/tools/install
+
 ## Setting up your virtualenvironment
 
 Make a new Python3 virtualenvironment:
@@ -33,12 +37,13 @@ Make a new Python3 virtualenvironment:
 ```
 virtualenv -p $(which python3) ./venv
 source venv/bin/activate
+
 pip3 install transformers==2.4.1
 pip3 install scikit-learn
 pip3 install boto3
 pip3 install tensorboard
 pip3 install torch torchvision
-pip3 install logbeam
+pip3 install setuptools-rust
 pip3 install sigopt
 pip3 install 'ray[tune]'
 ```
@@ -99,7 +104,7 @@ For a full list of defaults and their values go to ```./sigopt-examples/bert-dis
 Example CLI:
 
 ```
-python sigopt-examples/bert-distillation-multimetric/squad_fine_tuning/run_squad_w_distillation.py --model_type distilbert --teacher_type bert --teacher_name_or_path bert-base-uncased --train_file ../data/SQUAD_2/train-v2.0_subset.json --predict_file ../data/SQUAD_2_subset/dev-v2.0_subset2.json --output_dir ../test_run --num_train_epochs 3
+python sigopt-examples/bert-distillation-multimetric/run_squad_w_distillation_cli.py --model_type distilbert --teacher_type bert --teacher_name_or_path bert-base-uncased --train_file data/train-v2.0.json --predict_file data/dev-v2.0.json --output_dir ../test_run --num_train_epochs 3
 ```
 The above cli will run the distillation process for SQUAD 2.0 with the defaults listed above. The student mdoel is distilbert, the teacher model is bert, and it runs the student model training for 3 epochs.
 
