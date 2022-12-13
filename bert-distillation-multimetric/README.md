@@ -26,6 +26,10 @@ Change name of evaluation script:
 mv ./data/index.html ./data/evaluate-v2.0.py
 ```
 
+## Install Rust
+
+Install Rust following the instructions here: https://www.rust-lang.org/tools/install
+
 ## Setting up your virtualenvironment
 
 Make a new Python3 virtualenvironment:
@@ -33,19 +37,16 @@ Make a new Python3 virtualenvironment:
 ```
 virtualenv -p $(which python3) ./venv
 source venv/bin/activate
+
 pip3 install transformers==2.4.1
 pip3 install scikit-learn
 pip3 install boto3
 pip3 install tensorboard
 pip3 install torch torchvision
-pip3 install logbeam
+pip3 install setuptools-rust
 pip3 install sigopt
 pip3 install 'ray[tune]'
 ```
-
-## Logging
-
-All logs are set to standard out and to CloudWatch. To specify your logstream and loghandler, change the `cw_handler` in `logger.py`.
 
 ## CLI Options
 
@@ -99,7 +100,7 @@ For a full list of defaults and their values go to ```./sigopt-examples/bert-dis
 Example CLI:
 
 ```
-python sigopt-examples/bert-distillation-multimetric/squad_fine_tuning/run_squad_w_distillation.py --model_type distilbert --teacher_type bert --teacher_name_or_path bert-base-uncased --train_file ../data/SQUAD_2/train-v2.0_subset.json --predict_file ../data/SQUAD_2_subset/dev-v2.0_subset2.json --output_dir ../test_run --num_train_epochs 3
+python run_squad_w_distillation_cli.py --model_type distilbert --teacher_type bert --teacher_name_or_path bert-base-uncased --train_file data/train-v2.0.json --predict_file data/dev-v2.0.json --output_dir ../test_run --num_train_epochs 3
 ```
 The above cli will run the distillation process for SQUAD 2.0 with the defaults listed above. The student mdoel is distilbert, the teacher model is bert, and it runs the student model training for 3 epochs.
 
@@ -133,9 +134,7 @@ For a full list of default hyperparameter ranges, go to: ```sigopt-examples/bert
 Example CLI:
 
 ```
-python sigopt-examples/bert-distillation-multimetric/sigopt_optimization_cli.py --model_type distilbert --train_file ./data/train-v2.0.json
---predict_file ./data/dev-v2.0.json --experiment_name test-multimetric-distillation --project_name test-multimetric --use_hpo_default_ranges --api_token <SigOpt API Token> --output_dir
-./test_run_5 --sigopt_observation_budget 200 --teacher_type bert --teacher_name_or_path twmkn9/bert-base-uncased-squad2 --num_train_epochs 3 --store_s3 --s3_bucket s3-checkpoint-bucket --cache_s3_bucket --train_cache_s3_directory s3-cache-bucket/train_cache --eval_cache_s3_directory s3-cache-bucket/dev_cache
+python sigopt_optimization_cli.py --model_type distilbert --train_file data/train-v2.0.json --predict_file data/dev-v2.0.json --experiment_name test-multimetric-distillation --project_name test-multimetric --use_hpo_default_ranges --api_token <SigOpt API Token> --output_dir ./test_run_5 --sigopt_observation_budget 200 --teacher_type bert --teacher_name_or_path twmkn9/bert-base-uncased-squad2 --num_train_epochs 3 --store_s3 --s3_bucket s3-checkpoint-bucket --cache_s3_bucket --train_cache_s3_directory s3-cache-bucket/train_cache --eval_cache_s3_directory s3-cache-bucket/dev_cache
 ```
 
 The above CLI runs Multimetric Optimization on the distillation process using a [teacher model](https://huggingface.co/twmkn9/bert-base-uncased-squad2) from the [HuggingFace model zoo](https://huggingface.co/models). The optimization will run for 200 cycles and train the student model for 3 epochs each. The checkpoints will be stored on s3 and logged/saved for every 1000 steps. The feature caches for the dataset will be pulled from the specified s3 bucket.
