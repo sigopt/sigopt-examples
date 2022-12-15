@@ -7,7 +7,7 @@
 
 The data that comes with this example is sequence data extracted from diatoms. We encourage interested readers to replicate this blog using other datasets see how _optimal hyperparameter settings are data dependent_. There are over 80 different sequential datasets in the [UCR Time Series Classification Archive](http://www.cs.ucr.edu/~eamonn/time_series_data/) that can be used to replicate this example. Learn more at the associated blog post: [Deep Learning Hyperparameter Optimization with Competing Objectives](https://devblogs.nvidia.com/parallelforall/sigopt-deep-learning-hyperparameter-optimization/).
 
-In this example, SigOpt _carves out an effecient [Pareto frontier](https://en.wikipedia.org/wiki/Pareto_efficiency)_, simultaneously looking for hyperparameter configurations which yield fast inference times and high classifier accuracy.
+In this example, SigOpt _carves out an efficient [Pareto frontier](https://en.wikipedia.org/wiki/Pareto_efficiency)_, simultaneously looking for hyperparameter configurations which yield fast inference times and high classifier accuracy.
 
 > _Limited Access: For those interested in replicating this blog post, let us know so that we can provide a SigOpt account for you beyond your free trial!_
 
@@ -34,7 +34,7 @@ This example is made for the US East (N. Virginia) region. Follow the instructio
 
 3. From your EC2 instance, install SigOpt, Keras, Tensorflow and Pandas.
 
-  - `sudo pip install sigopt tensorflow-gpu keras pandas`
+  - `sudo pip install sigopt tensorflow-gpu pandas`
 
 4. Create a file named _sigopt.secret_ and the following line, entering your API key (see the [API tokens page](http://www.sigopt.com/tokens)):
 

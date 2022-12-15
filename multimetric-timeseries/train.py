@@ -5,10 +5,10 @@ warnings.simplefilter("ignore", UserWarning)
 import numpy as np
 import pandas as pd
 
-import keras
-from keras.callbacks import ReduceLROnPlateau
-from keras.models import Model
-from keras.utils import np_utils
+import tensorflow as tf
+from tensorflow.keras.callbacks import ReduceLROnPlateau
+from tensorflow.keras.models import Model
+from tensorflow.keras import utils
 
 from config import NB_EPOCHS
 
@@ -30,8 +30,8 @@ def prepare_data(dataset_path):
     y_test = (y_test - y_test.min())/(y_test.max()-y_test.min())*(nb_classes-1)
 
 
-    Y_train = np_utils.to_categorical(y_train, nb_classes)
-    Y_test = np_utils.to_categorical(y_test, nb_classes)
+    Y_train = utils.to_categorical(y_train, nb_classes)
+    Y_test = utils.to_categorical(y_test, nb_classes)
 
     x_train_mean = x_train.mean()
     x_train_std = x_train.std()
@@ -55,46 +55,46 @@ def get_model(assignments, x_train, nb_classes):
     """Return Keras model."""
     # define model architecture
     # input
-    x = keras.layers.Input(x_train.shape[1:])
+    x = tf.keras.layers.Input(x_train.shape[1:])
 
     # conv 1
-    conv1 = keras.layers.Conv2D(
+    conv1 = tf.keras.layers.Conv2D(
         assignments['conv_1_num_filters'],
         assignments['conv_1_filter_size'],
         1,
-        border_mode='same')(x)
-    conv1 = keras.layers.normalization.BatchNormalization()(conv1)
-    conv1 = keras.layers.Activation('relu')(conv1)
+        padding='same')(x)
+    conv1 = tf.keras.layers.BatchNormalization()(conv1)
+    conv1 = tf.keras.layers.Activation('relu')(conv1)
 
     # conv 2
-    conv2 = keras.layers.Conv2D(
+    conv2 = tf.keras.layers.Conv2D(
         assignments['conv_2_num_filters'],
         assignments['conv_2_filter_size'],
         1,
-        border_mode='same')(conv1)
-    conv2 = keras.layers.normalization.BatchNormalization()(conv2)
-    conv2 = keras.layers.Activation('relu')(conv2)
+        padding='same')(conv1)
+    conv2 = tf.keras.layers.BatchNormalization()(conv2)
+    conv2 = tf.keras.layers.Activation('relu')(conv2)
 
     # conv 3
-    conv3 = keras.layers.Conv2D(
+    conv3 = tf.keras.layers.Conv2D(
         assignments['conv_3_num_filters'],
         assignments['conv_3_filter_size'],
         1,
-        border_mode='same')(conv2)
-    conv3 = keras.layers.normalization.BatchNormalization()(conv3)
-    conv3 = keras.layers.Activation('relu')(conv3)
+        padding='same')(conv2)
+    conv3 = tf.keras.layers.BatchNormalization()(conv3)
+    conv3 = tf.keras.layers.Activation('relu')(conv3)
 
     # output
-    full = keras.layers.pooling.GlobalAveragePooling2D()(conv3)
-    out = keras.layers.Dense(nb_classes, activation='softmax')(full)
+    full = tf.keras.layers.GlobalAveragePooling2D()(conv3)
+    out = tf.keras.layers.Dense(nb_classes, activation='softmax')(full)
 
-    model = Model(input=x, output=out)
+    model = Model(inputs=x, outputs=out)
     return model
 
 def fit_model(assignments, model, x_train, Y_train, x_test, Y_test):
 
     # define model training
-    optimizer = keras.optimizers.Adam(lr=np.exp(assignments['log_lr']),
+    optimizer = tf.keras.optimizers.legacy.Adam(lr=np.exp(assignments['log_lr']),
                                       beta_1=1-np.exp(assignments['log_beta_1']),
                                       beta_2=1-np.exp(assignments['log_beta_2']),
                                       epsilon=np.exp(assignments['log_epsilon']),
@@ -114,7 +114,7 @@ def fit_model(assignments, model, x_train, Y_train, x_test, Y_test):
     # train model
     hist = model.fit(x_train, Y_train,
                      batch_size=batch_size,
-                     nb_epoch=NB_EPOCHS,
+                     epochs=NB_EPOCHS,
                      verbose=0,
                      validation_data=(x_test, Y_test),
                      callbacks = [reduce_lr])
