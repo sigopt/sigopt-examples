@@ -1,10 +1,8 @@
 """Example running MemN2N on a single bAbI task.
 Download tasks from facebook.ai/babi """
-from __future__ import absolute_import
-from __future__ import print_function
 
 from memn2n.data_utils import load_task, vectorize_data
-from sklearn import cross_validation, metrics
+from sklearn import model_selection, metrics
 from memn2n.memn2n_components import MemN2N
 from itertools import chain
 from six.moves import range, reduce
@@ -59,7 +57,7 @@ def run_memn2n_single_training(tensorflow_commandline_flags):
 
         # train/validation/test sets
         S, Q, A = vectorize_data(train, word_idx, sentence_size, memory_size)
-        trainS, valS, trainQ, valQ, trainA, valA = cross_validation.train_test_split(S, Q, A, test_size=.1,
+        trainS, valS, trainQ, valQ, trainA, valA = model_selection.train_test_split(S, Q, A, test_size=.1,
                                                                                      random_state=tensorflow_commandline_flags.random_state)
         testS, testQ, testA = vectorize_data(test, word_idx, sentence_size, memory_size)
 
@@ -76,14 +74,14 @@ def run_memn2n_single_training(tensorflow_commandline_flags):
         test_labels = np.argmax(testA, axis=1)
         val_labels = np.argmax(valA, axis=1)
 
-        tf.set_random_seed(tensorflow_commandline_flags.random_state)
+        tf.compat.v1.set_random_seed(tensorflow_commandline_flags.random_state)
         batch_size = tensorflow_commandline_flags.batch_size
 
         batches = zip(range(0, n_train - batch_size, batch_size), range(batch_size, n_train, batch_size))
         batches = [(start, end) for start, end in batches]
 
         optimizer = sigopt_memn2n_experiment_setup.string_to_optimizer_object(suggestions.assignments[ParametersList.OPTIMIZER.value], suggestions.assignments)
-        with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
+        with tf.compat.v1.Session(config=tf.compat.v1.ConfigProto(log_device_placement=True)) as sess:
             model = MemN2N(batch_size, vocab_size, sentence_size,
                            memory_size=memory_size,
                            embedding_size=suggestions.assignments[ParametersList.WORD_EMBEDDING.value],
@@ -133,7 +131,7 @@ def run_memn2n_single_training(tensorflow_commandline_flags):
                                                                                           suggestions, test_acc)
 
         # reset computation graph to create new mm model
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
 
     logging.info("Sig opt best parameters: %s", sigopt_experiment_definition.get_best_suggestions(e2e_memnn_experiment))
 
