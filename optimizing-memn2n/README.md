@@ -4,11 +4,10 @@ Implementation of [End-To-End Memory Networks](http://arxiv.org/abs/1503.08895) 
 
 ## Requirements
 
-* tensorflow 1.13.1
-* scikit-learn 0.17.1
-* six 1.10.0
+* tensorflow 2.10
+* scikit-learn 1.2.0
 
-For requirements information and installation instructions see [here](./virtual_env_setup/README.md).
+For requirements information and installation instructions see [here](./virtual_env_setup/README.md)s.
 
 ## Get Started
 
@@ -25,7 +24,7 @@ tar xzvf ./tasks_1-20_v1-2.tar.gz
 
 cd ../
 source <[Path to virtual environment]>/bin/activate
-python sigopt_optimization_run.py --run_single_exp True --run_joint_exp False --task_id 20 --sigopt_observation_budget 4 --sigopt_connection_token <SIGOPT API TOKEN> --sigopt_experiment_name 'task 20 conditionals optimization' --experiment_type 'conditionals'
+python sigopt_optimization_run.py --run_single_exp --task_id 20 --sigopt_observation_budget 4 --sigopt_connection_token <SIGOPT API TOKEN> --sigopt_experiment_name 'task 20 conditionals optimization' --experiment_type 'conditionals'
 ```
 
 ## Command Line Interface
