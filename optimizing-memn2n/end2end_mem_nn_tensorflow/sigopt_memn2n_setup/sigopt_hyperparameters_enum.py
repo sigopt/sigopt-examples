@@ -25,6 +25,6 @@ class SGDOptimizer(Enum):
 
 
 ## mapping from string to tensorflow object
-optimizer_mapping = {SGDOptimizer.ADAM.value: tf.train.AdamOptimizer, SGDOptimizer.ADAGRAD.value: tf.train.AdagradOptimizer,
-                    SGDOptimizer.GRADIENT_DESCENT_MOMENTUM.value: tf.train.MomentumOptimizer,
-                    SGDOptimizer.RMSPROP.value: tf.train.RMSPropOptimizer}
+optimizer_mapping = {SGDOptimizer.ADAM.value: tf.compat.v1.train.AdamOptimizer, SGDOptimizer.ADAGRAD.value: tf.compat.v1.train.AdagradOptimizer,
+                    SGDOptimizer.GRADIENT_DESCENT_MOMENTUM.value: tf.compat.v1.train.MomentumOptimizer,
+                    SGDOptimizer.RMSPROP.value: tf.compat.v1.train.RMSPropOptimizer}

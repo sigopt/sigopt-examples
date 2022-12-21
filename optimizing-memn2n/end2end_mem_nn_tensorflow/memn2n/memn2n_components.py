@@ -2,8 +2,6 @@
 
 The implementation is based on http://arxiv.org/abs/1503.08895 [1]
 """
-from __future__ import absolute_import
-from __future__ import division
 
 import tensorflow as tf
 import numpy as np
@@ -32,9 +30,9 @@ def zero_nil_slot(t, name=None):
     The nil_slot is a dummy slot and should not be trained and influence
     the training algorithm.
     """
-    with tf.op_scope([t], name, "zero_nil_slot") as name:
-        t = tf.convert_to_tensor(t, name="t")
-        s = tf.shape(t)[1]
+    with tf.compat.v1.op_scope([t], name, "zero_nil_slot") as name:
+        t = tf.convert_to_tensor(value=t, name="t")
+        s = tf.shape(input=t)[1]
         z = tf.zeros(tf.stack([1, s]))
         return tf.concat(axis=0, values=[z, tf.slice(t, [1, 0], [-1, -1])], name=name)
 
@@ -48,9 +46,9 @@ def add_gradient_noise(t, stddev=1e-3, name=None):
 
     0.001 was said to be a good fixed value for memory networks [2].
     """
-    with tf.op_scope([t, stddev], name, "add_gradient_noise") as name:
-        t = tf.convert_to_tensor(t, name="t")
-        gn = tf.random_normal(tf.shape(t), stddev=stddev)
+    with tf.compat.v1.op_scope([t, stddev], name, "add_gradient_noise") as name:
+        t = tf.convert_to_tensor(value=t, name="t")
+        gn = tf.random.normal(tf.shape(input=t), stddev=stddev)
         return tf.add(t, gn, name=name)
 
 class MemN2N(object):
@@ -59,9 +57,9 @@ class MemN2N(object):
         hops=3,
         max_grad_norm=40.0,
         nonlin=None,
-        initializer=tf.random_normal_initializer(stddev=0.1),
+        initializer=tf.compat.v1.random_normal_initializer(stddev=0.1),
         encoding=position_encoding,
-        session=tf.Session(),
+        session=tf.compat.v1.Session(),
         name='MemN2N'):
         """Creates an End-To-End Memory Network
 
@@ -118,8 +116,8 @@ class MemN2N(object):
 
         # cross entropy
         logits = self._inference(self._stories, self._queries) # (batch_size, vocab_size)
-        cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=tf.cast(self._answers, tf.float32), name="cross_entropy")
-        cross_entropy_sum = tf.reduce_sum(cross_entropy, name="cross_entropy_sum")
+        cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=tf.stop_gradient(tf.cast(self._answers, tf.float32)), name="cross_entropy")
+        cross_entropy_sum = tf.reduce_sum(input_tensor=cross_entropy, name="cross_entropy_sum")
 
         # loss op
         loss_op = cross_entropy_sum
@@ -137,9 +135,9 @@ class MemN2N(object):
         train_op = self._optimizer.apply_gradients(nil_grads_and_vars, name="train_op")
 
         # predict ops
-        predict_op = tf.argmax(logits, 1, name="predict_op")
+        predict_op = tf.argmax(input=logits, axis=1, name="predict_op")
         predict_proba_op = tf.nn.softmax(logits, name="predict_proba_op")
-        predict_log_proba_op = tf.log(predict_proba_op, name="predict_log_proba_op")
+        predict_log_proba_op = tf.math.log(predict_proba_op, name="predict_log_proba_op")
 
         # assign ops
         self.loss_op = loss_op
@@ -148,17 +146,17 @@ class MemN2N(object):
         self.predict_log_proba_op = predict_log_proba_op
         self.train_op = train_op
 
-        init_op = tf.global_variables_initializer()
+        init_op = tf.compat.v1.global_variables_initializer()
         self._sess = session
         self._sess.run(init_op)
 
     def _build_inputs(self):
-        self._stories = tf.placeholder(tf.int32, [None, self._memory_size, self._sentence_size], name="stories")
-        self._queries = tf.placeholder(tf.int32, [None, self._sentence_size], name="queries")
-        self._answers = tf.placeholder(tf.int32, [None, self._vocab_size], name="answers")
+        self._stories = tf.compat.v1.placeholder(tf.int32, [None, self._memory_size, self._sentence_size], name="stories")
+        self._queries = tf.compat.v1.placeholder(tf.int32, [None, self._sentence_size], name="queries")
+        self._answers = tf.compat.v1.placeholder(tf.int32, [None, self._vocab_size], name="answers")
 
     def _build_vars(self):
-        with tf.variable_scope(self._name):
+        with tf.compat.v1.variable_scope(self._name):
             nil_word_slot = tf.zeros([1, self._embedding_size])
             A = tf.concat(axis=0, values=[ nil_word_slot, self._init([self._vocab_size-1, self._embedding_size]) ])
             C = tf.concat(axis=0, values=[ nil_word_slot, self._init([self._vocab_size-1, self._embedding_size]) ])
@@ -168,42 +166,42 @@ class MemN2N(object):
             self.C = []
 
             for hopn in range(self._hops):
-                with tf.variable_scope('hop_{}'.format(hopn)):
+                with tf.compat.v1.variable_scope('hop_{}'.format(hopn)):
                     self.C.append(tf.Variable(C, name="C"))
 
         self._nil_vars = set([self.A_1.name] + [x.name for x in self.C])
 
     def _inference(self, stories, queries):
-        with tf.variable_scope(self._name):
+        with tf.compat.v1.variable_scope(self._name):
             # Use A_1 for the question embedding as per Adjacent Weight Sharing
-            q_emb = tf.nn.embedding_lookup(self.A_1, queries)
-            u_0 = tf.reduce_sum(q_emb * self._encoding, 1)
+            q_emb = tf.nn.embedding_lookup(params=self.A_1, ids=queries)
+            u_0 = tf.reduce_sum(input_tensor=q_emb * self._encoding, axis=1)
             u = [u_0]
 
             for hopn in range(self._hops):
                 if hopn == 0:
-                    m_emb_A = tf.nn.embedding_lookup(self.A_1, stories)
-                    m_A = tf.reduce_sum(m_emb_A * self._encoding, 2)
+                    m_emb_A = tf.nn.embedding_lookup(params=self.A_1, ids=stories)
+                    m_A = tf.reduce_sum(input_tensor=m_emb_A * self._encoding, axis=2)
 
                 else:
-                    with tf.variable_scope('hop_{}'.format(hopn - 1)):
-                        m_emb_A = tf.nn.embedding_lookup(self.C[hopn - 1], stories)
-                        m_A = tf.reduce_sum(m_emb_A * self._encoding, 2)
+                    with tf.compat.v1.variable_scope('hop_{}'.format(hopn - 1)):
+                        m_emb_A = tf.nn.embedding_lookup(params=self.C[hopn - 1], ids=stories)
+                        m_A = tf.reduce_sum(input_tensor=m_emb_A * self._encoding, axis=2)
 
                 # hack to get around no reduce_dot
-                u_temp = tf.transpose(tf.expand_dims(u[-1], -1), [0, 2, 1])
-                dotted = tf.reduce_sum(m_A * u_temp, 2)
+                u_temp = tf.transpose(a=tf.expand_dims(u[-1], -1), perm=[0, 2, 1])
+                dotted = tf.reduce_sum(input_tensor=m_A * u_temp, axis=2)
 
                 # Calculate probabilities
                 probs = tf.nn.softmax(dotted)
 
-                probs_temp = tf.transpose(tf.expand_dims(probs, -1), [0, 2, 1])
-                with tf.variable_scope('hop_{}'.format(hopn)):
-                    m_emb_C = tf.nn.embedding_lookup(self.C[hopn], stories)
-                m_C = tf.reduce_sum(m_emb_C * self._encoding, 2)
+                probs_temp = tf.transpose(a=tf.expand_dims(probs, -1), perm=[0, 2, 1])
+                with tf.compat.v1.variable_scope('hop_{}'.format(hopn)):
+                    m_emb_C = tf.nn.embedding_lookup(params=self.C[hopn], ids=stories)
+                m_C = tf.reduce_sum(input_tensor=m_emb_C * self._encoding, axis=2)
 
-                c_temp = tf.transpose(m_C, [0, 2, 1])
-                o_k = tf.reduce_sum(c_temp * probs_temp, 2)
+                c_temp = tf.transpose(a=m_C, perm=[0, 2, 1])
+                o_k = tf.reduce_sum(input_tensor=c_temp * probs_temp, axis=2)
                 u_k = u[-1] + o_k
 
                 # nonlinearity
@@ -213,8 +211,8 @@ class MemN2N(object):
                 u.append(u_k)
 
             # Use last C for output (transposed)
-            with tf.variable_scope('hop_{}'.format(self._hops)):
-                return tf.matmul(u_k, tf.transpose(self.C[-1], [1,0]))
+            with tf.compat.v1.variable_scope('hop_{}'.format(self._hops)):
+                return tf.matmul(u_k, tf.transpose(a=self.C[-1], perm=[1,0]))
 
     def batch_fit(self, stories, queries, answers):
         """Runs the training algorithm over the passed batch

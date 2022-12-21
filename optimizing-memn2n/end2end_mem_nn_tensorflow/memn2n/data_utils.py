@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import os
 import re
 import numpy as np
@@ -26,7 +24,9 @@ def tokenize(sent):
     >>> tokenize('Bob dropped the apple. Where is the apple?')
     ['Bob', 'dropped', 'the', 'apple', '.', 'Where', 'is', 'the', 'apple', '?']
     '''
-    return [x.strip() for x in re.split('(\W+)?', sent) if x.strip()]
+    tokens = re.split('(\W+)?', sent)
+    tokens = list(filter(lambda item: item is not None, tokens))
+    return [x.strip() if len(x) >=1 else x for x in tokens]
 
 
 def parse_stories(lines, only_supporting=False):

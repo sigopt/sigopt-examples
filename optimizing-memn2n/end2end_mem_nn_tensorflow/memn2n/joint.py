@@ -1,10 +1,8 @@
 """Example running MemN2N on a single bAbI task.
 Download tasks from facebook.ai/babi """
-from __future__ import absolute_import
-from __future__ import print_function
 
 from memn2n.data_utils import load_task, vectorize_data
-from sklearn import cross_validation, metrics
+from sklearn import model_selection, metrics
 from memn2n.memn2n_components import MemN2N
 from itertools import chain
 from six.moves import range, reduce
@@ -82,7 +80,7 @@ def run_memn2n_joint_training(tensorflow_commandline_flags):
         valA = []
         for task in train:
             S, Q, A = vectorize_data(task, word_idx, sentence_size, memory_size)
-            ts, vs, tq, vq, ta, va = cross_validation.train_test_split(S, Q, A, test_size=0.1,
+            ts, vs, tq, vq, ta, va = model_selection.cross_validation.train_test_split(S, Q, A, test_size=0.1,
                                                                        random_state=tensorflow_commandline_flags.random_state)
             trainS.append(ts)
             trainQ.append(tq)
@@ -112,7 +110,7 @@ def run_memn2n_joint_training(tensorflow_commandline_flags):
         test_labels = np.argmax(testA, axis=1)
         val_labels = np.argmax(valA, axis=1)
 
-        tf.set_random_seed(tensorflow_commandline_flags.random_state)
+        tf.compat.v1.set_random_seed(tensorflow_commandline_flags.random_state)
         batch_size = tensorflow_commandline_flags.batch_size
 
         # This avoids feeding 1 task after another, instead each batch has a random sampling of tasks
@@ -121,7 +119,7 @@ def run_memn2n_joint_training(tensorflow_commandline_flags):
 
         optimizer = sigopt_memn2n_experiment_setup.string_to_optimizer_object(suggestions.assignments[ParametersList.OPTIMIZER.value], suggestions.assignments)
 
-        with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
+        with tf.compat.v1.Session(config=tf.compat.v1.ConfigProto(log_device_placement=True)) as sess:
 
             model = MemN2N(batch_size, vocab_size, sentence_size,
                            memory_size=memory_size,
@@ -216,7 +214,7 @@ def run_memn2n_joint_training(tensorflow_commandline_flags):
                         conn.experiments(e2e_memnn_experiment.id).observations().create(suggestion=suggestions.id, value=test_accs_average, metadata=metadata_dict)
                         e2e_memnn_experiment = conn.experiments(e2e_memnn_experiment.id).fetch()
 
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
 
     logging.info("Sig opt best parameters: %s", sigopt_experiment_definition.get_best_suggestions(e2e_memnn_experiment))
 

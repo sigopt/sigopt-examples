@@ -65,31 +65,31 @@ def setup_sigopt_memn2n_experiment(tensorflow_commandline_flags):
 
 
 def setup_adam_optimizer(sigopt_experiment_assignments):
-    return tf.train.AdamOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
+    return tf.compat.v1.train.AdamOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
                                   beta1=sigopt_experiment_assignments[ParametersList.BETA_1.value],
                                   beta2=sigopt_experiment_assignments[ParametersList.BETA_2.value],
                                   epsilon=sigopt_experiment_assignments[ParametersList.EPSILON.value])
 
 
 def setup_adagrad(sigopt_experiment_assignments):
-    return tf.train.AdagradOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]))
+    return tf.compat.v1.train.AdagradOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]))
 
 
 def setup_gradient_descent_momentum(sigopt_experiment_assignments):
-    return tf.train.MomentumOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
+    return tf.compat.v1.train.MomentumOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
                                                             momentum=sigopt_experiment_assignments[ParametersList.MOMENTUM.value],
                                                             use_nesterov=True if sigopt_experiment_assignments[ParametersList.NESTEROV.value] == "true" else False)
 
 
 def setup_rmsprop(sigopt_experiment_assignments):
-    return tf.train.RMSPropOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
+    return tf.compat.v1.train.RMSPropOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
                                      decay=sigopt_experiment_assignments[ParametersList.DECAY_RATE.value],
                                      momentum=sigopt_experiment_assignments[ParametersList.MOMENTUM.value],
                                      epsilon=sigopt_experiment_assignments[ParametersList.EPSILON.value])
 
 
 def setup_adadelta(sigopt_experiment_assignments):
-    return tf.train.AdadeltaOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
+    return tf.compat.v1.train.AdadeltaOptimizer(learning_rate=np.exp(sigopt_experiment_assignments[ParametersList.LEARNING_RATE.value]),
                                       epsilon=sigopt_experiment_assignments[ParametersList.EPSILON.value],
                                       rho=sigopt_experiment_assignments[ParametersList.DECAY_RATE.value])
 
