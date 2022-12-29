@@ -14,6 +14,6 @@ scipy==1.9.3
 sigopt==8.6.3
 tensorboard==2.10.1
 tensorflow-estimator==2.10.0
-tensorflow==2.10.0
+tensorflow==2.10.1
 termcolor==1.1.0
 urllib3==1.26.13
