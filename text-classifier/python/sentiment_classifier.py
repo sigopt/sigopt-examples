@@ -2,7 +2,7 @@ import json, math, numpy
 import sigopt
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import SGDClassifier
-from sklearn import cross_validation
+from sklearn import model_selection
 
 #load text training data
 POSITIVE_TEXT = json.load(open("POSITIVE_list.json"))
@@ -18,10 +18,10 @@ def sentiment_metric(POS_TEXT, NEG_TEXT, params):
                                  ngram_range=(min_ngram, max_ngram))
     X = vectorizer.fit_transform(POS_TEXT+NEG_TEXT)
     y = [1]*len(POS_TEXT) + [-1]*len(NEG_TEXT)
-    clf = SGDClassifier(loss='log', penalty='elasticnet',
+    clf = SGDClassifier(loss='log_loss', penalty='elasticnet',
                         alpha=math.exp(params['log_reg_coef']), l1_ratio=params['l1_coef'])
-    cv = cross_validation.ShuffleSplit(X.shape[0], n_iter=5, test_size=0.3, random_state=0)
-    cv_scores = cross_validation.cross_val_score(clf, X, y, cv=cv)
+    cv = model_selection.ShuffleSplit(n_splits=5, test_size=0.3, random_state=0)
+    cv_scores = model_selection.cross_val_score(clf, X, y, cv=cv)
     return numpy.mean(cv_scores)
 
 conn = sigopt.Connection()

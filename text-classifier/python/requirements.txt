@@ -1,6 +1,6 @@
 jupyter>=1.0.0
 matplotlib
-numpy==1.22.0
-scipy==0.16.1
-scikit-learn==0.15.2
-sigopt>=1.6.4
+numpy==1.23.5
+scipy==1.9.3
+scikit-learn==1.2.0
+sigopt>=8.6.3
