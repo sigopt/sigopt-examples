@@ -7,9 +7,11 @@ Machine learning classifier hyperparameter optimization example.
 More details about this example can be found in [the associated blog post](https://sigopt.com/blog/tuning-machine-learning-models/).
 
 ## Setup
-1. Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
-2. Find your API Token on the [API tokens page](https://app.sigopt.com/tokens).
+1. (Optional) Log in to your SigOpt account at [https://app.sigopt.com](https://app.sigopt.com)
+2. (Optional) Find your API Token on the [API tokens page](https://app.sigopt.com/tokens).
 3. Install requirements `pip install -r requirements.txt`
+
+If you don't provide your SigOpt API Token then this demo will automatically default to using SigOptlite, a more limited, in-memory tool which provides a more limited set of capabilities than the full SigOpt service but which is sufficient for this demo. 
 
 ## Run
 
