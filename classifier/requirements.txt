@@ -1,4 +1,5 @@
-numpy==1.22.0
-scikit-learn==0.15.2
-scipy==0.16.1
-sigopt>=1.6.4
+numpy
+scikit-learn
+scipy
+sigopt
+sigopt[lite]
