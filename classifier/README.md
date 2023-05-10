@@ -11,7 +11,7 @@ More details about this example can be found in [the associated blog post](https
 2. (Optional) Find your API Token on the [API tokens page](https://app.sigopt.com/tokens).
 3. Install requirements `pip install -r requirements.txt`
 
-If you don't provide your SigOpt API Token then this demo will automatically default to using SigOptlite, a more limited, in-memory tool which provides a more limited set of capabilities than the full SigOpt service but which is sufficient for this demo. 
+If you don't provide your SigOpt API Token then this demo will automatically default to using SigOptlite, a in-memory tool which provides a more limited set of capabilities than the full SigOpt service but which is sufficient for this demo. 
 
 ## Run
 
