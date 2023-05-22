@@ -18,7 +18,7 @@ pbr==5.2.0
 protobuf==3.18.3
 python-dateutil==2.7.5
 pytz==2018.9
-requests==2.21.0
+requests==2.31.0
 scikit-learn==0.17.1
 scipy==1.1.0
 sigopt==3.6.0
