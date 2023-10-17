@@ -10,7 +10,7 @@ protobuf==3.19.6
 python-dateutil==2.8.2
 requests==2.31.0
 scikit-learn==1.2.0
-scipy==1.9.3
+scipy==1.10.0
 sigopt==8.6.3
 tensorboard==2.10.1
 tensorflow-estimator==2.10.0
