@@ -27,5 +27,5 @@ tensorboard==1.13.1
 tensorflow-gpu>=1.15.4
 tensorflow-estimator==1.13.0
 termcolor==1.1.0
-urllib3==1.26.5
+urllib3==1.26.17
 Werkzeug==2.2.3
